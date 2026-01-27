@@ -1,0 +1,23 @@
+{
+  "id": "76e6f14e-d14f-4375-9dba-148d4c3aec90",
+  "name": "UX",
+  "personalInfo": {
+    "firstName": "Russell",
+    "lastName": "Strauss",
+    "email": "russellstrauss@gmail.com",
+    "phone": "6789273289",
+    "address": {
+      "street": "333 Lawton St SW",
+      "city": "Atlanta",
+      "state": "Georgia",
+      "zipCode": "30310",
+      "country": "USA"
+    }
+  },
+  "workExperience": [],
+  "education": [],
+  "skills": [],
+  "certifications": [],
+  "createdAt": "2026-01-27T00:11:00.582Z",
+  "updatedAt": "2026-01-27T00:11:00.582Z"
+}
