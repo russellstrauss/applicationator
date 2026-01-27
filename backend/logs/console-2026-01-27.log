@@ -1925,3 +1925,41 @@ enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
 [2026-01-27T08:18:33.210Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
 [2026-01-27T08:18:33.211Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
 
+[2026-01-27T08:22:30.904Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:22:30.905Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:22:48.154Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:22:48.155Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T08:22:48.198Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:22:48.199Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:32:09.647Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:32:09.648Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:32:21.438Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:32:21.439Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:33:59.427Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:33:59.428Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:34:12.511Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:34:12.511Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:37:10.035Z] ERROR [http://localhost:3002/] [vite] {}
+[2026-01-27T08:37:10.036Z] ERROR [http://localhost:3002/] [vite] Failed to reload /src/components/SkillsInput.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T08:37:10.072Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:37:10.072Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:38:11.227Z] ERROR [http://localhost:3002/] [vite] {}
+[2026-01-27T08:38:11.227Z] ERROR [http://localhost:3002/] [vite] Failed to reload /src/components/SkillsInput.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T08:38:11.250Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:38:11.250Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:38:43.045Z] ERROR [http://localhost:3002/] [vite] {}
+[2026-01-27T08:38:43.045Z] ERROR [http://localhost:3002/] [vite] Failed to reload /src/components/SkillsInput.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T08:38:43.067Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:38:43.067Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T08:42:51.656Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:42:51.656Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
