@@ -3,15 +3,22 @@
 export interface Profile {
   id: string;
   name: string;
+  summary?: string;
   personalInfo: PersonalInfo;
   workExperience: WorkExperience[];
   education: Education[];
-  skills: string[];
+  skills: SkillCategory[];
   certifications: Certification[];
   resumeTemplateId?: string;
   fieldMappings?: FieldMapping[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface SkillCategory {
+  id: string;
+  title: string;
+  skills: string[];
 }
 
 export interface PersonalInfo {

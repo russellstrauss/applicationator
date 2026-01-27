@@ -15,6 +15,8 @@ class Logger {
   private flushInterval = 5000; // Flush every 5 seconds
   private flushTimer: number | null = null;
   private isInitialized = false;
+  private localStorageDisabled = false; // Circuit breaker for localStorage
+  private consecutiveFailures = 0;
 
   constructor() {
     // Store original console methods before interception
@@ -172,33 +174,57 @@ class Logger {
   }
 
   private saveToLocalStorage(logs: LogEntry[]) {
+    // Circuit breaker: if localStorage keeps failing, stop trying
+    if (this.localStorageDisabled) {
+      return;
+    }
+
     try {
       const pendingKey = 'apply-matrix-pending-logs';
       const existing = localStorage.getItem(pendingKey);
       const pendingLogs = existing ? JSON.parse(existing) : [];
-      pendingLogs.push(...logs);
       
-      // Limit localStorage size (keep last 200 log entries to prevent quota issues)
-      const limited = pendingLogs.slice(-200);
+      // Add new logs but limit total to prevent quota issues
+      const combined = [...pendingLogs, ...logs];
       
-      // Try to save, but if it fails due to quota, clear old logs and try again
+      // Keep only the most recent 100 entries to prevent quota issues
+      const limited = combined.slice(-100);
+      
+      // Try to save, but if it fails due to quota, be more aggressive
       try {
-        localStorage.setItem(pendingKey, JSON.stringify(limited));
+        const serialized = JSON.stringify(limited);
+        // Check size estimate (rough calculation: ~2 bytes per character)
+        if (serialized.length > 100000) {
+          // Too large, keep only last 25 entries
+          const minimal = combined.slice(-25);
+          localStorage.setItem(pendingKey, JSON.stringify(minimal));
+        } else {
+          localStorage.setItem(pendingKey, serialized);
+        }
+        // Success - reset failure counter
+        this.consecutiveFailures = 0;
       } catch (quotaError: any) {
+        this.consecutiveFailures++;
         if (quotaError.name === 'QuotaExceededError' || quotaError.message?.includes('quota')) {
-          // Clear all pending logs and only keep the most recent 50
-          const minimal = pendingLogs.slice(-50);
+          // Clear all pending logs - they're not critical
           try {
-            localStorage.setItem(pendingKey, JSON.stringify(minimal));
-          } catch {
-            // If still failing, clear everything
             localStorage.removeItem(pendingKey);
+          } catch {
+            // Ignore errors when clearing
           }
+        }
+        // If we've failed 3 times in a row, disable localStorage saving
+        if (this.consecutiveFailures >= 3) {
+          this.localStorageDisabled = true;
         }
       }
     } catch (error) {
+      this.consecutiveFailures++;
       // localStorage might be full or unavailable - silently fail
       // Don't log this as it would create infinite recursion
+      if (this.consecutiveFailures >= 3) {
+        this.localStorageDisabled = true;
+      }
     }
   }
 

@@ -14,8 +14,13 @@ export default function TemplatesPage() {
   }, [loadTemplates]);
 
   const handleConnect = async () => {
-    await connectGoogleDrive();
-    setIsConnected(true);
+    try {
+      await connectGoogleDrive();
+      setIsConnected(true);
+    } catch (error: any) {
+      console.error('Failed to connect Google Drive:', error);
+      alert('Failed to connect Google Drive. Please ensure the backend is running and Google OAuth credentials are configured.');
+    }
   };
 
   return (

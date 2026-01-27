@@ -1,0 +1,221 @@
+[2026-01-27T01:04:07.815Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T01:04:07.815Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T01:04:07.922Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:07.923Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:04:07.987Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:07.987Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:04:08.049Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.050Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/CertificationForm.tsx
+[2026-01-27T01:04:08.149Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.149Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T01:04:07.883Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T01:04:07.884Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T01:04:07.993Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:07.994Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:04:08.073Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.074Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:04:08.173Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.174Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+[2026-01-27T01:04:08.249Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.250Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T01:04:08.284Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.285Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T01:04:08.340Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:04:08.341Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T01:42:19.289Z] ERROR [http://localhost:3002/] Warning: validateDOMNesting(...): %s cannot appear as a descendant of <%s>.%s <form> form 
+form
+div
+WorkExperienceForm@http://localhost:3002/src/components/WorkExperienceForm.tsx?t=1769475845753:20:43
+div
+div
+form
+div
+div
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769475845790:23:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx?t=1769475845790:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:5293:7
+App
+
+[2026-01-27T01:44:57.921Z] LOG   [http://localhost:3002/?] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T01:47:41.652Z] ERROR [http://localhost:3002/?] Warning: validateDOMNesting(...): %s cannot appear as a descendant of <%s>.%s <form> form 
+form
+div
+WorkExperienceForm@http://localhost:3002/src/components/WorkExperienceForm.tsx:20:43
+div
+div
+form
+div
+div
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx:23:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:5293:7
+App
+
+[2026-01-27T01:48:43.416Z] ERROR [http://localhost:3002/?] Warning: validateDOMNesting(...): %s cannot appear as a descendant of <%s>.%s <form> form 
+form
+div
+WorkExperienceForm@http://localhost:3002/src/components/WorkExperienceForm.tsx:20:43
+div
+div
+form
+div
+div
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx:23:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:5293:7
+App
+
+[2026-01-27T01:50:56.381Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:50:56.381Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/TemplatesPage.tsx
+
+[2026-01-27T01:50:56.368Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:50:56.368Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+
+[2026-01-27T01:53:18.149Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:18.150Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:18.199Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:18.200Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:19.011Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:19.012Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T01:53:18.182Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:18.187Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:18.275Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:18.275Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:19.013Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:19.013Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:21.053Z] ERROR [http://localhost:3000/templates] [vite] {}
+[2026-01-27T01:53:21.054Z] ERROR [http://localhost:3000/templates] [vite] Failed to reload /src/components/EducationForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T01:53:21.090Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:21.090Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T01:53:22.140Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:22.141Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T01:53:21.051Z] ERROR [http://localhost:3002/?] [vite] {}
+[2026-01-27T01:53:21.053Z] ERROR [http://localhost:3002/?] [vite] Failed to reload /src/components/EducationForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T01:53:21.079Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:21.080Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:53:22.154Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:22.155Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:53:24.123Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:24.123Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T01:53:24.122Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:24.122Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:53:26.307Z] ERROR [http://localhost:3000/templates] [vite] {}
+[2026-01-27T01:53:26.308Z] ERROR [http://localhost:3000/templates] [vite] Failed to reload /src/components/CertificationForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T01:53:26.330Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:26.330Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T01:53:26.351Z] ERROR [http://localhost:3002/?] [vite] {}
+[2026-01-27T01:53:26.352Z] ERROR [http://localhost:3002/?] [vite] Failed to reload /src/components/CertificationForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T01:53:26.381Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:26.382Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+[2026-01-27T01:53:27.751Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:27.751Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+[2026-01-27T01:53:29.121Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:29.121Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T01:53:27.750Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:27.751Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+[2026-01-27T01:53:29.123Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:29.123Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T01:53:44.787Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:44.787Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:44.839Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:44.839Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:53:44.885Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:44.885Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T01:53:44.783Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:44.783Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T01:53:44.838Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:44.839Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T01:53:44.885Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T01:53:44.886Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:14:45.664Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:14:45.666Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T02:14:45.680Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:14:45.680Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T02:15:04.482Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:04.482Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T02:15:04.427Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:04.427Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T02:15:06.916Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:06.916Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:15:10.809Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:10.810Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:06.940Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:06.940Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:15:10.796Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:10.796Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:23.817Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:23.818Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:23.804Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:23.804Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:33.144Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:33.145Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:33.148Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:33.148Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:41.622Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:41.622Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:41.605Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:41.605Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:52.450Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:52.450Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:15:52.467Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:15:52.467Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:16:14.715Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:16:14.715Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T02:16:14.807Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:16:14.807Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T02:16:14.885Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:16:14.886Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:16:14.732Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:16:14.733Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T02:16:14.820Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:16:14.820Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T02:16:14.900Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:16:14.900Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+

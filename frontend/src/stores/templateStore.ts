@@ -22,9 +22,17 @@ export const templateStore = create<TemplateStore>((set) => ({
   connectGoogleDrive: async () => {
     try {
       const authUrl = await apiClient.get<string>('/api/google-auth/url');
-      window.location.href = authUrl;
-    } catch (error) {
+      if (authUrl && authUrl.startsWith('http')) {
+        window.location.href = authUrl;
+      } else {
+        throw new Error('Invalid authentication URL received');
+      }
+    } catch (error: any) {
       console.error('Failed to connect Google Drive:', error);
+      // Re-throw with more context
+      if (error.response?.status === 500) {
+        throw new Error('Google Drive OAuth is not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in backend environment variables.');
+      }
       throw error;
     }
   },

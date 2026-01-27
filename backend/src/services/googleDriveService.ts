@@ -43,7 +43,16 @@ export class GoogleDriveService {
 
   getAuthUrl(): string {
     if (!this.oauth2Client) {
-      throw new Error('OAuth not initialized. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET');
+      const clientId = process.env.GOOGLE_CLIENT_ID;
+      const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+      if (!clientId || !clientSecret) {
+        throw new Error('Google OAuth credentials not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.');
+      }
+      // Try to initialize again
+      this.initializeOAuth();
+      if (!this.oauth2Client) {
+        throw new Error('Failed to initialize Google OAuth. Please check your credentials.');
+      }
     }
 
     const scopes = [
