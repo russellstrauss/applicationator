@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ProfilesPage from './pages/ProfilesPage';
+import UserSettingsPage from './pages/UserSettingsPage';
 import AutomationPage from './pages/AutomationPage';
 import TemplatesPage from './pages/TemplatesPage';
 import FieldMappingsPage from './pages/FieldMappingsPage';
@@ -29,6 +30,12 @@ function App() {
                     className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     Profiles
+                  </Link>
+                  <Link
+                    to="/user-settings"
+                    className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  >
+                    User Settings
                   </Link>
                   <Link
                     to="/automation"
@@ -66,6 +73,7 @@ function App() {
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 min-h-screen">
           <Routes>
             <Route path="/" element={<ProfilesPage />} />
+            <Route path="/user-settings" element={<UserSettingsPage />} />
             <Route path="/automation" element={<AutomationPage />} />
             <Route path="/templates" element={<TemplatesPage />} />
             <Route path="/field-mappings" element={<FieldMappingsPage />} />

@@ -10,6 +10,7 @@ process.on('warning', (warning) => {
 import express from 'express';
 import cors from 'cors';
 import profilesRouter from './routes/profiles.js';
+import userRouter from './routes/user.js';
 import automateRouter from './routes/automate.js';
 import fieldsRouter from './routes/fields.js';
 import templatesRouter from './routes/templates.js';
@@ -47,6 +48,7 @@ app.use(express.json({ limit: '50mb' }));
 
 // Routes
 app.use('/api/profiles', profilesRouter);
+app.use('/api/user', userRouter);
 app.use('/api/automate', automateRouter);
 app.use('/api/fields', fieldsRouter);
 app.use('/api/templates', templatesRouter);

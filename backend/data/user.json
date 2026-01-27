@@ -1,0 +1,29 @@
+{
+  "id": "default",
+  "personalInfo": {
+    "firstName": "Russell",
+    "lastName": "Strauss",
+    "email": "russellstrauss@gmail.com",
+    "phone": "6789273289",
+    "address": {
+      "street": "333 Lawton St SW",
+      "city": "Atlanta",
+      "state": "Georgia",
+      "zipCode": "30310",
+      "country": "USA"
+    }
+  },
+  "education": [
+    {
+      "id": "d6aec823-451d-4b9e-b3a3-424f49970743",
+      "institution": "Georgia Institute of Technology",
+      "degree": "B.S. Computational Media",
+      "fieldOfStudy": "Computer Science",
+      "startDate": "2008-08-01",
+      "endDate": "2012-05-01",
+      "gpa": "3.7",
+      "honors": ""
+    }
+  ],
+  "updatedAt": "2026-01-27T02:55:40.898Z"
+}

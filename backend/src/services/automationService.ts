@@ -1,6 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { v4 as uuidv4 } from 'uuid';
-import type { AutomationSession, Profile, FormField, FieldType, FieldMapping } from '../../../shared/types.js';
+import type { AutomationSession, Profile, User, FormField, FieldType, FieldMapping } from '../../../shared/types.js';
 import { StorageService } from './storageService.js';
 
 class AutomationService {
@@ -45,6 +45,9 @@ class AutomationService {
 
   private async runAutomation(session: AutomationSession, profile: Profile) {
     try {
+      // Get user data for personal info and education
+      const user = await StorageService.getUser();
+      
       if (!this.browser) {
         this.browser = await puppeteer.launch({
           headless: false, // Set to true for production
@@ -62,18 +65,18 @@ class AutomationService {
       const isMultiPage = await this.detectMultiPageForm(page);
       
       if (isMultiPage) {
-        await this.handleMultiPageForm(page, session, profile);
+        await this.handleMultiPageForm(page, session, profile, user);
       } else {
         // Single page form
         const fields = await this.detectFormFields(page);
         session.currentStep = `Found ${fields.length} form fields`;
         session.progress = 10;
 
-      // Fill fields based on profile data
+      // Fill fields based on profile and user data
       const unmappedFields: FormField[] = [];
       for (let i = 0; i < fields.length; i++) {
         const field = fields[i];
-        const result = await this.getFieldValue(field, profile);
+        const result = await this.getFieldValue(field, profile, user);
         
         if (result.value) {
           try {
@@ -156,7 +159,7 @@ class AutomationService {
     });
   }
 
-  private async getFieldValue(field: FormField, profile: Profile): Promise<{ value?: string; needsUserInput: boolean; suggestedType?: FieldType }> {
+  private async getFieldValue(field: FormField, profile: Profile, user: User | null): Promise<{ value?: string; needsUserInput: boolean; suggestedType?: FieldType }> {
     // Check learned mappings first
     const mappings = await StorageService.getFieldMappings();
     const mapping = mappings.find((m: FieldMapping) => 
@@ -164,14 +167,14 @@ class AutomationService {
     );
 
     if (mapping && mapping.fieldType !== FieldType.UNKNOWN) {
-      const value = this.extractValueFromProfile(profile, mapping.fieldType);
+      const value = this.extractValue(profile, user, mapping.fieldType);
       if (value) {
         return { value, needsUserInput: false, suggestedType: mapping.fieldType };
       }
     }
 
     // Try rule-based matching
-    const ruleBased = this.ruleBasedFieldMatch(field.name, profile);
+    const ruleBased = this.ruleBasedFieldMatch(field.name, profile, user);
     if (ruleBased.value) {
       return { value: ruleBased.value, needsUserInput: false, suggestedType: ruleBased.type };
     }
@@ -180,8 +183,13 @@ class AutomationService {
     return { needsUserInput: true, suggestedType: FieldType.UNKNOWN };
   }
 
-  private extractValueFromProfile(profile: Profile, fieldType: FieldType): string | undefined {
-    const personalInfo = profile.personalInfo;
+  private extractValue(profile: Profile, user: User | null, fieldType: FieldType): string | undefined {
+    // Use user data for personal info, profile data for work experience, skills, etc.
+    const personalInfo = user?.personalInfo;
+    
+    if (!personalInfo) {
+      return undefined;
+    }
     
     switch (fieldType) {
       case FieldType.FIRST_NAME:
@@ -208,14 +216,24 @@ class AutomationService {
         return personalInfo.linkedIn;
       case FieldType.PORTFOLIO:
         return personalInfo.portfolio;
+      case FieldType.EDUCATION:
+        // Return education from user data
+        if (user?.education && user.education.length > 0) {
+          return user.education.map(e => `${e.degree} from ${e.institution}`).join('; ');
+        }
+        return undefined;
       default:
         return undefined;
     }
   }
 
-  private ruleBasedFieldMatch(fieldName: string, profile: Profile): { value?: string; type: FieldType } {
+  private ruleBasedFieldMatch(fieldName: string, profile: Profile, user: User | null): { value?: string; type: FieldType } {
     const lower = fieldName.toLowerCase();
-    const personalInfo = profile.personalInfo;
+    const personalInfo = user?.personalInfo;
+
+    if (!personalInfo) {
+      return { type: FieldType.UNKNOWN };
+    }
 
     if (lower.includes('first') && lower.includes('name')) {
       return { value: personalInfo.firstName, type: FieldType.FIRST_NAME };
@@ -311,7 +329,7 @@ class AutomationService {
   }
 
   // Multi-page form handling
-  async handleMultiPageForm(page: Page, session: AutomationSession, profile: Profile) {
+  async handleMultiPageForm(page: Page, session: AutomationSession, profile: Profile, user: User | null) {
     let currentPage = 1;
     let hasNext = true;
     const maxPages = 10; // Safety limit
@@ -328,7 +346,7 @@ class AutomationService {
       const unmappedFields: FormField[] = [];
       
       for (const field of fields) {
-        const result = await this.getFieldValue(field, profile);
+        const result = await this.getFieldValue(field, profile, user);
         if (result.value) {
           try {
             await this.fillField(page, field, result.value);

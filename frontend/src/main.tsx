@@ -1,3 +1,5 @@
+// Polyfill for CommonJS 'module' object - must be imported first
+import './polyfills'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'

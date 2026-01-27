@@ -219,3 +219,372 @@ App
 [2026-01-27T02:16:14.900Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
 [2026-01-27T02:16:14.900Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
 
+[2026-01-27T02:42:46.098Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:42:46.098Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T02:42:46.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:42:46.242Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T02:42:46.350Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:42:46.350Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:42:46.001Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:42:46.001Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T02:42:46.132Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:42:46.132Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T02:42:46.264Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:42:46.264Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:45:52.577Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:45:52.577Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T02:45:52.550Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:45:52.551Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T02:47:48.905Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:47:48.906Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:47:48.904Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:47:48.905Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:47:59.720Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:47:59.720Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:47:59.719Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:47:59.719Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:48:02.232Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:48:02.232Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:48:02.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:48:02.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:48:11.120Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:11.120Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:11.112Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:11.112Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:48:14.476Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:14.476Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:48:14.510Z] ERROR [http://localhost:3002/?] Unhandled Error: ReferenceError: showEducationForm is not defined File: http://localhost:3002/src/components/ProfileForm.tsx?t=1769482094076:739:9 ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482094076:739:9
+renderWithHooks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:11596:35
+mountIndeterminateComponent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:14974:21
+beginWork@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:15962:22
+callCallback2@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:3680:22
+invokeGuardedCallbackDev@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:3705:24
+invokeGuardedCallback@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:3739:39
+beginWork$1@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19818:36
+performUnitOfWork@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19251:20
+workLoopSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19190:30
+renderRootSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19169:15
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:18927:42
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+setTimeout handler*debounce/<@http://localhost:3002/@react-refresh:598:14
+validateRefreshBoundaryAndEnqueueUpdate@http://localhost:3002/@react-refresh:648:5
+@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482088932:1133:48
+accept/<@http://localhost:3002/@vite/client:66:95
+fetchUpdate/<@http://localhost:3002/@vite/client:218:54
+queueUpdate/<@http://localhost:3002/@vite/client:196:55
+queueUpdate@http://localhost:3002/@vite/client:196:33
+async*handleMessage/<@http://localhost:3002/@vite/client:839:55
+handleMessage@http://localhost:3002/@vite/client:838:38
+async*createHMRHandler/</<@http://localhost:3002/@vite/client:458:49
+dequeue@http://localhost:3002/@vite/client:480:8
+enqueue/<@http://localhost:3002/@vite/client:472:9
+enqueue@http://localhost:3002/@vite/client:466:10
+createHMRHandler/<@http://localhost:3002/@vite/client:458:28
+onMessage@http://localhost:3002/@vite/client:305:15
+createWebSocketModuleRunnerTransport/connect/<@http://localhost:3002/@vite/client:413:14
+EventListener.handleEvent*connect@http://localhost:3002/@vite/client:412:11
+connect@http://localhost:3002/@vite/client:751:23
+connect@http://localhost:3002/@vite/client:289:23
+connect@http://localhost:3002/@vite/client:373:45
+@http://localhost:3002/@vite/client:823:11
+
+[2026-01-27T02:48:14.513Z] ERROR [http://localhost:3002/?] Unhandled Error: ReferenceError: showEducationForm is not defined File: http://localhost:3002/src/components/ProfileForm.tsx?t=1769482094076:739:9 ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482094076:739:9
+renderWithHooks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:11596:35
+mountIndeterminateComponent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:14974:21
+beginWork@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:15962:22
+callCallback2@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:3680:22
+invokeGuardedCallbackDev@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:3705:24
+invokeGuardedCallback@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:3739:39
+beginWork$1@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19818:36
+performUnitOfWork@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19251:20
+workLoopSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19190:30
+renderRootSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19169:15
+recoverFromConcurrentError@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:18786:42
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:18932:28
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+setTimeout handler*debounce/<@http://localhost:3002/@react-refresh:598:14
+validateRefreshBoundaryAndEnqueueUpdate@http://localhost:3002/@react-refresh:648:5
+@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482088932:1133:48
+accept/<@http://localhost:3002/@vite/client:66:95
+fetchUpdate/<@http://localhost:3002/@vite/client:218:54
+queueUpdate/<@http://localhost:3002/@vite/client:196:55
+queueUpdate@http://localhost:3002/@vite/client:196:33
+async*handleMessage/<@http://localhost:3002/@vite/client:839:55
+handleMessage@http://localhost:3002/@vite/client:838:38
+async*createHMRHandler/</<@http://localhost:3002/@vite/client:458:49
+dequeue@http://localhost:3002/@vite/client:480:8
+enqueue/<@http://localhost:3002/@vite/client:472:9
+enqueue@http://localhost:3002/@vite/client:466:10
+createHMRHandler/<@http://localhost:3002/@vite/client:458:28
+onMessage@http://localhost:3002/@vite/client:305:15
+createWebSocketModuleRunnerTransport/connect/<@http://localhost:3002/@vite/client:413:14
+EventListener.handleEvent*connect@http://localhost:3002/@vite/client:412:11
+connect@http://localhost:3002/@vite/client:751:23
+connect@http://localhost:3002/@vite/client:289:23
+connect@http://localhost:3002/@vite/client:373:45
+@http://localhost:3002/@vite/client:823:11
+
+[2026-01-27T02:48:14.515Z] ERROR [http://localhost:3002/?] The above error occurred in the <ProfileForm> component:
+
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482094076:24:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx?t=1769481763939:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=971c2317:5293:7
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+[2026-01-27T02:48:14.525Z] ERROR [http://localhost:3002/?] Unhandled Promise Rejection: ReferenceError: showEducationForm is not defined ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482094076:739:9
+renderWithHooks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:11596:35
+mountIndeterminateComponent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:14974:21
+beginWork@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:15962:22
+beginWork$1@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19806:22
+performUnitOfWork@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19251:20
+workLoopSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19190:30
+renderRootSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19169:15
+recoverFromConcurrentError@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:18786:42
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:18932:28
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=971c2317:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+setTimeout handler*debounce/<@http://localhost:3002/@react-refresh:598:14
+validateRefreshBoundaryAndEnqueueUpdate@http://localhost:3002/@react-refresh:648:5
+@http://localhost:3002/src/components/ProfileForm.tsx?t=1769482088932:1133:48
+accept/<@http://localhost:3002/@vite/client:66:95
+fetchUpdate/<@http://localhost:3002/@vite/client:218:54
+queueUpdate/<@http://localhost:3002/@vite/client:196:55
+queueUpdate@http://localhost:3002/@vite/client:196:33
+async*handleMessage/<@http://localhost:3002/@vite/client:839:55
+handleMessage@http://localhost:3002/@vite/client:838:38
+async*createHMRHandler/</<@http://localhost:3002/@vite/client:458:49
+dequeue@http://localhost:3002/@vite/client:480:8
+enqueue/<@http://localhost:3002/@vite/client:472:9
+enqueue@http://localhost:3002/@vite/client:466:10
+createHMRHandler/<@http://localhost:3002/@vite/client:458:28
+onMessage@http://localhost:3002/@vite/client:305:15
+createWebSocketModuleRunnerTransport/connect/<@http://localhost:3002/@vite/client:413:14
+EventListener.handleEvent*connect@http://localhost:3002/@vite/client:412:11
+connect@http://localhost:3002/@vite/client:751:23
+connect@http://localhost:3002/@vite/client:289:23
+connect@http://localhost:3002/@vite/client:373:45
+@http://localhost:3002/@vite/client:823:11
+
+
+[2026-01-27T02:48:14.474Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:14.474Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:48:15.922Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:15.923Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:15.927Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:15.927Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:24.603Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:24.604Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:48:25.076Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:25.077Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:24.591Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:24.591Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:48:25.070Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:25.070Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:39.808Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:39.808Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:39.797Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:39.797Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:52.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:52.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:48:52.223Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:48:52.223Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:49:03.648Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:49:03.649Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T02:49:03.637Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:49:03.638Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T02:49:34.348Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:49:34.348Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T02:49:34.354Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:49:34.354Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-27T02:50:14.377Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:14.377Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T02:50:14.375Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:14.375Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T02:50:17.542Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:17.544Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T02:50:19.193Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:19.194Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T02:50:17.549Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:17.550Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T02:50:19.188Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:19.189Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T02:50:23.300Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:23.300Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T02:50:24.981Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:24.982Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:50:23.301Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:23.302Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T02:50:24.987Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:24.987Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:50:28.639Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:28.640Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:50:28.648Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:50:28.649Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:52:23.671Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:52:23.672Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileList.tsx
+
+[2026-01-27T02:52:23.655Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:52:23.657Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileList.tsx
+
+[2026-01-27T02:52:46.633Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:52:46.633Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:52:46.633Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:52:46.633Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:53:07.135Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:53:07.136Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T02:53:07.404Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.405Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T02:53:07.477Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.477Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T02:53:07.593Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.594Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T02:53:07.764Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:53:07.765Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T02:53:07.066Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T02:53:07.066Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T02:53:07.280Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.280Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T02:53:07.347Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.348Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T02:53:07.612Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/App.tsx
+[2026-01-27T02:53:07.612Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.656Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.656Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T02:53:07.729Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.729Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T02:53:07.761Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.761Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T02:53:07.825Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.825Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T02:53:07.847Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.847Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T02:53:07.863Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.863Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:53:07.830Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.831Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+[2026-01-27T02:53:07.850Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.850Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T02:53:07.867Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.867Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T02:53:07.883Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.883Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T02:53:07.915Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.915Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CertificationForm.tsx
+
+[2026-01-27T02:53:07.938Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.938Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileList.tsx
+
+[2026-01-27T02:53:07.882Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/index.css
+[2026-01-27T02:53:07.883Z] DEBUG [http://localhost:3002/?] [vite] hot updated: /src/components/ProfileList.tsx
+
+[2026-01-27T02:57:10.545Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:10.545Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T02:57:10.522Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:10.525Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T02:57:16.126Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:16.127Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T02:57:16.133Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:16.133Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T02:57:25.662Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:25.662Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T02:57:25.696Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:25.696Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T02:57:25.651Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:25.651Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T02:57:25.682Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T02:57:25.682Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T02:57:33.745Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T02:57:33.740Z] LOG   [http://localhost:3002/user-settings] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T02:59:11.213Z] LOG   [http://localhost:3002/user-settings] Synced 1 pending logs to server
+[2026-01-27T02:59:12.280Z] DEBUG [http://localhost:3002/user-settings] [vite] connected.
+
+[2026-01-27T02:59:21.625Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T02:59:21.625Z] LOG   [http://localhost:3002/user-settings] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T02:59:35.564Z] LOG   [http://localhost:3002/user-settings] Synced 1 pending logs to server
+
+[2026-01-27T02:59:37.820Z] LOG   [http://localhost:3002/user-settings] Synced 1 pending logs to server
+
+[2026-01-27T02:59:44.103Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T02:59:44.101Z] LOG   [http://localhost:3002/user-settings] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T02:59:50.584Z] LOG   [http://localhost:3002/user-settings] Synced 1 pending logs to server
+
+[2026-01-27T03:00:03.440Z] LOG   [http://localhost:3002/user-settings] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T03:00:03.435Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T03:00:16.003Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T03:00:19.895Z] LOG   [http://localhost:3000/templates] Synced 1 pending logs to server
+
+[2026-01-27T03:01:54.948Z] LOG   [http://localhost:3002/user-settings] [vite] server connection lost. Polling for restart...
+

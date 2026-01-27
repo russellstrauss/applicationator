@@ -1,12 +1,17 @@
 // Shared types between frontend and backend
 
+export interface User {
+  id: string;
+  personalInfo: PersonalInfo;
+  education: Education[];
+  updatedAt: string;
+}
+
 export interface Profile {
   id: string;
   name: string;
   summary?: string;
-  personalInfo: PersonalInfo;
   workExperience: WorkExperience[];
-  education: Education[];
   skills: SkillCategory[];
   certifications: Certification[];
   resumeTemplateId?: string;

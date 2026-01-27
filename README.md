@@ -1,4 +1,4 @@
-# Apply Matrix - Job Application Automation App
+# Applicationator
 
 A full-stack web application that automates job applications using browser automation, machine learning field matching, and profile management.
 

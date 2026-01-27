@@ -23,19 +23,19 @@
       "current": true,
       "description": "Farmer John Technologies builds the technology of the future.",
       "location": "Atlanta, GA"
+    },
+    {
+      "id": "b3b47872-6843-4db3-9405-1c5e0e4e500b",
+      "company": "Rightpoint Consulting",
+      "position": "Senior Front End Engineer",
+      "startDate": "2014-10-01",
+      "endDate": "2019-08-01",
+      "current": false,
+      "description": "Rightpoint descript",
+      "location": "Atlanta, GA"
     }
   ],
   "education": [
-    {
-      "id": "8cc3f84c-ec79-40fd-b306-23c4c18e0dfc",
-      "institution": "Georgia Institute of Technology",
-      "degree": "B.S. Computational Media",
-      "fieldOfStudy": "Computer Science",
-      "startDate": "2008-08-01",
-      "endDate": "2012-05-01",
-      "gpa": "3.7",
-      "honors": ""
-    },
     {
       "id": "dfded6c8-b958-4185-b07b-64dde15e5cec",
       "institution": "Georgia Institute of Technology",
@@ -45,11 +45,30 @@
       "endDate": "2020-12-01",
       "gpa": "3.8",
       "honors": ""
+    },
+    {
+      "id": "8cc3f84c-ec79-40fd-b306-23c4c18e0dfc",
+      "institution": "Georgia Institute of Technology",
+      "degree": "B.S. Computational Media",
+      "fieldOfStudy": "Computer Science",
+      "startDate": "2008-08-01",
+      "endDate": "2012-05-01",
+      "gpa": "3.7",
+      "honors": ""
     }
   ],
-  "skills": [],
+  "skills": [
+    {
+      "id": "a7d6e14b-27a4-439c-bd1e-2a13920fa040",
+      "title": "Front End",
+      "skills": [
+        "JavaScript",
+        "Vue.js"
+      ]
+    }
+  ],
   "certifications": [],
   "createdAt": "2026-01-27T00:11:00.582Z",
-  "updatedAt": "2026-01-27T02:34:42.130Z",
+  "updatedAt": "2026-01-27T02:41:51.998Z",
   "summary": "Front End Software Architect with experience building and shipping production-grade web applications and strong front end specialization. Deep expertise in modern JavaScript, rapid prototyping, UI architecture,  and design system patterns, with a product-driven mindset. Known for bridging product, design, and engineering to deliver scalable, high-quality user experiences in fast-moving environments. Strong foundation in performance, accessibility, developer experience, and expert in AI-assisted workflows."
 }

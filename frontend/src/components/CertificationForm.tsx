@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Certification } from '../../../shared/types';
 import { v4 as uuidv4 } from 'uuid';
+import DatePicker from './DatePicker';
 
 interface CertificationFormProps {
   certification: Certification | null;
@@ -70,20 +71,18 @@ export default function CertificationForm({ certification, onSave, onCancel }: C
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-medium text-gray-700">Issue Date *</label>
-            <input
-              type="date"
+            <DatePicker
               value={formData.issueDate}
-              onChange={(e) => setFormData({ ...formData, issueDate: e.target.value })}
+              onChange={(value) => setFormData({ ...formData, issueDate: value })}
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
               required
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Expiry Date</label>
-            <input
-              type="date"
+            <DatePicker
               value={formData.expiryDate || ''}
-              onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
+              onChange={(value) => setFormData({ ...formData, expiryDate: value })}
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
             />
           </div>

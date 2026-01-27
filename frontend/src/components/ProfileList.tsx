@@ -23,8 +23,11 @@ export default function ProfileList({ profiles, onEdit, onDelete }: ProfileListP
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-medium text-gray-900">{profile.name}</h3>
-                <p className="text-sm text-gray-500">
-                  {profile.personalInfo.firstName} {profile.personalInfo.lastName} • {profile.personalInfo.email}
+                {profile.summary && (
+                  <p className="text-sm text-gray-500 mt-1">{profile.summary}</p>
+                )}
+                <p className="text-sm text-gray-400 mt-1">
+                  {profile.workExperience?.length || 0} work experience{profile.workExperience?.length !== 1 ? 's' : ''} • {profile.skills?.length || 0} skill categor{profile.skills?.length !== 1 ? 'ies' : 'y'}
                 </p>
               </div>
               <div className="flex space-x-2">

@@ -10,6 +10,7 @@ const DATA_DIR = path.join(__dirname, '../../data');
 const PROFILES_DIR = path.join(DATA_DIR, 'profiles');
 const FIELD_MAPPINGS_DIR = path.join(DATA_DIR, 'field-mappings');
 const LEARNED_PATTERNS_DIR = path.join(DATA_DIR, 'learned-patterns');
+const USER_FILE = path.join(DATA_DIR, 'user.json');
 
 // Ensure directories exist
 async function ensureDirectories() {
@@ -118,6 +119,24 @@ export class StorageService {
     if (data.learnedPatterns) {
       await this.saveLearnedPatterns(data.learnedPatterns);
     }
+    if (data.user) {
+      await this.saveUser(data.user);
+    }
+  }
+
+  // User operations
+  static async getUser() {
+    await ensureDirectories();
+    if (await fs.pathExists(USER_FILE)) {
+      return await fs.readJson(USER_FILE);
+    }
+    return null;
+  }
+
+  static async saveUser(user: any) {
+    await ensureDirectories();
+    await fs.writeJson(USER_FILE, user, { spaces: 2 });
+    return user;
   }
 }
 
