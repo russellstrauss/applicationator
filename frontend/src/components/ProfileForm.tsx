@@ -14,8 +14,12 @@ interface ProfileFormProps {
 export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormProps) {
   const [formData, setFormData] = useState<Partial<Profile>>({
     name: '',
+    positionSummaryHeadline: '',
+    summaryTitle: '',
     summary: '',
+    workExperienceTitle: '',
     workExperience: [],
+    skillsTitle: '',
     skills: [],
     certifications: [],
   });
@@ -32,8 +36,12 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
       let migratedProfile: Partial<Profile> = {
         id: profile.id,
         name: profile.name,
+        positionSummaryHeadline: profile.positionSummaryHeadline,
+        summaryTitle: profile.summaryTitle,
         summary: profile.summary,
+        workExperienceTitle: profile.workExperienceTitle,
         workExperience: profile.workExperience || [],
+        skillsTitle: profile.skillsTitle,
         skills: profile.skills || [],
         certifications: profile.certifications || [],
         resumeTemplateId: profile.resumeTemplateId,
@@ -172,8 +180,30 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
             />
           </div>
 
+          {/* Position Summary Headline */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Position Summary Headline</label>
+            <input
+              type="text"
+              value={formData.positionSummaryHeadline || ''}
+              onChange={(e) => setFormData({ ...formData, positionSummaryHeadline: e.target.value })}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+              placeholder="e.g., Senior Software Engineer"
+            />
+          </div>
+
           {/* Summary */}
           <div>
+            <div className="mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <input
+                type="text"
+                value={formData.summaryTitle || ''}
+                onChange={(e) => setFormData({ ...formData, summaryTitle: e.target.value })}
+                className="block w-full border border-gray-300 rounded-md px-3 py-2"
+                placeholder="Professional Summary"
+              />
+            </div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Professional Summary</label>
             <textarea
               value={formData.summary || ''}
@@ -186,6 +216,16 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
 
           {/* Work Experience Section */}
           <div className="border-t pt-4">
+            <div className="mb-3">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <input
+                type="text"
+                value={formData.workExperienceTitle || ''}
+                onChange={(e) => setFormData({ ...formData, workExperienceTitle: e.target.value })}
+                className="block w-full border border-gray-300 rounded-md px-3 py-2"
+                placeholder="Work Experience"
+              />
+            </div>
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-md font-semibold">Work Experience</h4>
               <button
@@ -220,7 +260,16 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
                           {exp.startDate} - {exp.current ? 'Present' : exp.endDate || 'N/A'}
                         </p>
                         {exp.description && (
-                          <p className="text-sm text-gray-700 mt-2">{exp.description}</p>
+                          <div className="text-sm text-gray-700 mt-2">
+                            <ul className="list-disc list-outside ml-5 space-y-1">
+                              {exp.description
+                                .split('\n')
+                                .filter(line => line.trim())
+                                .map((line, idx) => (
+                                  <li key={idx} className="pl-1">{line.trim()}</li>
+                                ))}
+                            </ul>
+                          </div>
                         )}
                       </div>
                       <div className="flex gap-2 ml-4 items-center">
@@ -268,6 +317,16 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
 
           {/* Skills Section */}
           <div className="border-t pt-4">
+            <div className="mb-3">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <input
+                type="text"
+                value={formData.skillsTitle || ''}
+                onChange={(e) => setFormData({ ...formData, skillsTitle: e.target.value })}
+                className="block w-full border border-gray-300 rounded-md px-3 py-2"
+                placeholder="Skills"
+              />
+            </div>
             <h4 className="text-md font-semibold mb-3">Skills</h4>
             <SkillsInput
               skills={formData.skills || []}

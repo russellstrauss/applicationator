@@ -180,7 +180,7 @@ class Logger {
     }
 
     try {
-      const pendingKey = 'apply-matrix-pending-logs';
+      const pendingKey = 'applicationator-pending-logs';
       const existing = localStorage.getItem(pendingKey);
       const pendingLogs = existing ? JSON.parse(existing) : [];
       
@@ -230,7 +230,7 @@ class Logger {
 
   private clearPendingLogs() {
     try {
-      localStorage.removeItem('apply-matrix-pending-logs');
+      localStorage.removeItem('applicationator-pending-logs');
     } catch (error) {
       // Ignore errors
     }
@@ -238,7 +238,7 @@ class Logger {
 
   async syncPendingLogs() {
     try {
-      const pendingKey = 'apply-matrix-pending-logs';
+      const pendingKey = 'applicationator-pending-logs';
       const existing = localStorage.getItem(pendingKey);
       if (!existing) return;
 
@@ -313,7 +313,7 @@ class Logger {
   // Get pending logs count
   getPendingLogsCount(): number {
     try {
-      const pendingKey = 'apply-matrix-pending-logs';
+      const pendingKey = 'applicationator-pending-logs';
       const existing = localStorage.getItem(pendingKey);
       if (!existing) return 0;
       const pendingLogs = JSON.parse(existing);

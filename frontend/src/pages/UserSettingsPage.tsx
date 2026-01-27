@@ -200,6 +200,29 @@ export default function UserSettingsPage() {
             </div>
           </div>
 
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Online Portfolio</label>
+              <input
+                type="url"
+                value={personalInfo.onlinePortfolio || ''}
+                onChange={(e) => setPersonalInfo({ ...personalInfo, onlinePortfolio: e.target.value })}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+                placeholder="https://yourportfolio.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">GitHub</label>
+              <input
+                type="url"
+                value={personalInfo.github || ''}
+                onChange={(e) => setPersonalInfo({ ...personalInfo, github: e.target.value })}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+                placeholder="https://github.com/username"
+              />
+            </div>
+          </div>
+
           <div className="flex justify-end pt-4">
             <button
               onClick={handleSavePersonalInfo}
@@ -248,7 +271,6 @@ export default function UserSettingsPage() {
                     <p className="text-sm text-gray-600">
                       {edu.startDate} - {edu.endDate || 'N/A'}
                       {edu.gpa && ` • GPA: ${edu.gpa}`}
-                      {edu.honors && ` • ${edu.honors}`}
                     </p>
                   </div>
                   <div className="flex gap-2 ml-4 items-center">

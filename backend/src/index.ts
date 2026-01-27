@@ -59,7 +59,7 @@ app.use('/api/logs', logsRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Apply Matrix API is running' });
+  res.json({ status: 'ok', message: 'Applicationator API is running' });
 });
 
 // Start server

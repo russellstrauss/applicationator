@@ -588,3 +588,1300 @@ connect@http://localhost:3002/@vite/client:373:45
 
 [2026-01-27T03:01:54.948Z] LOG   [http://localhost:3002/user-settings] [vite] server connection lost. Polling for restart...
 
+[2026-01-27T03:20:10.717Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=11e8b17e",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=11e8b17e:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=11e8b17e:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T03:20:10.717Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=11e8b17e",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=11e8b17e:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=11e8b17e:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T03:22:30.819Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-27T03:22:42.044Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T03:22:42.046Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ninvokePassiveEffectMountInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18374:44\ninvokeEffectsInDev@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19754:33\ncommitDoubleInvokeEffectsInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19739:33\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19556:43\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T03:24:18.703Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-27T03:24:31.725Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ninvokePassiveEffectMountInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18374:44\ninvokeEffectsInDev@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19754:33\ncommitDoubleInvokeEffectsInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19739:33\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19556:43\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T03:24:31.726Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T03:36:56.499Z] LOG   [http://localhost:3000/] Synced 8 pending logs to server
+
+[2026-01-27T03:37:27.184Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T04:02:01.424Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T04:04:48.075Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ninvokePassiveEffectMountInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18374:44\ninvokeEffectsInDev@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19754:33\ncommitDoubleInvokeEffectsInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19739:33\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19556:43\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T04:04:48.089Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T04:04:55.802Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/App.tsx
+[2026-01-27T04:04:55.803Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-27T04:05:04.372Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-27T04:05:13.086Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T04:05:13.088Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ninvokePassiveEffectMountInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18374:44\ninvokeEffectsInDev@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19754:33\ncommitDoubleInvokeEffectsInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19739:33\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19556:43\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T04:05:21.112Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-27T04:05:33.806Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T04:05:33.808Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ninvokePassiveEffectMountInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18374:44\ninvokeEffectsInDev@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19754:33\ncommitDoubleInvokeEffectsInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19739:33\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19556:43\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T04:06:54.386Z] LOG   [http://localhost:3000/] Synced 10 pending logs to server
+
+[2026-01-27T04:08:41.407Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-27T04:08:55.684Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T04:08:55.686Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadProfiles@http://localhost:3000/src/stores/profileStore.ts:7:40\nfetchProfiles@http://localhost:3000/src/pages/ProfilesPage.tsx:32:13\nProfilesPage/<@http://localhost:3000/src/pages/ProfilesPage.tsx:35:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:16963:34\ninvokePassiveEffectMountInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:18374:44\ninvokeEffectsInDev@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19754:33\ncommitDoubleInvokeEffectsInDEV@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19739:33\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19556:43\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19500:22\n../node_modules/react-dom/cjs/react-dom.development.js/commitRootImpl/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:19381:17\nworkLoop@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:197:50\nflushWork@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:176:22\nperformWorkUntilDeadline@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:384:29\nEventHandlerNonNull*../node_modules/scheduler/cjs/scheduler.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:405:11\n../node_modules/scheduler/cjs/scheduler.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:453:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/scheduler/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:465:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/cjs/react-dom.development.js/<@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:481:25\n../node_modules/react-dom/cjs/react-dom.development.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21629:9\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/index.js@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=c5e51849:21641:24\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n../node_modules/react-dom/client.js@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:12:13\n__require@http://localhost:3000/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=c5e51849:8:50\n@http://localhost:3000/node_modules/.vite/deps/react-dom_client.js?v=c5e51849:38:16\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T04:09:15.804Z] LOG   [http://localhost:3000/] Synced 3 pending logs to server
+
+[2026-01-27T05:00:02.266Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T05:00:06.308Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T05:01:22.543Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T05:01:22.559Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T05:02:49.356Z] LOG   [http://localhost:3000/] Synced 4 pending logs to server
+
+[2026-01-27T05:21:56.612Z] LOG   [http://localhost:3001/] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T05:08:56.976Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-27T05:10:03.750Z] DEBUG [http://localhost:3000/] [vite] connected.
+[2026-01-27T05:10:04.524Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T05:10:04.530Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=c5e51849:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T05:22:00.258Z] LOG   [http://localhost:3000/] Synced 4 pending logs to server
+[2026-01-27T05:22:00.959Z] DEBUG [http://localhost:3000/] [vite] connected.
+
+[2026-01-27T05:26:40.285Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/ExportImport.tsx
+[2026-01-27T05:26:40.289Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-27T05:26:40.350Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/ExportImport.tsx
+[2026-01-27T05:26:40.352Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+
+[2026-01-27T05:23:18.837Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-27T05:25:03.305Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T05:25:03.307Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T05:26:42.268Z] LOG   [http://localhost:3000/] Synced 3 pending logs to server
+[2026-01-27T05:26:45.619Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+
+[2026-01-27T05:31:58.536Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-27T05:31:58.539Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T05:31:58.566Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-27T05:31:58.566Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T05:32:18.394Z] ERROR [http://localhost:3000/] [vite] {}
+[2026-01-27T05:32:18.395Z] ERROR [http://localhost:3000/] [vite] Failed to reload /src/components/WorkExperienceForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T05:32:18.395Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-27T05:32:18.395Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T06:08:06.062Z] DEBUG [http://localhost:3002/] [vite] connected.
+
+[2026-01-27T06:14:34.176Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:14:34.177Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T06:14:43.551Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:14:43.551Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T06:14:53.108Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:14:53.109Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T06:15:01.632Z] ERROR [http://localhost:3002/] [vite] {}
+[2026-01-27T06:15:01.633Z] ERROR [http://localhost:3002/] [vite] Failed to reload /src/components/WorkExperienceForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T06:15:01.676Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:15:01.677Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T06:18:57.588Z] ERROR [http://localhost:3002/] [vite] {}
+[2026-01-27T06:18:57.588Z] ERROR [http://localhost:3002/] [vite] Failed to reload /src/components/WorkExperienceForm.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T06:18:57.627Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:18:57.627Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T06:19:37.016Z] LOG   [http://localhost:3002/] [vite] server connection lost. Polling for restart...
+
+[2026-01-27T06:27:15.750Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:27:15.750Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T06:27:17.777Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:27:17.777Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:27:25.194Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:27:25.194Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:27:31.462Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:27:31.462Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:27:34.775Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:27:34.775Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:28:01.304Z] ERROR [http://localhost:3002/] [vite] {}
+[2026-01-27T06:28:01.305Z] ERROR [http://localhost:3002/] [vite] Failed to reload /src/components/DatePicker.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-27T06:28:01.344Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:28:01.344Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:28:05.769Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:28:05.769Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:28:30.003Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:28:30.003Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:28:43.399Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:28:43.399Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:28:59.268Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:28:59.268Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:30:12.417Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:30:12.417Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T06:30:13.353Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:30:13.353Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:30:32.182Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:30:32.182Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:31:00.704Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:31:00.705Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:34:26.362Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:34:26.363Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:34:35.618Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:34:35.620Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:34:56.441Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:34:56.441Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:35:03.836Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:35:03.837Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:35:24.679Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:35:24.680Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:36:56.587Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:36:56.587Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T06:36:56.616Z] ERROR [http://localhost:3002/] Unhandled Error: ReferenceError: formatDisplayDate is not defined File: http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:52:23 DatePicker/<@http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:52:23
+commitHookEffectListMount@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:16963:34
+commitPassiveMountOnFiber@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18206:44
+commitPassiveMountEffects_complete@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18179:42
+commitPassiveMountEffects_begin@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18169:49
+commitPassiveMountEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18159:42
+flushPassiveEffectsImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19543:36
+flushPassiveEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19500:22
+commitRootImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19469:13
+commitRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19330:27
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18948:21
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+
+[2026-01-27T06:36:56.619Z] ERROR [http://localhost:3002/] Unhandled Error: ReferenceError: formatDisplayDate is not defined File: http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:52:23 DatePicker/<@http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:52:23
+commitHookEffectListMount@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:16963:34
+invokePassiveEffectMountInDEV@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18374:44
+invokeEffectsInDev@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19754:33
+commitDoubleInvokeEffectsInDEV@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19739:33
+flushPassiveEffectsImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19556:43
+flushPassiveEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19500:22
+commitRootImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19469:13
+commitRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19330:27
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18948:21
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+
+[2026-01-27T06:36:56.620Z] ERROR [http://localhost:3002/] The above error occurred in the <DatePicker> component:
+
+DatePicker@http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:19:35
+div
+div
+div
+div
+WorkExperienceForm@http://localhost:3002/src/components/WorkExperienceForm.tsx?t=1769495724591:21:43
+div
+div
+form
+div
+div
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769495724591:23:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx?t=1769495724591:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:5293:7
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+[2026-01-27T06:36:56.620Z] ERROR [http://localhost:3002/] The above error occurred in the <DatePicker> component:
+
+DatePicker@http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:19:35
+div
+div
+div
+div
+WorkExperienceForm@http://localhost:3002/src/components/WorkExperienceForm.tsx?t=1769495724591:21:43
+div
+div
+form
+div
+div
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769495724591:23:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx?t=1769495724591:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:5293:7
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+[2026-01-27T06:36:56.630Z] ERROR [http://localhost:3002/] Unhandled Promise Rejection: ReferenceError: formatDisplayDate is not defined DatePicker/<@http://localhost:3002/src/components/DatePicker.tsx?t=1769495816493:52:23
+commitHookEffectListMount@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:16963:34
+commitPassiveMountOnFiber@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18206:44
+commitPassiveMountEffects_complete@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18179:42
+commitPassiveMountEffects_begin@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18169:49
+commitPassiveMountEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18159:42
+flushPassiveEffectsImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19543:36
+flushPassiveEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19500:22
+commitRootImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19469:13
+commitRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19330:27
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18948:21
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+
+[2026-01-27T06:36:59.193Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:36:59.193Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:37:18.430Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:37:18.430Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:40:46.332Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:40:46.332Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:40:53.882Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:40:53.883Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+[2026-01-27T06:40:53.923Z] ERROR [http://localhost:3002/] Unhandled Error: ReferenceError: parseValueToDate is not defined File: http://localhost:3002/src/components/DatePicker.tsx?t=1769496053804:48:20 DatePicker/<@http://localhost:3002/src/components/DatePicker.tsx?t=1769496053804:48:20
+commitHookEffectListMount@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:16963:34
+commitPassiveMountOnFiber@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18206:44
+commitPassiveMountEffects_complete@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18179:42
+commitPassiveMountEffects_begin@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18169:49
+commitPassiveMountEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18159:42
+flushPassiveEffectsImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19543:36
+flushPassiveEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19500:22
+commitRootImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19469:13
+commitRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19330:27
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18948:21
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+
+[2026-01-27T06:40:53.927Z] ERROR [http://localhost:3002/] The above error occurred in the <DatePicker> component:
+
+DatePicker@http://localhost:3002/src/components/DatePicker.tsx?t=1769496053804:19:35
+div
+div
+div
+div
+WorkExperienceForm@http://localhost:3002/src/components/WorkExperienceForm.tsx?t=1769495838335:21:43
+div
+div
+form
+div
+div
+ProfileForm@http://localhost:3002/src/components/ProfileForm.tsx?t=1769495838335:23:36
+div
+ProfilesPage@http://localhost:3002/src/pages/ProfilesPage.tsx?t=1769495838335:25:83
+RenderedRoute@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4133:7
+Routes@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4602:7
+main
+div
+Router@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:4550:7
+BrowserRouter@http://localhost:3002/node_modules/.vite/deps/react-router-dom.js?v=dbe8b243:5293:7
+App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+[2026-01-27T06:40:53.929Z] ERROR [http://localhost:3002/] Unhandled Promise Rejection: ReferenceError: parseValueToDate is not defined DatePicker/<@http://localhost:3002/src/components/DatePicker.tsx?t=1769496053804:48:20
+commitHookEffectListMount@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:16963:34
+commitPassiveMountOnFiber@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18206:44
+commitPassiveMountEffects_complete@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18179:42
+commitPassiveMountEffects_begin@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18169:49
+commitPassiveMountEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18159:42
+flushPassiveEffectsImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19543:36
+flushPassiveEffects@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19500:22
+commitRootImpl@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19469:13
+commitRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19330:27
+performSyncWorkOnRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18948:21
+flushSyncCallbacks@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:9166:30
+flushSync@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:19012:15
+scheduleRefresh@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:20057:22
+performReactRefresh/<@http://localhost:3002/@react-refresh:228:17
+performReactRefresh@http://localhost:3002/@react-refresh:217:26
+enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
+
+
+[2026-01-27T06:41:14.213Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:41:14.213Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:41:29.063Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:41:29.063Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:41:48.420Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:41:48.420Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T06:42:02.401Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T06:42:02.402Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/DatePicker.tsx
+
+[2026-01-27T07:00:43.321Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:00:43.322Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+
+[2026-01-27T07:01:14.143Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:01:14.144Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:01:22.193Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:01:22.194Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T07:01:22.238Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:01:22.238Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:05:22.257Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:05:22.257Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/WorkExperienceForm.tsx
+[2026-01-27T07:05:22.328Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:05:22.328Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:05:57.291Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:05:57.291Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:06:00.137Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:06:00.137Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:06:13.021Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:06:13.022Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:06:20.575Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:06:20.575Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:06:34.481Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T07:06:34.482Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+
+[2026-01-27T07:06:59.704Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T07:06:59.704Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:06:59.752Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:06:59.752Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T07:06:59.850Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:06:59.850Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:13:37.046Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T07:13:37.048Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T07:13:40.516Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T07:13:40.517Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T07:13:46.903Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T07:13:46.904Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/EducationForm.tsx
+
+[2026-01-27T07:13:49.494Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T07:13:49.494Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T07:13:51.950Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:13:51.951Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:14:11.459Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T07:14:11.460Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/EducationForm.tsx
+[2026-01-27T07:14:11.551Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/pages/UserSettingsPage.tsx
+[2026-01-27T07:14:11.552Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/index.css
+[2026-01-27T07:14:11.637Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:14:11.638Z] DEBUG [http://localhost:3002/user-settings] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:17:38.175Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:17:38.176Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:17:42.447Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:17:42.448Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:17:45.051Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:17:45.052Z] DEBUG [http://localhost:3002/] [vite] invalidate /src/components/ProfileForm.tsx: Could not Fast Refresh (export removed)
+[2026-01-27T07:17:45.052Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T07:17:45.492Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:17:45.492Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/ProfilesPage.tsx
+
+[2026-01-27T07:18:07.024Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:18:07.024Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T07:18:07.197Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:18:07.197Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:40:43.162Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:40:43.163Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:40:46.213Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:40:46.220Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T07:40:48.543Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:40:48.543Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:40:54.195Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:40:54.196Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:41:21.250Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:41:21.250Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T07:41:21.587Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:41:21.587Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:59:42.052Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:59:42.053Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T07:59:42.074Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T07:59:42.074Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-27T07:59:43.707Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:59:43.709Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T07:59:46.657Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:59:46.658Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T07:59:52.321Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:59:52.322Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T07:59:58.699Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T07:59:58.699Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T08:00:01.535Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:00:01.536Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T08:00:39.097Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T08:00:39.097Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T08:00:39.255Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
+[2026-01-27T08:00:39.255Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/ProfileForm.tsx
+

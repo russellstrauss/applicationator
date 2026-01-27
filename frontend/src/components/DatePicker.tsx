@@ -15,11 +15,42 @@ export default function DatePicker({
   disabled = false,
   required = false,
   className = '',
-  placeholder = 'Select date',
+  placeholder = 'MM/DD/YYYY',
 }: DatePickerProps) {
+  // Helper function to format date as MM/DD/YYYY
+  const formatDateAsMMDDYYYY = (date: Date | null): string => {
+    if (!date) return '';
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
+
+  // Parse value string to Date, using noon to avoid timezone issues
+  const parseValueToDate = (val: string): Date | null => {
+    if (!val) return null;
+    // If value is in YYYY-MM-DD format, parse it safely
+    const isoMatch = val.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (isoMatch) {
+      const [, year, month, day] = isoMatch;
+      // Create date at noon local time to avoid timezone issues
+      return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0);
+    }
+    // Try parsing as Date object
+    const date = new Date(val);
+    if (!isNaN(date.getTime())) {
+      // Create a new date at noon to avoid timezone issues
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
+    }
+    return null;
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(
-    value ? new Date(value) : null
+    value ? parseValueToDate(value) : null
+  );
+  const [inputValue, setInputValue] = useState<string>(
+    value && parseValueToDate(value) ? formatDateAsMMDDYYYY(parseValueToDate(value)!) : ''
   );
   const [currentMonth, setCurrentMonth] = useState(
     selectedDate || new Date()
@@ -28,10 +59,15 @@ export default function DatePicker({
 
   useEffect(() => {
     if (value) {
-      setSelectedDate(new Date(value));
-      setCurrentMonth(new Date(value));
+      const date = parseValueToDate(value);
+      if (date) {
+        setSelectedDate(date);
+        setCurrentMonth(date);
+        setInputValue(formatDateAsMMDDYYYY(date));
+      }
     } else {
       setSelectedDate(null);
+      setInputValue('');
     }
   }, [value]);
 
@@ -56,29 +92,134 @@ export default function DatePicker({
     return `${year}-${month}-${day}`;
   };
 
-  const formatDisplayDate = (date: Date | null): string => {
-    if (!date) return '';
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+  const parseDateInput = (input: string): Date | null => {
+    if (!input || !input.trim()) return null;
+    
+    // Try parsing as ISO format (YYYY-MM-DD)
+    const isoMatch = input.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (isoMatch) {
+      const [, year, month, day] = isoMatch;
+      // Create date at noon local time to avoid timezone issues
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0);
+      if (!isNaN(date.getTime())) return date;
+    }
+    
+    // Try parsing as MM/DD/YYYY or M/D/YYYY
+    const slashMatch = input.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (slashMatch) {
+      const [, month, day, year] = slashMatch;
+      // Create date at noon local time to avoid timezone issues
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0);
+      if (!isNaN(date.getTime())) return date;
+    }
+    
+    // Try parsing as natural language date (e.g., "Jan 15, 2024")
+    const naturalDate = new Date(input);
+    if (!isNaN(naturalDate.getTime())) {
+      // If parsed successfully, create a new date at noon to avoid timezone issues
+      const year = naturalDate.getFullYear();
+      const month = naturalDate.getMonth();
+      const day = naturalDate.getDate();
+      return new Date(year, month, day, 12, 0, 0);
+    }
+    
+    return null;
   };
 
   const handleDateSelect = (day: number) => {
+    // Create date at noon to avoid timezone issues
     const newDate = new Date(
       currentMonth.getFullYear(),
       currentMonth.getMonth(),
-      day
+      day,
+      12, 0, 0
     );
     setSelectedDate(newDate);
+    // Format as MM/DD/YYYY when selecting from calendar
+    const month = String(newDate.getMonth() + 1).padStart(2, '0');
+    const dayStr = String(newDate.getDate()).padStart(2, '0');
+    const year = newDate.getFullYear();
+    setInputValue(`${month}/${dayStr}/${year}`);
     onChange(formatDate(newDate));
     setIsOpen(false);
   };
 
+  const formatInputWithSlashes = (value: string): string => {
+    // Remove all non-digit characters
+    const digits = value.replace(/\D/g, '');
+    
+    // Limit to 8 digits (MMDDYYYY)
+    const limitedDigits = digits.slice(0, 8);
+    
+    // Add slashes in the right places
+    if (limitedDigits.length <= 2) {
+      return limitedDigits;
+    } else if (limitedDigits.length <= 4) {
+      return `${limitedDigits.slice(0, 2)}/${limitedDigits.slice(2)}`;
+    } else {
+      return `${limitedDigits.slice(0, 2)}/${limitedDigits.slice(2, 4)}/${limitedDigits.slice(4)}`;
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Input is read-only, clicking it just opens the picker
-    setIsOpen(true);
+    const newValue = e.target.value;
+    
+    // Allow backspace/delete to work normally
+    // If user is deleting, just update the input value without parsing
+    if (newValue.length < inputValue.length) {
+      // User is deleting - format what remains
+      const formatted = formatInputWithSlashes(newValue);
+      setInputValue(formatted);
+      return;
+    }
+    
+    // Format the input with slashes as user types
+    const formatted = formatInputWithSlashes(newValue);
+    setInputValue(formatted);
+    
+    // Only parse and update date if we have a complete date (MM/DD/YYYY format)
+    if (formatted.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+      const parsedDate = parseDateInput(formatted);
+      if (parsedDate && !isNaN(parsedDate.getTime())) {
+        setSelectedDate(parsedDate);
+        setCurrentMonth(parsedDate);
+        onChange(formatDate(parsedDate));
+      }
+    } else if (!formatted.trim()) {
+      // If input is cleared, clear the date
+      setSelectedDate(null);
+      onChange('');
+    }
+    // Don't parse incomplete dates - let user finish typing
+  };
+
+  const handleInputBlur = () => {
+    // On blur, validate the input if a date was entered
+    if (inputValue.trim()) {
+      const parsedDate = parseDateInput(inputValue);
+      if (parsedDate && !isNaN(parsedDate.getTime())) {
+        // Valid date - update state, keep MM/DD/YYYY format
+        setSelectedDate(parsedDate);
+        setCurrentMonth(parsedDate);
+        // Ensure proper MM/DD/YYYY format
+        const formatted = formatInputWithSlashes(inputValue.replace(/\D/g, ''));
+        if (formatted.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+          setInputValue(formatted);
+        }
+        onChange(formatDate(parsedDate));
+      } else {
+        // Invalid date, clear the input
+        setInputValue('');
+        setSelectedDate(null);
+        onChange('');
+      }
+    } else if (selectedDate) {
+      // If input is empty but we have a selected date, show it in MM/DD/YYYY format
+      const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+      const day = String(selectedDate.getDate()).padStart(2, '0');
+      const year = selectedDate.getFullYear();
+      setInputValue(`${month}/${day}/${year}`);
+    }
   };
 
   const handleMonthChange = (monthIndex: number) => {
@@ -157,14 +298,14 @@ export default function DatePicker({
       <div className="relative">
         <input
           type="text"
-          value={selectedDate ? formatDisplayDate(selectedDate) : ''}
+          value={inputValue}
           onChange={handleInputChange}
           onFocus={() => setIsOpen(true)}
+          onBlur={handleInputBlur}
           disabled={disabled}
           required={required}
           className={`${className} pr-10`}
-          placeholder={placeholder}
-          readOnly
+          placeholder={placeholder || 'MM/DD/YYYY'}
         />
         <button
           type="button"
@@ -255,8 +396,15 @@ export default function DatePicker({
             <button
               type="button"
               onClick={() => {
-                const today = new Date();
+                // Create today's date at noon to avoid timezone issues
+                const now = new Date();
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
                 setSelectedDate(today);
+                // Format as MM/DD/YYYY
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                const year = today.getFullYear();
+                setInputValue(`${month}/${day}/${year}`);
                 onChange(formatDate(today));
                 setIsOpen(false);
               }}
@@ -268,6 +416,7 @@ export default function DatePicker({
               type="button"
               onClick={() => {
                 setSelectedDate(null);
+                setInputValue('');
                 onChange('');
                 setIsOpen(false);
               }}

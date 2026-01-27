@@ -55,7 +55,7 @@ This will start:
 ## Project Structure
 
 ```
-apply-matrix/
+applicationator/
 ├── frontend/          # React + TypeScript frontend
 ├── backend/           # Node.js + Express backend
 ├── shared/            # Shared TypeScript types

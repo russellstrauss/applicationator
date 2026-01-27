@@ -10,8 +10,12 @@ export interface User {
 export interface Profile {
   id: string;
   name: string;
+  positionSummaryHeadline?: string;
+  summaryTitle?: string;
   summary?: string;
+  workExperienceTitle?: string;
   workExperience: WorkExperience[];
+  skillsTitle?: string;
   skills: SkillCategory[];
   certifications: Certification[];
   resumeTemplateId?: string;
@@ -38,6 +42,8 @@ export interface PersonalInfo {
   ssn?: string; // Encrypted in production
   linkedIn?: string;
   portfolio?: string;
+  onlinePortfolio?: string;
+  github?: string;
 }
 
 export interface Address {
@@ -67,7 +73,6 @@ export interface Education {
   startDate: string;
   endDate?: string;
   gpa?: string;
-  honors?: string;
 }
 
 export interface Certification {

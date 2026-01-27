@@ -21,9 +21,21 @@ export default function WorkExperienceForm({ experience, onSave, onCancel }: Wor
     location: '',
   });
 
+  // Parse description into list items
+  const getDescriptionItems = (description: string): string[] => {
+    if (!description) return [''];
+    const items = description.split('\n').filter(line => line.trim() || description.split('\n').length === 1);
+    return items.length > 0 ? items : [''];
+  };
+
+  const [descriptionItems, setDescriptionItems] = useState<string[]>(['']);
+
   useEffect(() => {
     if (experience) {
       setFormData(experience);
+      setDescriptionItems(getDescriptionItems(experience.description || ''));
+    } else {
+      setDescriptionItems(['']);
     }
   }, [experience]);
 
@@ -40,7 +52,36 @@ export default function WorkExperienceForm({ experience, onSave, onCancel }: Wor
         return;
       }
     }
-    onSave(formData);
+    // Join description items with newlines
+    const description = descriptionItems.filter(item => item.trim()).join('\n');
+    onSave({ ...formData, description });
+  };
+
+  const handleDescriptionItemChange = (index: number, value: string) => {
+    const newItems = [...descriptionItems];
+    newItems[index] = value;
+    setDescriptionItems(newItems);
+  };
+
+  const handleAddDescriptionItem = () => {
+    setDescriptionItems([...descriptionItems, '']);
+  };
+
+  const handleRemoveDescriptionItem = (index: number) => {
+    if (descriptionItems.length > 1) {
+      const newItems = descriptionItems.filter((_, i) => i !== index);
+      setDescriptionItems(newItems);
+    } else {
+      setDescriptionItems(['']);
+    }
+  };
+
+  const handleMoveDescriptionItem = (index: number, direction: 'up' | 'down') => {
+    const newItems = [...descriptionItems];
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+    if (newIndex < 0 || newIndex >= newItems.length) return;
+    [newItems[index], newItems[newIndex]] = [newItems[newIndex], newItems[index]];
+    setDescriptionItems(newItems);
   };
 
   return (
@@ -122,14 +163,59 @@ export default function WorkExperienceForm({ experience, onSave, onCancel }: Wor
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Description</label>
-          <textarea
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
-            rows={4}
-            placeholder="Describe your responsibilities and achievements..."
-          />
+          <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+          <div className="space-y-2">
+            {descriptionItems.map((item, index) => (
+              <div key={index} className="flex items-start gap-2">
+                <div className="flex-shrink-0 pt-2 text-sm text-gray-500 min-w-[24px]">
+                  •
+                </div>
+                <input
+                  type="text"
+                  value={item}
+                  onChange={(e) => handleDescriptionItemChange(index, e.target.value)}
+                  className="flex-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                  placeholder={`Description item ${index + 1}...`}
+                />
+                <div className="flex flex-col gap-1 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => handleMoveDescriptionItem(index, 'up')}
+                    disabled={index === 0}
+                    className="px-2 py-1 text-gray-600 hover:text-gray-800 text-xs disabled:opacity-30 disabled:cursor-not-allowed"
+                    title="Move up"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleMoveDescriptionItem(index, 'down')}
+                    disabled={index === descriptionItems.length - 1}
+                    className="px-2 py-1 text-gray-600 hover:text-gray-800 text-xs disabled:opacity-30 disabled:cursor-not-allowed"
+                    title="Move down"
+                  >
+                    ↓
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveDescriptionItem(index)}
+                  disabled={descriptionItems.length === 1 && !item.trim()}
+                  className="px-2 py-1 text-red-600 hover:text-red-800 text-sm disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                  title="Remove"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddDescriptionItem}
+              className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+            >
+              + Add item
+            </button>
+          </div>
         </div>
 
         <div className="flex justify-end space-x-2">
@@ -152,4 +238,3 @@ export default function WorkExperienceForm({ experience, onSave, onCancel }: Wor
     </div>
   );
 }
-

@@ -5,7 +5,7 @@ export class FrontendAutomationService {
   async injectOverlay() {
     // Create overlay UI for manual mode
     const overlay = document.createElement('div');
-    overlay.id = 'apply-matrix-overlay';
+    overlay.id = 'applicationator-overlay';
     overlay.style.cssText = `
       position: fixed;
       top: 20px;
@@ -19,7 +19,7 @@ export class FrontendAutomationService {
     `;
     
     overlay.innerHTML = `
-      <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Apply Matrix</h3>
+      <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">Applicationator</h3>
       <button id="am-start" style="
         background: #3b82f6;
         color: white;
