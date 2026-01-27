@@ -4,11 +4,11 @@
     "firstName": "Russell",
     "lastName": "Strauss",
     "email": "russellstrauss@gmail.com",
-    "phone": "6789273289",
+    "phone": "678.927.3289",
     "address": {
       "street": "333 Lawton St SW",
       "city": "Atlanta",
-      "state": "Georgia",
+      "state": "GA",
       "zipCode": "30310",
       "country": "USA"
     },
@@ -37,5 +37,5 @@
       "honors": ""
     }
   ],
-  "updatedAt": "2026-01-27T07:16:37.693Z"
+  "updatedAt": "2026-01-27T20:55:39.345Z"
 }

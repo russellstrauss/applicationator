@@ -10,6 +10,7 @@ const DATA_DIR = path.join(__dirname, '../../data');
 const PROFILES_DIR = path.join(DATA_DIR, 'profiles');
 const FIELD_MAPPINGS_DIR = path.join(DATA_DIR, 'field-mappings');
 const LEARNED_PATTERNS_DIR = path.join(DATA_DIR, 'learned-patterns');
+const TEMPLATES_DIR = path.join(DATA_DIR, 'templates');
 const USER_FILE = path.join(DATA_DIR, 'user.json');
 
 // Ensure directories exist
@@ -17,6 +18,7 @@ async function ensureDirectories() {
   await fs.ensureDir(PROFILES_DIR);
   await fs.ensureDir(FIELD_MAPPINGS_DIR);
   await fs.ensureDir(LEARNED_PATTERNS_DIR);
+  await fs.ensureDir(TEMPLATES_DIR);
 }
 
 ensureDirectories();
@@ -92,16 +94,56 @@ export class StorageService {
     await fs.writeJson(filePath, patterns, { spaces: 2 });
   }
 
+  // Template operations
+  static async getTemplate(id: string) {
+    const filePath = path.join(TEMPLATES_DIR, `${id}.json`);
+    if (await fs.pathExists(filePath)) {
+      return await fs.readJson(filePath);
+    }
+    return null;
+  }
+
+  static async getAllTemplates() {
+    await ensureDirectories();
+    const files = await fs.readdir(TEMPLATES_DIR);
+    const templates = [];
+    for (const file of files) {
+      if (file.endsWith('.json')) {
+        const template = await fs.readJson(path.join(TEMPLATES_DIR, file));
+        templates.push(template);
+      }
+    }
+    return templates;
+  }
+
+  static async saveTemplate(template: any) {
+    await ensureDirectories();
+    const filePath = path.join(TEMPLATES_DIR, `${template.id}.json`);
+    await fs.writeJson(filePath, template, { spaces: 2 });
+    return template;
+  }
+
+  static async deleteTemplate(id: string) {
+    const filePath = path.join(TEMPLATES_DIR, `${id}.json`);
+    if (await fs.pathExists(filePath)) {
+      await fs.remove(filePath);
+      return true;
+    }
+    return false;
+  }
+
   // Export/Import
   static async exportAll() {
     await ensureDirectories();
     const profiles = await this.getAllProfiles();
     const mappings = await this.getFieldMappings();
     const patterns = await this.getLearnedPatterns();
+    const templates = await this.getAllTemplates();
     return {
       profiles,
       fieldMappings: mappings,
       learnedPatterns: patterns,
+      templates,
       exportedAt: new Date().toISOString(),
     };
   }
@@ -118,6 +160,11 @@ export class StorageService {
     }
     if (data.learnedPatterns) {
       await this.saveLearnedPatterns(data.learnedPatterns);
+    }
+    if (data.templates) {
+      for (const template of data.templates) {
+        await this.saveTemplate(template);
+      }
     }
     if (data.user) {
       await this.saveUser(data.user);

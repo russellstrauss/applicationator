@@ -1963,3 +1963,502 @@ enqueueUpdate<@http://localhost:3002/@react-refresh:608:3
 [2026-01-27T08:42:51.656Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/index.css
 [2026-01-27T08:42:51.656Z] DEBUG [http://localhost:3002/] [vite] hot updated: /src/components/SkillsInput.tsx
 
+[2026-01-27T08:54:17.561Z] ERROR [http://localhost:3002/templates] Failed to connect Google Drive: {
+  "message": "Request failed with status code 500",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:433:5\nsettle@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1267:12\nonloadend@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1616:13\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/url",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_BAD_RESPONSE",
+  "status": 500
+}
+[2026-01-27T08:54:17.561Z] ERROR [http://localhost:3002/templates] Failed to connect Google Drive: {}
+
+[2026-01-27T19:00:28.385Z] ERROR [http://localhost:3002/templates] Failed to connect Google Drive: {
+  "message": "Request failed with status code 500",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:433:5\nsettle@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1267:12\nonloadend@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1616:13\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1626:7\nxhr_default<@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1583:10\ndispatchRequest@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2117:10\n_request@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2340:33\nrequest@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2359:17\nwrap@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:8:15\nget@http://localhost:3002/src/services/apiClient.ts:5:34\nconnectGoogleDrive@http://localhost:3002/src/stores/templateStore.ts:15:39\nhandleConnect@http://localhost:3002/src/pages/TemplatesPage.tsx:31:13\ncallCallback2@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3680:22\ninvokeGuardedCallbackDev@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3705:24\ninvokeGuardedCallback@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3739:39\ninvokeGuardedCallbackAndCatchFirstError@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3742:33\nexecuteDispatch@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7046:50\nprocessDispatchQueueItemsInOrder@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7066:30\nprocessDispatchQueue@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7075:45\ndispatchEventsForPlugins@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7083:31\n../node_modules/react-dom/cjs/react-dom.development.js/dispatchEventForPluginEventSystem/<@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7206:20\nbatchedUpdates$1@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18966:20\nbatchedUpdates@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3585:20\ndispatchEventForPluginEventSystem@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7205:25\ndispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5484:46\ndispatchEvent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5478:92\ndispatchDiscreteEvent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5455:26\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/url",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_BAD_RESPONSE",
+  "status": 500
+}
+[2026-01-27T19:00:28.423Z] ERROR [http://localhost:3002/templates] Failed to connect Google Drive: {}
+
+[2026-01-27T19:29:36.345Z] ERROR [http://localhost:3002/templates] Failed to connect Google Drive: {
+  "message": "Request failed with status code 500",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:433:5\nsettle@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1267:12\nonloadend@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1616:13\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1626:7\nxhr_default<@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:1583:10\ndispatchRequest@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2117:10\n_request@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2340:33\nrequest@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:2359:17\nwrap@http://localhost:3002/node_modules/.vite/deps/axios.js?v=dbe8b243:8:15\nget@http://localhost:3002/src/services/apiClient.ts:5:34\nconnectGoogleDrive@http://localhost:3002/src/stores/templateStore.ts:16:40\nhandleConnect@http://localhost:3002/src/pages/TemplatesPage.tsx:51:13\ncallCallback2@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3680:22\ninvokeGuardedCallbackDev@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3705:24\ninvokeGuardedCallback@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3739:39\ninvokeGuardedCallbackAndCatchFirstError@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3742:33\nexecuteDispatch@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7046:50\nprocessDispatchQueueItemsInOrder@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7066:30\nprocessDispatchQueue@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7075:45\ndispatchEventsForPlugins@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7083:31\n../node_modules/react-dom/cjs/react-dom.development.js/dispatchEventForPluginEventSystem/<@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7206:20\nbatchedUpdates$1@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:18966:20\nbatchedUpdates@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:3585:20\ndispatchEventForPluginEventSystem@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7205:25\ndispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5484:46\ndispatchEvent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5478:92\ndispatchDiscreteEvent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5455:26\nEventListener.handleEvent*addEventBubbleListener@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:5650:18\naddTrappedEventListener@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7152:37\nlistenToNativeEvent@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7109:34\n../node_modules/react-dom/cjs/react-dom.development.js/listenToAllSupportedEvents/<@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7118:38\nlistenToAllSupportedEvents@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:7115:29\ncreateRoot@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:21233:37\ncreateRoot$1@http://localhost:3002/node_modules/.vite/deps/chunk-C42HTGOX.js?v=dbe8b243:21580:18\n../node_modules/react-dom/client.js/exports.createRoot@http://localhost:3002/node_modules/.vite/deps/react-dom_client.js?v=dbe8b243:21:20\n@http://localhost:3002/src/main.tsx:8:10\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/url",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_BAD_RESPONSE",
+  "status": 500
+}
+[2026-01-27T19:29:36.349Z] ERROR [http://localhost:3002/templates] Failed to connect Google Drive: {}
+
+[2026-01-27T20:08:03.261Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:08:03.263Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:08:03.400Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:08:03.401Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:08:05.514Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:08:05.514Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+
+[2026-01-27T20:08:33.542Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:08:33.542Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:08:44.854Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:08:44.854Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:09:06.008Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadTemplates@http://localhost:3000/src/stores/templateStore.ts?t=1769544538458:11:41\nTemplatesPage/<@http://localhost:3000/src/pages/TemplatesPage.tsx?t=1769544538458:31:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19500:22\ncommitRootImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19469:13\ncommitRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19330:27\nperformSyncWorkOnRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18948:21\nflushSyncCallbacks@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:9166:30\nflushSync@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19012:15\nscheduleRefresh@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:20057:22\nperformReactRefresh/<@http://localhost:3000/@react-refresh:228:17\nperformReactRefresh@http://localhost:3000/@react-refresh:217:26\nenqueueUpdate<@http://localhost:3000/@react-refresh:608:3\nsetTimeout handler*debounce/<@http://localhost:3000/@react-refresh:598:14\nvalidateRefreshBoundaryAndEnqueueUpdate@http://localhost:3000/@react-refresh:648:5\n@http://localhost:3000/src/components/CreateTemplateModal.tsx?t=1769544538399:254:48\naccept/<@http://localhost:3000/@vite/client:66:95\nfetchUpdate/<@http://localhost:3000/@vite/client:218:54\nqueueUpdate/<@http://localhost:3000/@vite/client:196:55\nqueueUpdate@http://localhost:3000/@vite/client:196:33\nasync*handleMessage/<@http://localhost:3000/@vite/client:839:55\nhandleMessage@http://localhost:3000/@vite/client:838:38\nasync*createHMRHandler/</<@http://localhost:3000/@vite/client:458:49\ndequeue@http://localhost:3000/@vite/client:480:8\ndequeue/<@http://localhost:3000/@vite/client:482:9\nAsync*dequeue@http://localhost:3000/@vite/client:480:56\ndequeue/<@http://localhost:3000/@vite/client:482:9\nAsync*dequeue@http://localhost:3000/@vite/client:480:56\ndequeue/<@http://localhost:3000/@vite/client:482:9\nAsync*dequeue@http://localhost:3000/@vite/client:480:56\nenqueue/<@http://localhost:3000/@vite/client:472:9\nenqueue@http://localhost:3000/@vite/client:466:10\ncreateHMRHandler/<@http://localhost:3000/@vite/client:458:28\nonMessage@http://localhost:3000/@vite/client:305:15\ncreateWebSocketModuleRunnerTransport/connect/<@http://localhost:3000/@vite/client:413:14\nEventListener.handleEvent*connect@http://localhost:3000/@vite/client:412:11\nconnect@http://localhost:3000/@vite/client:751:23\nconnect@http://localhost:3000/@vite/client:289:23\nconnect@http://localhost:3000/@vite/client:373:45\n@http://localhost:3000/@vite/client:823:11\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T20:09:06.161Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\ncheckConnectionStatus@http://localhost:3000/src/stores/templateStore.ts?t=1769544538458:35:40\nTemplatesPage/<@http://localhost:3000/src/pages/TemplatesPage.tsx?t=1769544538458:32:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19500:22\ncommitRootImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19469:13\ncommitRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19330:27\nperformSyncWorkOnRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18948:21\nflushSyncCallbacks@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:9166:30\nflushSync@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19012:15\nscheduleRefresh@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:20057:22\nperformReactRefresh/<@http://localhost:3000/@react-refresh:228:17\nperformReactRefresh@http://localhost:3000/@react-refresh:217:26\nenqueueUpdate<@http://localhost:3000/@react-refresh:608:3\nsetTimeout handler*debounce/<@http://localhost:3000/@react-refresh:598:14\nvalidateRefreshBoundaryAndEnqueueUpdate@http://localhost:3000/@react-refresh:648:5\n@http://localhost:3000/src/components/CreateTemplateModal.tsx?t=1769544538399:254:48\naccept/<@http://localhost:3000/@vite/client:66:95\nfetchUpdate/<@http://localhost:3000/@vite/client:218:54\nqueueUpdate/<@http://localhost:3000/@vite/client:196:55\nqueueUpdate@http://localhost:3000/@vite/client:196:33\nasync*handleMessage/<@http://localhost:3000/@vite/client:839:55\nhandleMessage@http://localhost:3000/@vite/client:838:38\nasync*createHMRHandler/</<@http://localhost:3000/@vite/client:458:49\ndequeue@http://localhost:3000/@vite/client:480:8\ndequeue/<@http://localhost:3000/@vite/client:482:9\nAsync*dequeue@http://localhost:3000/@vite/client:480:56\ndequeue/<@http://localhost:3000/@vite/client:482:9\nAsync*dequeue@http://localhost:3000/@vite/client:480:56\ndequeue/<@http://localhost:3000/@vite/client:482:9\nAsync*dequeue@http://localhost:3000/@vite/client:480:56\nenqueue/<@http://localhost:3000/@vite/client:472:9\nenqueue@http://localhost:3000/@vite/client:466:10\ncreateHMRHandler/<@http://localhost:3000/@vite/client:458:28\nonMessage@http://localhost:3000/@vite/client:305:15\ncreateWebSocketModuleRunnerTransport/connect/<@http://localhost:3000/@vite/client:413:14\nEventListener.handleEvent*connect@http://localhost:3000/@vite/client:412:11\nconnect@http://localhost:3000/@vite/client:751:23\nconnect@http://localhost:3000/@vite/client:289:23\nconnect@http://localhost:3000/@vite/client:373:45\n@http://localhost:3000/@vite/client:823:11\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T20:09:06.272Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\nloadTemplates@http://localhost:3000/src/stores/templateStore.ts?t=1769544538458:11:41\nTemplatesPage/<@http://localhost:3000/src/pages/TemplatesPage.tsx?t=1769544538389:31:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19500:22\ncommitRootImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19469:13\ncommitRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19330:27\nperformSyncWorkOnRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18948:21\nflushSyncCallbacks@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:9166:30\nflushSync@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19012:15\nscheduleRefresh@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:20057:22\nperformReactRefresh/<@http://localhost:3000/@react-refresh:228:17\nperformReactRefresh@http://localhost:3000/@react-refresh:217:26\nenqueueUpdate<@http://localhost:3000/@react-refresh:608:3\nsetTimeout handler*debounce/<@http://localhost:3000/@react-refresh:598:14\nvalidateRefreshBoundaryAndEnqueueUpdate@http://localhost:3000/@react-refresh:648:5\n@http://localhost:3000/src/components/CreateTemplateModal.tsx:254:48\naccept/<@http://localhost:3000/@vite/client:66:95\nfetchUpdate/<@http://localhost:3000/@vite/client:218:54\nqueueUpdate/<@http://localhost:3000/@vite/client:196:55\nqueueUpdate@http://localhost:3000/@vite/client:196:33\nasync*handleMessage/<@http://localhost:3000/@vite/client:839:55\nhandleMessage@http://localhost:3000/@vite/client:838:38\nasync*createHMRHandler/</<@http://localhost:3000/@vite/client:458:49\ndequeue@http://localhost:3000/@vite/client:480:8\nenqueue/<@http://localhost:3000/@vite/client:472:9\nenqueue@http://localhost:3000/@vite/client:466:10\ncreateHMRHandler/<@http://localhost:3000/@vite/client:458:28\nonMessage@http://localhost:3000/@vite/client:305:15\ncreateWebSocketModuleRunnerTransport/connect/<@http://localhost:3000/@vite/client:413:14\nEventListener.handleEvent*connect@http://localhost:3000/@vite/client:412:11\nconnect@http://localhost:3000/@vite/client:751:23\nconnect@http://localhost:3000/@vite/client:289:23\nconnect@http://localhost:3000/@vite/client:373:45\n@http://localhost:3000/@vite/client:823:11\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T20:09:06.288Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\nEventHandlerNonNull*dispatchXhrRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1645:5\nxhr_default<@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1583:10\ndispatchRequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2117:10\n_request@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2340:33\nrequest@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2229:25\nforEachMethodNoData/Axios.prototype[method]@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:2359:17\nwrap@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:8:15\nget@http://localhost:3000/src/services/apiClient.ts:5:34\ncheckConnectionStatus@http://localhost:3000/src/stores/templateStore.ts?t=1769544538458:35:40\nTemplatesPage/<@http://localhost:3000/src/pages/TemplatesPage.tsx?t=1769544538389:32:5\ncommitHookEffectListMount@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:16963:34\ncommitPassiveMountOnFiber@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18206:44\ncommitPassiveMountEffects_complete@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18179:42\ncommitPassiveMountEffects_begin@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18169:49\ncommitPassiveMountEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18159:42\nflushPassiveEffectsImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19543:36\nflushPassiveEffects@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19500:22\ncommitRootImpl@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19469:13\ncommitRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19330:27\nperformSyncWorkOnRoot@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:18948:21\nflushSyncCallbacks@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:9166:30\nflushSync@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:19012:15\nscheduleRefresh@http://localhost:3000/node_modules/.vite/deps/chunk-C42HTGOX.js?v=2633ff99:20057:22\nperformReactRefresh/<@http://localhost:3000/@react-refresh:228:17\nperformReactRefresh@http://localhost:3000/@react-refresh:217:26\nenqueueUpdate<@http://localhost:3000/@react-refresh:608:3\nsetTimeout handler*debounce/<@http://localhost:3000/@react-refresh:598:14\nvalidateRefreshBoundaryAndEnqueueUpdate@http://localhost:3000/@react-refresh:648:5\n@http://localhost:3000/src/components/CreateTemplateModal.tsx:254:48\naccept/<@http://localhost:3000/@vite/client:66:95\nfetchUpdate/<@http://localhost:3000/@vite/client:218:54\nqueueUpdate/<@http://localhost:3000/@vite/client:196:55\nqueueUpdate@http://localhost:3000/@vite/client:196:33\nasync*handleMessage/<@http://localhost:3000/@vite/client:839:55\nhandleMessage@http://localhost:3000/@vite/client:838:38\nasync*createHMRHandler/</<@http://localhost:3000/@vite/client:458:49\ndequeue@http://localhost:3000/@vite/client:480:8\nenqueue/<@http://localhost:3000/@vite/client:472:9\nenqueue@http://localhost:3000/@vite/client:466:10\ncreateHMRHandler/<@http://localhost:3000/@vite/client:458:28\nonMessage@http://localhost:3000/@vite/client:305:15\ncreateWebSocketModuleRunnerTransport/connect/<@http://localhost:3000/@vite/client:413:14\nEventListener.handleEvent*connect@http://localhost:3000/@vite/client:412:11\nconnect@http://localhost:3000/@vite/client:751:23\nconnect@http://localhost:3000/@vite/client:289:23\nconnect@http://localhost:3000/@vite/client:373:45\n@http://localhost:3000/@vite/client:823:11\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T20:09:00.914Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:09:00.915Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:09:00.916Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+[2026-01-27T20:09:00.992Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:09:00.992Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+[2026-01-27T20:09:02.235Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:09:02.235Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:09:02.278Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:09:02.278Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:09:02.278Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+
+[2026-01-27T20:09:09.742Z] LOG   [http://localhost:3000/templates] Synced 10 pending logs to server
+
+[2026-01-27T20:23:49.403Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:23:49.404Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:23:49.405Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+[2026-01-27T20:23:49.492Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:23:49.492Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:23:49.492Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+
+[2026-01-27T20:23:54.147Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:23:54.148Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:23:54.148Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+
+[2026-01-27T20:24:07.297Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:24:07.297Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:24:09.708Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:24:09.708Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:24:21.558Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:24:21.559Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:24:25.019Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:24:25.019Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:24:35.284Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:24:35.284Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:24:35.312Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:24:35.312Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:25:03.507Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:25:03.507Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:25:03.508Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+[2026-01-27T20:25:03.563Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-27T20:25:03.563Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+
+[2026-01-27T20:25:08.620Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T20:25:08.624Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-27T20:25:08.627Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-27T20:35:41.178Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:35:41.183Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T20:35:44.156Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:35:44.157Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:35:53.362Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:35:53.371Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:36:08.915Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:36:08.917Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:37:27.410Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:37:27.443Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T20:37:29.445Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:37:29.507Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T20:37:29.624Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:37:29.624Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-27T20:37:31.141Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:37:31.143Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:37:50.606Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:37:50.606Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:57:38.572Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T20:57:38.573Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T20:57:39.905Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:57:39.908Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:57:45.133Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:57:45.154Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:58:30.523Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:58:30.527Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-27T20:59:22.218Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-27T20:59:22.218Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+[2026-01-27T20:59:22.399Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-27T20:59:22.400Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+

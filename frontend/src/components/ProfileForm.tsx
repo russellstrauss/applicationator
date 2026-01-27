@@ -17,11 +17,11 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
     positionSummaryHeadline: '',
     summaryTitle: '',
     summary: '',
-    workExperienceTitle: '',
     workExperience: [],
     skillsTitle: '',
     skills: [],
     certifications: [],
+    hideLocation: false,
   });
 
   const [editingWorkExp, setEditingWorkExp] = useState<WorkExperience | null>(null);
@@ -39,11 +39,11 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
         positionSummaryHeadline: profile.positionSummaryHeadline,
         summaryTitle: profile.summaryTitle,
         summary: profile.summary,
-        workExperienceTitle: profile.workExperienceTitle,
         workExperience: profile.workExperience || [],
         skillsTitle: profile.skillsTitle,
         skills: profile.skills || [],
         certifications: profile.certifications || [],
+        hideLocation: profile.hideLocation || false,
         resumeTemplateId: profile.resumeTemplateId,
         fieldMappings: profile.fieldMappings,
       };
@@ -192,10 +192,26 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
             />
           </div>
 
+          {/* Hide Location Checkbox */}
+          <div>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={formData.hideLocation || false}
+                onChange={(e) => setFormData({ ...formData, hideLocation: e.target.checked })}
+                className="mr-2"
+              />
+              <span className="text-sm font-medium text-gray-700">Hide location from resume</span>
+            </label>
+            <p className="text-xs text-gray-500 mt-1 ml-6">
+              When checked, location fields (city, state, address) will be hidden in exported resumes
+            </p>
+          </div>
+
           {/* Summary */}
           <div>
             <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Summary Title</label>
               <input
                 type="text"
                 value={formData.summaryTitle || ''}
@@ -216,16 +232,6 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
 
           {/* Work Experience Section */}
           <div className="border-t pt-4">
-            <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-              <input
-                type="text"
-                value={formData.workExperienceTitle || ''}
-                onChange={(e) => setFormData({ ...formData, workExperienceTitle: e.target.value })}
-                className="block w-full border border-gray-300 rounded-md px-3 py-2"
-                placeholder="Work Experience"
-              />
-            </div>
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-md font-semibold">Work Experience</h4>
               <button
@@ -318,7 +324,7 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
           {/* Skills Section */}
           <div className="border-t pt-4">
             <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Skills Title</label>
               <input
                 type="text"
                 value={formData.skillsTitle || ''}

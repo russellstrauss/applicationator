@@ -1,3 +1,22 @@
+// Load environment variables
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load .env file from backend directory
+const envPath = path.join(__dirname, '../.env');
+dotenv.config({ path: envPath });
+
+// Debug: Log if environment variables are loaded (without showing values)
+console.log('Environment variables loaded:');
+console.log('  GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID ? '✓ Set' : '✗ Not set');
+console.log('  GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? '✓ Set' : '✗ Not set');
+console.log('  GOOGLE_REDIRECT_URI:', process.env.GOOGLE_REDIRECT_URI || 'http://localhost:5000/api/google-auth/callback (default)');
+
 // Suppress deprecation warnings from dependencies (harmless, coming from fs-extra/googleapis)
 process.removeAllListeners('warning');
 process.on('warning', (warning) => {

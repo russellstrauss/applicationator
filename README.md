@@ -35,10 +35,26 @@ A full-stack web application that automates job applications using browser autom
 npm run install:all
 ```
 
-2. Set up environment variables (create `.env` in backend directory):
+2. Set up Google Drive OAuth credentials:
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
+   - Enable APIs: Google Drive API and Google Docs API
+   - Navigate to "APIs & Services" > "Credentials"
+   - Configure OAuth consent screen (if not done):
+     - User Type: External (or Internal for workspace)
+     - App name: Applicationator
+     - Scopes: Add `https://www.googleapis.com/auth/drive.readonly` and `https://www.googleapis.com/auth/documents.readonly`
+   - Create OAuth client:
+     - Application type: Web application
+     - Name: Applicationator Web Client
+     - Authorized redirect URIs: `http://localhost:5000/api/google-auth/callback`
+     - For production, add your production callback URL
+   - Copy the Client ID and Client Secret
+
+3. Set up environment variables (create `.env` in backend directory):
 ```
-GOOGLE_CLIENT_ID=your_client_id
-GOOGLE_CLIENT_SECRET=your_client_secret
+GOOGLE_CLIENT_ID=your_client_id_here
+GOOGLE_CLIENT_SECRET=your_client_secret_here
 GOOGLE_REDIRECT_URI=http://localhost:5000/api/google-auth/callback
 PORT=5000
 ```

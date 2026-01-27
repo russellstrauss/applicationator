@@ -108,9 +108,10 @@
   ],
   "certifications": [],
   "createdAt": "2026-01-27T06:25:30.734Z",
-  "updatedAt": "2026-01-27T08:01:44.605Z",
+  "updatedAt": "2026-01-27T21:01:01.664Z",
   "positionSummaryHeadline": "Product Engineer / Senior UI Engineer",
   "summaryTitle": "Summary",
   "workExperienceTitle": "Experience",
-  "skillsTitle": "Skills"
+  "skillsTitle": "Skillz",
+  "hideLocation": true
 }

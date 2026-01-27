@@ -18,6 +18,7 @@ export interface Profile {
   skillsTitle?: string;
   skills: SkillCategory[];
   certifications: Certification[];
+  hideLocation?: boolean;
   resumeTemplateId?: string;
   fieldMappings?: FieldMapping[];
   createdAt: string;
