@@ -11,6 +11,10 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
   const [editingCategory, setEditingCategory] = useState<SkillCategory | null>(null);
   const [newCategoryTitle, setNewCategoryTitle] = useState('');
   const [newSkill, setNewSkill] = useState<{ [categoryId: string]: string }>({});
+  const [draggedSkill, setDraggedSkill] = useState<{ categoryId: string; skillIndex: number } | null>(null);
+  const [draggedCategory, setDraggedCategory] = useState<string | null>(null);
+  const [dragOverSkill, setDragOverSkill] = useState<{ categoryId: string; skillIndex: number } | null>(null);
+  const [dragOverCategoryId, setDragOverCategoryId] = useState<string | null>(null);
 
   const handleAddCategory = () => {
     if (newCategoryTitle.trim()) {
@@ -67,66 +71,140 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
     }
   };
 
-  const handleMoveCategory = (categoryId: string, direction: 'up' | 'down') => {
-    const index = skills.findIndex((cat) => cat.id === categoryId);
-    if (index === -1) return;
 
-    const newIndex = direction === 'up' ? index - 1 : index + 1;
-    if (newIndex < 0 || newIndex >= skills.length) return;
-
-    const newCategories = [...skills];
-    [newCategories[index], newCategories[newIndex]] = [
-      newCategories[newIndex],
-      newCategories[index],
-    ];
-    onChange(newCategories);
+  const handleDragSkillStart = (e: React.DragEvent, categoryId: string, skillIndex: number) => {
+    setDraggedSkill({ categoryId, skillIndex });
+    e.dataTransfer.effectAllowed = 'move';
   };
 
-  const handleMoveSkill = (categoryId: string, skillIndex: number, direction: 'up' | 'down') => {
-    const category = skills.find((cat) => cat.id === categoryId);
-    if (!category) return;
+  const handleDragSkillOver = (
+    e: React.DragEvent,
+    categoryId: string,
+    skillIndex: number
+  ) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverSkill({ categoryId, skillIndex });
+  };
 
-    const newIndex = direction === 'up' ? skillIndex - 1 : skillIndex + 1;
-    if (newIndex < 0 || newIndex >= category.skills.length) return;
+  const handleDragSkillLeave = () => {
+    setDragOverSkill(null);
+  };
 
-    const newSkills = [...category.skills];
-    [newSkills[skillIndex], newSkills[newIndex]] = [
-      newSkills[newIndex],
-      newSkills[skillIndex],
-    ];
+  const handleDragSkillDrop = (e: React.DragEvent, targetCategoryId: string, targetSkillIndex: number) => {
+    e.preventDefault();
+    if (!draggedSkill) return;
 
-    onChange(
-      skills.map((cat) =>
-        cat.id === categoryId ? { ...cat, skills: newSkills } : cat
-      )
-    );
+    const { categoryId: sourceCategoryId, skillIndex: sourceSkillIndex } = draggedSkill;
+
+    if (sourceCategoryId === targetCategoryId && sourceSkillIndex === targetSkillIndex) {
+      setDraggedSkill(null);
+      return;
+    }
+
+    const sourceCategory = skills.find((cat) => cat.id === sourceCategoryId);
+    if (!sourceCategory) return;
+
+    const skillToMove = sourceCategory.skills[sourceSkillIndex];
+    const newSkills = [...sourceCategory.skills];
+    newSkills.splice(sourceSkillIndex, 1);
+
+    if (sourceCategoryId === targetCategoryId) {
+      // Moving within same category
+      const adjustedIndex = sourceSkillIndex < targetSkillIndex ? targetSkillIndex - 1 : targetSkillIndex;
+      newSkills.splice(adjustedIndex, 0, skillToMove);
+      onChange(
+        skills.map((cat) =>
+          cat.id === sourceCategoryId ? { ...cat, skills: newSkills } : cat
+        )
+      );
+    } else {
+      // Moving to different category
+      const targetCategory = skills.find((cat) => cat.id === targetCategoryId);
+      if (!targetCategory) return;
+
+      const targetSkills = [...targetCategory.skills];
+      targetSkills.splice(targetSkillIndex, 0, skillToMove);
+
+      onChange(
+        skills.map((cat) => {
+          if (cat.id === sourceCategoryId) {
+            return { ...cat, skills: newSkills };
+          }
+          if (cat.id === targetCategoryId) {
+            return { ...cat, skills: targetSkills };
+          }
+          return cat;
+        })
+      );
+    }
+
+    setDraggedSkill(null);
+    setDragOverSkill(null);
+  };
+
+  const handleDragCategoryStart = (e: React.DragEvent, categoryId: string) => {
+    setDraggedCategory(categoryId);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragCategoryOver = (e: React.DragEvent, targetCategoryId: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverCategoryId(targetCategoryId);
+  };
+
+  const handleDragCategoryLeave = () => {
+    setDragOverCategoryId(null);
+  };
+
+  const handleDragCategoryDrop = (e: React.DragEvent, targetCategoryId: string) => {
+    e.preventDefault();
+    if (!draggedCategory || draggedCategory === targetCategoryId) {
+      setDraggedCategory(null);
+      return;
+    }
+
+    const sourceIndex = skills.findIndex((cat) => cat.id === draggedCategory);
+    const targetIndex = skills.findIndex((cat) => cat.id === targetCategoryId);
+
+    if (sourceIndex === -1 || targetIndex === -1) {
+      setDraggedCategory(null);
+      return;
+    }
+
+    const newCategories = [...skills];
+    const [movedCategory] = newCategories.splice(sourceIndex, 1);
+    newCategories.splice(targetIndex, 0, movedCategory);
+
+    onChange(newCategories);
+    setDraggedCategory(null);
+    setDragOverCategoryId(null);
   };
 
   return (
     <div className="space-y-4">
       {skills.map((category, categoryIndex) => (
-        <div key={category.id} className="border rounded-lg p-4 bg-gray-50">
+        <div
+          key={category.id}
+          className={`border rounded-lg p-4 bg-gray-50 ${
+            dragOverCategoryId === category.id ? 'ring-2 ring-blue-300' : ''
+          }`}
+          draggable
+          onDragStart={(e) => handleDragCategoryStart(e, category.id)}
+          onDragOver={(e) => handleDragCategoryOver(e, category.id)}
+          onDragLeave={handleDragCategoryLeave}
+          onDrop={(e) => handleDragCategoryDrop(e, category.id)}
+        >
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center gap-2 flex-1">
-              <div className="flex flex-col gap-1">
-                <button
-                  type="button"
-                  onClick={() => handleMoveCategory(category.id, 'up')}
-                  disabled={categoryIndex === 0}
-                  className="px-2 py-1 text-gray-600 hover:text-gray-800 text-sm disabled:opacity-30 disabled:cursor-not-allowed"
-                  title="Move category up"
-                >
-                  ↑
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleMoveCategory(category.id, 'down')}
-                  disabled={categoryIndex === skills.length - 1}
-                  className="px-2 py-1 text-gray-600 hover:text-gray-800 text-sm disabled:opacity-30 disabled:cursor-not-allowed"
-                  title="Move category down"
-                >
-                  ↓
-                </button>
+              <div
+                className="cursor-move text-gray-400 hover:text-gray-600"
+                title="Drag to reorder category"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M7 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
+                </svg>
               </div>
               {editingCategory?.id === category.id ? (
                 <input
@@ -196,28 +274,27 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
               {category.skills.map((skill, skillIndex) => (
                 <li
                   key={skillIndex}
-                  className="flex items-center justify-between group"
+                  className={`flex items-center justify-between group ${
+                    dragOverSkill &&
+                    dragOverSkill.categoryId === category.id &&
+                    dragOverSkill.skillIndex === skillIndex
+                      ? 'border-t-2 border-blue-400 -mt-px pt-1'
+                      : ''
+                  }`}
+                  draggable
+                  onDragStart={(e) => handleDragSkillStart(e, category.id, skillIndex)}
+                  onDragOver={(e) => handleDragSkillOver(e, category.id, skillIndex)}
+                  onDragLeave={handleDragSkillLeave}
+                  onDrop={(e) => handleDragSkillDrop(e, category.id, skillIndex)}
                 >
                   <div className="flex items-center gap-2 flex-1">
-                    <div className="flex flex-col gap-1">
-                      <button
-                        type="button"
-                        onClick={() => handleMoveSkill(category.id, skillIndex, 'up')}
-                        disabled={skillIndex === 0}
-                        className="px-1 py-0.5 text-gray-400 hover:text-gray-600 text-xs disabled:opacity-30 disabled:cursor-not-allowed opacity-0 group-hover:opacity-100 transition-opacity"
-                        title="Move skill up"
-                      >
-                        ↑
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleMoveSkill(category.id, skillIndex, 'down')}
-                        disabled={skillIndex === category.skills.length - 1}
-                        className="px-1 py-0.5 text-gray-400 hover:text-gray-600 text-xs disabled:opacity-30 disabled:cursor-not-allowed opacity-0 group-hover:opacity-100 transition-opacity"
-                        title="Move skill down"
-                      >
-                        ↓
-                      </button>
+                    <div
+                      className="cursor-move text-gray-400 hover:text-gray-600"
+                      title="Drag to reorder skill"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M7 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
+                      </svg>
                     </div>
                     <span className="text-sm text-gray-700">{skill}</span>
                   </div>
