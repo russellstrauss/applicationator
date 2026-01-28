@@ -155,6 +155,25 @@ export interface TemplateData {
   skills4Category?: string; // Fifth category name only
   skills4List?: string; // Fifth category skills list only
   certifications?: string;
+
+  /**
+   * NOTE: The properties above are intentionally "flat" so they can be used
+   * directly as {{placeholder}} values in Google Docs. For layout- and
+   * formatting-sensitive sections (like work experience and skills), template
+   * authors are encouraged to:
+   *
+   * - Use granular field placeholders inside Google Docs loop blocks, for example:
+   *   {{#each workExperience}}
+   *     {{position}} at {{company}}
+   *   {{/endeach}}
+   *
+   *   instead of relying on mega-fields like {{workExperience}} or {{skills}},
+   *   which are pre-formatted strings and do not allow per-field styling.
+   *
+   * The helper methods below expose structured collections and per-item
+   * placeholder maps that the Google Docs integration can use to render each
+   * item while letting the template fully control typography.
+   */
 }
 
 export class TemplateDataService {
@@ -308,6 +327,140 @@ export class TemplateDataService {
     }
     
     return data;
+  }
+
+  /**
+   * Structured collection helpers
+   * -----------------------------
+   * These helpers expose the raw collection data in a way that can be used by
+   * loop-aware code (for example, in GoogleDriveService) without forcing
+   * everything through a single pre-formatted string.
+   *
+   * They keep the existing behaviour intact while making it easier to evolve
+   * toward a prototype-cloning loop model that preserves template formatting.
+   */
+
+  /**
+   * Return work experience items as-is, defaulting to an empty array.
+   */
+  static getWorkExperienceItems(profile: Profile): WorkExperience[] {
+    return Array.isArray(profile.workExperience) ? profile.workExperience : [];
+  }
+
+  /**
+   * Return skill categories as-is, defaulting to an empty array.
+   */
+  static getSkillCategories(profile: Profile): SkillCategory[] {
+    return Array.isArray(profile.skills) ? profile.skills : [];
+  }
+
+  /**
+   * Return certifications as-is, defaulting to an empty array.
+   */
+  static getCertificationItems(profile: Profile): Certification[] {
+    return Array.isArray(profile.certifications) ? profile.certifications : [];
+  }
+
+  /**
+   * Build a per-item placeholder map suitable for use inside a loop block in a
+   * Google Docs template. This mirrors the semantics of the string-based
+   * replace*Placeholder helpers, but exposes the mapping explicitly.
+   */
+  static buildItemPlaceholderMap(
+    collectionName: 'workExperience' | 'skills' | 'certifications',
+    item: any,
+    index: number,
+  ): Map<string, string> {
+    const map = new Map<string, string>();
+
+    if (collectionName === 'workExperience') {
+      const startDateYear = this.extractYear(item.startDate);
+      const endDateDisplay = item.current ? 'Present' : this.extractYear(item.endDate);
+      const description = this.formatDescription(item.description || '');
+
+      const replacements: Record<string, string> = {
+        '{{position}}': item.position || '',
+        '{{company}}': item.company || '',
+        '{{location}}': item.location || '',
+        '{{startDate}}': startDateYear,
+        '{{endDate}}': endDateDisplay,
+        '{{current}}': item.current ? 'Yes' : 'No',
+        '{{description}}': description,
+        // with spaces
+        '{{ position }}': item.position || '',
+        '{{ company }}': item.company || '',
+        '{{ location }}': item.location || '',
+        '{{ startDate }}': startDateYear,
+        '{{ endDate }}': endDateDisplay,
+        '{{ current }}': item.current ? 'Yes' : 'No',
+        '{{ description }}': description,
+        // without double braces
+        '{position}': item.position || '',
+        '{company}': item.company || '',
+        '{location}': item.location || '',
+        '{startDate}': startDateYear,
+        '{endDate}': endDateDisplay,
+        '{current}': item.current ? 'Yes' : 'No',
+        '{description}': description,
+        // indices for advanced templates
+        '{{index}}': String(index),
+        '{{ index }}': String(index),
+        '{index}': String(index),
+      };
+
+      Object.entries(replacements).forEach(([placeholder, value]) => {
+        map.set(placeholder, value);
+      });
+    } else if (collectionName === 'skills') {
+      const skillsList =
+        item.skills && Array.isArray(item.skills) ? (item.skills as string[]).join(', ') : '';
+
+      const replacements: Record<string, string> = {
+        '{{title}}': item.title || '',
+        '{{skills}}': skillsList,
+        '{{category}}': item.title || '',
+        '{{ title }}': item.title || '',
+        '{{ skills }}': skillsList,
+        '{{ category }}': item.title || '',
+        '{title}': item.title || '',
+        '{skills}': skillsList,
+        '{category}': item.title || '',
+        '{{index}}': String(index),
+        '{{ index }}': String(index),
+        '{index}': String(index),
+      };
+
+      Object.entries(replacements).forEach(([placeholder, value]) => {
+        map.set(placeholder, value);
+      });
+    } else if (collectionName === 'certifications') {
+      const replacements: Record<string, string> = {
+        '{{name}}': item.name || '',
+        '{{issuer}}': item.issuer || '',
+        '{{issueDate}}': item.issueDate || '',
+        '{{expiryDate}}': item.expiryDate || '',
+        '{{credentialId}}': item.credentialId || '',
+        '{{ name }}': item.name || '',
+        '{{ issuer }}': item.issuer || '',
+        '{{ issueDate }}': item.issueDate || '',
+        '{{ expiryDate }}': item.expiryDate || '',
+        '{{ credentialId }}': item.credentialId || '',
+        '{name}': item.name || '',
+        '{issuer}': item.issuer || '',
+        '{issueDate}': item.issueDate || '',
+        '{expiryDate}': item.expiryDate || '',
+        '{credentialId}': item.credentialId || '',
+        '{{index}}': String(index),
+        '{{ index }}': String(index),
+        '{index}': String(index),
+      };
+
+      Object.entries(replacements).forEach(([placeholder, value]) => {
+        map.set(placeholder, value);
+      });
+    }
+
+    return map;
   }
   
   /**

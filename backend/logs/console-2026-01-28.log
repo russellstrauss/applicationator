@@ -727,3 +727,1720 @@ onloadend@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1616
 
 [2026-01-28T19:55:42.212Z] LOG   [http://localhost:3000/] Synced 1 pending logs to server
 
+[2026-01-28T20:18:13.706Z] ERROR [http://localhost:3000/templates] [vite] {}
+[2026-01-28T20:18:13.707Z] ERROR [http://localhost:3000/templates] [vite] Failed to reload /src/pages/TemplatesPage.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-28T20:18:13.747Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-28T20:18:13.747Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T20:19:28.115Z] ERROR [http://localhost:3000/templates] [vite] {}
+[2026-01-28T20:19:28.116Z] ERROR [http://localhost:3000/templates] [vite] Failed to reload /src/pages/TemplatesPage.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[2026-01-28T20:19:28.138Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-28T20:19:28.138Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T20:35:57.700Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-28T20:35:57.700Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T20:35:58.926Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-28T20:35:58.927Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T20:36:00.023Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:36:00.023Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:36:00.034Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:36:01.243Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:36:04.664Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:36:09.715Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:45.568Z] ERROR [http://localhost:3000/templates] Failed to connect Google Drive: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/url",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:45.568Z] ERROR [http://localhost:3000/templates] Failed to connect Google Drive: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/url",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:52.219Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:52.222Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:52.223Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:52.225Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:55.220Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+[2026-01-28T20:37:56.303Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:37:56.303Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:38:05.434Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:38:05.435Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:38:05.439Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:38:05.445Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:38:09.551Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:38:09.554Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:42:14.289Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+[2026-01-28T20:42:57.292Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:42:57.292Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:42:57.293Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:42:57.293Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:42:57.293Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:43:01.373Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:47:11.182Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+[2026-01-28T20:47:34.049Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:47:34.050Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:47:34.050Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:47:34.079Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:47:34.079Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:47:38.125Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:18.748Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+[2026-01-28T20:54:25.727Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:25.728Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-28T20:54:25.729Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:25.732Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:25.732Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:33.714Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:33.715Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:33.717Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:33.717Z] ERROR [http://localhost:3000/templates] Failed to load templates: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:33.718Z] ERROR [http://localhost:3000/templates] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:54:37.801Z] ERROR [http://localhost:3000/templates] Failed to check connection status: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/google-auth/status",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T20:56:49.487Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T21:26:50.105Z] LOG   [http://localhost:3000/templates] Synced 60 pending logs to server
+
+[2026-01-28T21:43:57.305Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T21:44:07.371Z] LOG   [http://localhost:3000/templates] Synced 1 pending logs to server
+
+[2026-01-28T22:09:45.431Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-28T22:09:45.432Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-28T22:10:02.746Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/FieldMappingsPage.tsx
+[2026-01-28T22:10:02.746Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/FieldPromptModal.tsx
+
+[2026-01-28T22:20:54.498Z] LOG   [http://localhost:3000/templates] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T22:21:22.162Z] LOG   [http://localhost:3000/templates] Synced 1 pending logs to server
+
+[2026-01-28T22:21:34.806Z] LOG   [http://localhost:3000/templates] Synced 1 pending logs to server
+
+[2026-01-28T22:31:01.566Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/pages/TemplatesPage.tsx
+[2026-01-28T22:31:01.566Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+

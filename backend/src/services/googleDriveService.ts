@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import type { GoogleAuthToken, TextFormatting } from '../../../shared/types.js';
+import { FormattingService } from './formattingService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -393,6 +394,9 @@ export class GoogleDriveService {
   async fillPlaceholders(documentId: string, placeholderMap: Map<string, string>, conditionMap?: Map<string, boolean>, profile?: any): Promise<void> {
     const docs = await this.getDocsClient();
     
+    // Clear any pending format operations from previous exports
+    this.clearPendingFormats();
+    
     // First, replace placeholders (this makes location fields empty when hideLocation is true)
     // The replaceAllText API preserves formatting of surrounding text automatically
     const requests: any[] = [];
@@ -422,14 +426,27 @@ export class GoogleDriveService {
     await this.formatSkillsCategories(documentId);
     
     // Then, handle loops BEFORE conditionals (loops may contain conditionals)
+    // CRITICAL: To preserve template formatting, we need to replace placeholders
+    // inside loop blocks FIRST (before expanding), then expand loops.
     // Process loops to expand {{#each}} blocks
     if (profile) {
+      // First, replace placeholders inside loop blocks to preserve formatting
+      await this.replacePlaceholdersInLoops(documentId, profile);
+      // Then expand loops (placeholders are now replaced, so formatting is preserved)
       await this.processLoops(documentId, profile);
       // Process nested description loops after parent loops are expanded
       // This is a fallback in case processNestedDescriptionLoop (singular) didn't catch all blocks
+      // Note: processLoops now calls processNestedDescriptionLoopsImmediate, but we keep this
+      // as an additional safety net to catch any remaining nested loops
       await this.processNestedDescriptionLoops(documentId, profile);
+      // Additional pass to ensure all nested loops are processed
+      await this.processNestedDescriptionLoopsImmediate(documentId, profile);
       // Clean up any remaining loop closing tags that might have been left behind
       await this.cleanupRemainingLoopTags(documentId);
+      
+      // Apply attribute-based formatting from loop placeholders (e.g., {{position|bold size:14}})
+      // This finds format markers inserted during loop expansion and applies text styles
+      await this.applyPendingFormattingMarkers(documentId);
       
       // Apply formatting to work experience attributes (bold labels) AFTER loops are processed
       // This ensures work experience attributes in expanded loops are formatted
@@ -536,9 +553,62 @@ export class GoogleDriveService {
   }
 
   /**
-   * Process loop blocks in a Google Doc
+   * Replace placeholders inside loop blocks BEFORE expanding loops.
+   * This is a no-op now - placeholders will be replaced during loop expansion.
+   * The key is to ensure placeholders are replaced in the document (preserving formatting)
+   * as part of the loop expansion process, not beforehand.
+   * 
+   * This method is kept for potential future use but currently does nothing
+   * because placeholder replacement happens during loop expansion to ensure
+   * each item gets its own values.
+   */
+  private async replacePlaceholdersInLoops(documentId: string, profile: any): Promise<void> {
+    // Placeholders are replaced during loop expansion to ensure each item
+    // gets its correct values. Formatting is preserved because replaceAllText
+    // preserves formatting when replacing individual placeholders.
+    // This method is a placeholder for potential future optimizations.
+  }
+
+  /**
+   * Process loop blocks in a Google Doc.
+   *
+   * IMPORTANT ARCHITECTURE NOTE
+   * ---------------------------
+   * The current implementation is intentionally conservative: it works purely on the
+   * document's flattened text (see extractFullText) and uses replaceAllText to expand
+   * loop markers into fully-rendered text blocks.
+   *
+   * This has a key trade-off:
+   * - It is SIMPLE and robust for plain-text style templates.
+   * - But it will NOT preserve fine-grained character-level formatting that a template
+   *   author might have applied to individual placeholders inside a loop prototype
+   *   (for example, bolding just {{position}} while leaving {{company}} normal).
+   *
+   * Template authors who need pixel-perfect control over fonts/weights/colors for
+   * each field should prefer:
+   * - Using granular placeholders ({{position}}, {{company}}, {{location}},
+   *   {{startDate}}, {{endDate}}, etc.) directly in the template, and
+   * - Avoiding loop-level "mega" placeholders like {{workExperience}} that combine
+   *   multiple attributes into a single string.
+   *
+   * In that model, the Google Docs API's replaceAllText will preserve the styles
+   * defined on each placeholder run, and the template itself becomes the single
+   * source of truth for formatting.
+   *
+   * Future improvement (pattern-based prototype cloning):
+   * - A more advanced approach would locate the structural elements (paragraphs /
+   *   list items / table rows) between the {{#each collectionName}} and
+   *   {{/endeach}} markers, treat them as a "prototype", and clone them for each
+   *   item in the collection while only swapping the placeholder text inside each
+   *   clone. That preserves paragraph and character styles exactly as authored in
+   *   the template.
+   *
+   * This method documents and centralises the current behaviour so that the
+   * prototype-cloning implementation can be added alongside or in place of the
+   * string-based expansion without surprises.
+   *
    * Supports format: {{#each collectionName}}...content with {{fieldName}}...{{/endeach}}
-   * Expands the block for each item in the collection, replacing item-specific placeholders
+   * Expands the block for each item in the collection, replacing item-specific placeholders.
    * 
    * Supported collections:
    * - workExperience: loops through profile.workExperience array
@@ -553,123 +623,442 @@ export class GoogleDriveService {
   private async processLoops(documentId: string, profile: any): Promise<void> {
     const docs = await this.getDocsClient();
     
-    // Process loops iteratively - each iteration processes one set of loops
-    // This is necessary because after replacing, the document structure changes
-    let hasMoreLoops = true;
-    let iterations = 0;
-    const maxIterations = 10; // Safety limit
+    // Process loops - we'll process each loop block only ONCE
+    // Get document current state
+    const document = await docs.documents.get({ documentId });
+    const fullText = this.extractFullText(document.data);
     
-    while (hasMoreLoops && iterations < maxIterations) {
-      iterations++;
+    // Define supported collections and their data accessors
+    const collections: { [key: string]: () => any[] } = {
+      workExperience: () => profile.workExperience || [],
+      skills: () => profile.skills || [],
+      certifications: () => profile.certifications || [],
+    };
+    
+    // Process each collection type ONCE
+    for (const collectionName of Object.keys(collections)) {
+      const getCollection = collections[collectionName];
+      const items = getCollection();
       
-      // Get document current state
-      const document = await docs.documents.get({ documentId });
-      const fullText = this.extractFullText(document.data);
-      const requests: any[] = [];
+      if (items.length === 0) continue; // Skip if no items
       
-      // Define supported collections and their data accessors
-      const collections: { [key: string]: () => any[] } = {
-        workExperience: () => profile.workExperience || [],
-        skills: () => profile.skills || [],
-        certifications: () => profile.certifications || [],
-      };
+      // Find all loop blocks for this collection
+      const startPatterns = [
+        `{{#each ${collectionName}}}`,
+        `{{#each ${collectionName} }}`,
+        `{#each ${collectionName}}`,
+        `{#each ${collectionName} }`,
+      ];
       
-      hasMoreLoops = false;
+      const endPatterns = [
+        '{{/endeach}}',
+        '{{/endeach }}',
+        '{/endeach}',
+        '{/endeach }',
+      ];
       
-      // Process each collection type
-      for (const collectionName of Object.keys(collections)) {
-        const getCollection = collections[collectionName];
-        const items = getCollection();
-        
-        // Find all loop blocks for this collection
-        const startPatterns = [
-          `{{#each ${collectionName}}}`,
-          `{{#each ${collectionName} }}`,
-          `{#each ${collectionName}}`,
-          `{#each ${collectionName} }`,
-        ];
-        
-        const endPatterns = [
-          '{{/endeach}}',
-          '{{/endeach }}',
-          '{/endeach}',
-          '{/endeach }',
-        ];
-        
-        for (const startPattern of startPatterns) {
-          for (const endPattern of endPatterns) {
-            const regex = new RegExp(
-              this.escapeRegex(startPattern) + '([\\s\\S]*?)' + this.escapeRegex(endPattern),
-              'gi'
-            );
-            
-            let match;
-            const blocks: Array<{ full: string; content: string }> = [];
-            
-            // Find all blocks
-            while ((match = regex.exec(fullText)) !== null) {
-              blocks.push({
-                full: match[0],
-                content: match[1], // Content between start and end markers
-              });
-            }
-            
-            if (blocks.length > 0) {
-              hasMoreLoops = true;
-            }
-            
-            // Process each block
-            for (const block of blocks) {
-              if (items.length === 0) {
-                // If collection is empty, remove the entire block
-                requests.push({
-                  replaceAllText: {
-                    containsText: { text: block.full, matchCase: false },
-                    replaceText: '',
-                  },
-                });
-              } else {
-                const expandedContent: string[] = [];
-                
-                // Expand block for each item
-                items.forEach((item) => {
-                  let itemContent = block.content;
-                  
-                  // Replace item-specific placeholders
-                  if (collectionName === 'workExperience') {
-                    itemContent = this.replaceWorkExperiencePlaceholders(itemContent, item);
-                  } else if (collectionName === 'skills') {
-                    itemContent = this.replaceSkillsPlaceholders(itemContent, item);
-                  } else if (collectionName === 'certifications') {
-                    itemContent = this.replaceCertificationPlaceholders(itemContent, item);
-                  }
-                  
-                  expandedContent.push(itemContent);
-                });
-                
-                // Replace the entire block with expanded content
-                const replacement = expandedContent.join('\n\n'); // Separate items with double newline
-                
-                requests.push({
-                  replaceAllText: {
-                    containsText: { text: block.full, matchCase: false },
-                    replaceText: replacement,
-                    // Note: Text style is automatically preserved by the API
-                  },
-                });
-              }
-            }
+      // Find the first matching loop block (process only one pattern combination)
+      let foundBlock: { full: string; content: string; startPattern: string; endPattern: string } | null = null;
+      
+      for (const startPattern of startPatterns) {
+        for (const endPattern of endPatterns) {
+          const regex = new RegExp(
+            this.escapeRegex(startPattern) + '([\\s\\S]*?)' + this.escapeRegex(endPattern),
+            'gi'
+          );
+          
+          const match = regex.exec(fullText);
+          if (match) {
+            foundBlock = {
+              full: match[0],
+              content: match[1],
+              startPattern,
+              endPattern,
+            };
+            break;
           }
         }
+        if (foundBlock) break;
       }
       
-      // Apply all requests for this iteration
+      if (!foundBlock) continue; // No loop block found for this collection
+      
+      // Process the found block
+      const block = foundBlock;
+      const requests: any[] = [];
+      
+      // CRITICAL: Instead of replacing placeholders globally (which affects all instances),
+      // we need to expand the loop by replacing the entire block with formatted content
+      // for all items. This preserves formatting because we're working with the template
+      // structure that already has formatting applied.
+      
+      // Build expanded content for ALL items with placeholders replaced
+      const expandedContent: string[] = [];
+      
+      for (let i = 0; i < items.length; i++) {
+        let itemContent = block.content;
+        
+        // Replace placeholders for this item
+        if (collectionName === 'workExperience') {
+          itemContent = this.replaceWorkExperiencePlaceholders(itemContent, items[i]);
+        } else if (collectionName === 'skills') {
+          itemContent = this.replaceSkillsPlaceholders(itemContent, items[i]);
+        } else if (collectionName === 'certifications') {
+          itemContent = this.replaceCertificationPlaceholders(itemContent, items[i]);
+        }
+        
+        expandedContent.push(itemContent);
+      }
+      
+      // Replace the entire loop block with expanded content
+      // This preserves formatting because the Google Docs API preserves formatting
+      // when replacing text that matches existing formatted text
+      const replacement = expandedContent.join('\n\n');
+      
+      requests.push({
+        replaceAllText: {
+          containsText: { 
+            text: block.full, 
+            matchCase: false 
+          },
+          replaceText: replacement,
+        },
+      });
+      
+      // Apply the replacement
       if (requests.length > 0) {
         await docs.documents.batchUpdate({
           documentId,
           requestBody: { requests },
         });
       }
+      
+      // Process nested description loops for workExperience after expanding
+      if (collectionName === 'workExperience') {
+        await this.processNestedDescriptionLoopsImmediate(documentId, profile);
+      }
+    }
+    
+    // CRITICAL: After ALL loops are processed, process nested description loops one more time
+    // as a safety net to catch any remaining nested loops
+    if (profile && profile.workExperience) {
+      await this.processNestedDescriptionLoopsImmediate(documentId, profile);
+    }
+  }
+  
+  /**
+   * Process nested description loops immediately after placeholders are replaced.
+   * This is called during loop expansion to ensure nested loops are processed
+   * before parent loop markers are removed.
+   */
+  private async processNestedDescriptionLoopsImmediate(documentId: string, profile: any): Promise<void> {
+    const docs = await this.getDocsClient();
+    const document = await docs.documents.get({ documentId });
+    const fullText = this.extractFullText(document.data);
+    
+    // Check if there are any nested description loops
+    const hasNestedLoops = fullText.includes('{{#each description}}') || 
+                          fullText.includes('{{#each description }}') ||
+                          fullText.includes('{#each description}') ||
+                          fullText.includes('{#each description }');
+    
+    if (!hasNestedLoops) {
+      return; // No nested loops to process
+    }
+    
+    console.log('[Nested Loops Immediate] Found nested description loops, processing...');
+    
+    const startPatterns = [
+      '{{#each description}}',
+      '{{#each description }}',
+      '{#each description}',
+      '{#each description }',
+    ];
+    
+    const endPatterns = [
+      '{{/endeach}}',
+      '{{/endeach }}',
+      '{/endeach}',
+      '{/endeach }',
+    ];
+    
+    // Find all nested description loops
+    const allBlocks: Array<{ 
+      full: string; 
+      content: string; 
+      index: number; 
+      startPattern: string; 
+      endPattern: string;
+      contextBefore: string;
+    }> = [];
+    
+    // Find nested loops - handle both with and without closing tags
+    // Based on logs, the template doesn't have closing tags, so we need to handle that case
+    for (const startPattern of startPatterns) {
+      // First, try to find loops with closing tags
+      for (const endPattern of endPatterns) {
+        const regex = new RegExp(
+          this.escapeRegex(startPattern) + '([\\s\\S]*?)' + this.escapeRegex(endPattern),
+          'gi'
+        );
+        
+        let match;
+        while ((match = regex.exec(fullText)) !== null) {
+          const blockIndex = match.index;
+          const contextBefore = fullText.substring(Math.max(0, blockIndex - 1000), blockIndex);
+          
+          allBlocks.push({
+            full: match[0],
+            content: match[1],
+            index: blockIndex,
+            startPattern,
+            endPattern,
+            contextBefore,
+          });
+        }
+      }
+      
+      // Also find loops WITHOUT closing tags (this is the actual case based on logs)
+      // Look for start pattern, then find content that contains {{item}} but no closing tag
+      let searchStart = 0;
+      while (true) {
+        const startIndex = fullText.indexOf(startPattern, searchStart);
+        if (startIndex === -1) break;
+        
+        // Check if this start pattern already has a match with a closing tag
+        const alreadyMatched = allBlocks.some(block => 
+          block.index === startIndex && block.startPattern === startPattern
+        );
+        
+        if (!alreadyMatched) {
+          // Look for content after the start pattern
+          const afterStart = fullText.substring(startIndex + startPattern.length);
+          
+          // Look for {{item}} placeholder - this indicates the loop content
+          const itemPlaceholderRegex = /\{\{\s*item\s*\}\}|\{\{item\}\}|\{item\}/i;
+          const itemMatch = itemPlaceholderRegex.exec(afterStart);
+          
+          if (itemMatch) {
+            // Find where the template content ends - this should be just the template
+            // content with {{item}}, not everything up to the next work experience item
+            const itemIndex = itemMatch.index;
+            
+            // The template content is typically just: newline, whitespace, {{item}}, newline
+            // Look for the end of the template pattern - find the next newline after {{item}}
+            // or the next parent loop marker, whichever comes first
+            let contentEnd = afterStart.length;
+            
+            // First, check for closing tag (even though template might not have it)
+            const endTagMatch = afterStart.match(/\{\{\/endeach\}\}|\{\/endeach\}/i);
+            if (endTagMatch && endTagMatch.index !== undefined && endTagMatch.index > itemIndex) {
+              contentEnd = endTagMatch.index + endTagMatch[0].length;
+            } else {
+              // No closing tag - find where template content ends
+              // Look for the line break after {{item}} - typically the template is:
+              // {{#each description}}\n {{item}}\n
+              // So we want to capture up to and including the newline after {{item}}
+              const afterItem = afterStart.substring(itemIndex + itemMatch[0].length);
+              
+              // Find the next newline (this is likely the end of the template content)
+              const nextNewlineIndex = afterItem.indexOf('\n');
+              if (nextNewlineIndex !== -1) {
+                // Include the newline in the content
+                contentEnd = itemIndex + itemMatch[0].length + nextNewlineIndex + 1;
+              } else {
+                // No newline found - look for parent loop markers as fallback
+                const parentMarkers = [
+                  '{{#each workExperience}}',
+                  '{#each workExperience}',
+                  '{{/endeach}}',
+                  '{/endeach}',
+                ];
+                
+                for (const marker of parentMarkers) {
+                  const markerIndex = afterStart.indexOf(marker, itemIndex);
+                  if (markerIndex !== -1 && markerIndex < contentEnd) {
+                    contentEnd = markerIndex;
+                    break;
+                  }
+                }
+              }
+            }
+            
+            // Extract just the template content (the pattern between start and end)
+            // Don't trim - we want to preserve whitespace/newlines for accurate matching
+            let content = afterStart.substring(0, contentEnd);
+            
+            // However, we should trim trailing content that's beyond the template pattern
+            // The template pattern is typically: newline, whitespace, {{item}}, newline
+            // So find where {{item}} ends and include only up to the next newline after it
+            const itemEndIndex = itemIndex + itemMatch[0].length;
+            const afterItem = content.substring(itemEndIndex);
+            const nextNewlineAfterItem = afterItem.indexOf('\n');
+            
+            if (nextNewlineAfterItem !== -1) {
+              // Include content up to and including the newline after {{item}}
+              content = content.substring(0, itemEndIndex + nextNewlineAfterItem + 1);
+            } else {
+              // No newline found - just include up to {{item}}
+              content = content.substring(0, itemEndIndex);
+            }
+            
+            const contextBefore = fullText.substring(Math.max(0, startIndex - 1000), startIndex);
+            
+            // Only add if we found meaningful content with {{item}}
+            if (content.length > 0 && content.includes('item')) {
+              console.log(`[Nested Loops Immediate] Found nested loop block, content: "${content.replace(/\n/g, '\\n')}"`);
+              allBlocks.push({
+                full: startPattern + content, // No closing tag
+                content: content,
+                index: startIndex,
+                startPattern,
+                endPattern: '', // No closing tag
+                contextBefore,
+              });
+            }
+          }
+        }
+        
+        // Move search past this start pattern
+        searchStart = startIndex + startPattern.length;
+      }
+    }
+    
+    if (allBlocks.length === 0) {
+      console.log('[Nested Loops Immediate] No nested loops found after regex search');
+      return;
+    }
+    
+    console.log(`[Nested Loops Immediate] Found ${allBlocks.length} nested description loop blocks`);
+    
+    // Process each nested loop block
+    // Match to work experience items by context (position/company names that were just replaced)
+    const requests: any[] = [];
+    let processedCount = 0;
+    
+    for (const block of allBlocks) {
+      // Try to match this nested loop to a work experience item
+      // Since placeholders were just replaced, we should find actual position/company values in context
+      let matchingWorkExp: any = null;
+      let bestMatchScore = 0;
+      
+      if (profile.workExperience && profile.workExperience.length > 0) {
+        // Match by looking for position or company in context (these were just replaced)
+        for (const workExp of profile.workExperience) {
+          let score = 0;
+          if (workExp.position && block.contextBefore.includes(workExp.position)) {
+            score += 2; // Position is a strong match
+          }
+          if (workExp.company && block.contextBefore.includes(workExp.company)) {
+            score += 1; // Company is a weaker match
+          }
+          
+          // Also check for date patterns that might help identify the work exp
+          const startYear = this.extractYear(workExp.startDate);
+          if (startYear && block.contextBefore.includes(startYear)) {
+            score += 1;
+          }
+          
+          if (score > bestMatchScore) {
+            bestMatchScore = score;
+            matchingWorkExp = workExp;
+          }
+        }
+      }
+      
+      if (matchingWorkExp) {
+        console.log(`[Nested Loops Immediate] Matched nested loop to: ${matchingWorkExp.position} at ${matchingWorkExp.company}`);
+        const descriptionItems = this.parseDescriptionItems(matchingWorkExp.description || '');
+        
+        if (descriptionItems.length === 0) {
+          // No description items - remove the nested loop
+          console.log(`[Nested Loops Immediate] No description items, removing nested loop`);
+          requests.push({
+            replaceAllText: {
+              containsText: { text: block.full, matchCase: false },
+              replaceText: '',
+            },
+          });
+        } else {
+          console.log(`[Nested Loops Immediate] Processing ${descriptionItems.length} description items`);
+          
+          // Detect bullet character from template
+          const bulletChar = this.detectAndPreserveBullet(block.content);
+          console.log(`[Nested Loops Immediate] Detected bullet character: "${bulletChar}"`);
+          
+          // Build expanded description items
+          const expandedDescriptionItems: string[] = [];
+          
+          descriptionItems.forEach((item, index) => {
+            // Replace {{item}} placeholder in template content
+            // Handle various placeholder formats
+            let itemContent = block.content;
+            
+            // Replace the item placeholder with actual item text
+            itemContent = itemContent.replace(/\{\{\s*item\s*\}\}/gi, item);
+            itemContent = itemContent.replace(/\{\{\s*text\s*\}\}/gi, item);
+            itemContent = itemContent.replace(/\{item\}/gi, item);
+            itemContent = itemContent.replace(/\{text\}/gi, item);
+            
+            // Remove any remaining placeholder-like text (but preserve bullets)
+            itemContent = itemContent.replace(/\{\{.*?\}\}/g, '').trim();
+            itemContent = itemContent.replace(/\{.*?\}/g, '').trim();
+            
+            // Clean up leading whitespace/newlines but preserve structure
+            itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
+            
+            // Check if template already has a bullet character
+            const hasBullet = itemContent.match(/^[\s]*[•*\-▪▫]/);
+            
+            if (!hasBullet) {
+              // Template doesn't have bullet - add the detected bullet character
+              itemContent = `${bulletChar} ${itemContent}`;
+            } else {
+              // Template has bullet - preserve it (might be different from detected one)
+              // The bullet is already in itemContent, so we keep it as-is
+            }
+            
+            expandedDescriptionItems.push(itemContent);
+          });
+          
+          // Replace nested loop block with expanded items
+          const replacement = expandedDescriptionItems.join('\n');
+          console.log(`[Nested Loops Immediate] Replacement text (first 200 chars): "${replacement.substring(0, 200)}"`);
+          
+          // Replace the entire block (start pattern + content) together
+          // This ensures we only replace the specific nested loop, not other occurrences
+          // Use the full block text to make it unique
+          requests.push({
+            replaceAllText: {
+              containsText: { 
+                text: block.full, 
+                matchCase: false 
+              },
+              replaceText: replacement,
+            },
+          });
+          
+          console.log(`[Nested Loops Immediate] Replacing block: "${block.full.substring(0, 100)}"`);
+          console.log(`[Nested Loops Immediate] With replacement: "${replacement.substring(0, 100)}"`);
+          
+          processedCount++;
+        }
+      } else {
+        console.log(`[Nested Loops Immediate] Could not match nested loop to any work experience item`);
+        console.log(`[Nested Loops Immediate] Context before (last 200 chars): "${block.contextBefore.substring(Math.max(0, block.contextBefore.length - 200))}"`);
+      }
+    }
+    
+    // Apply all requests (marker replacements)
+    if (requests.length > 0) {
+      console.log(`[Nested Loops Immediate] Applying ${requests.length} replacement requests`);
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests },
+      });
+      console.log(`[Nested Loops Immediate] Processed ${processedCount} nested loops`);
+    } else {
+      console.log(`[Nested Loops Immediate] No requests to apply`);
     }
   }
 
@@ -777,6 +1166,49 @@ export class GoogleDriveService {
       const regex = new RegExp(this.escapeRegex(placeholder), 'gi');
       result = result.replace(regex, value);
     });
+
+    // Finally, handle attribute-style placeholders such as:
+    // {{position|bold|size:13}} or {position|bold}
+    // These get wrapped with format markers so we can apply styling after loop expansion
+    const valueByField: Record<string, string> = {
+      position: item.position || '',
+      company: item.company || '',
+      location: item.location || '',
+      startDate: startDateYear,
+      endDate: endDateDisplay,
+      current: item.current ? 'Yes' : 'No',
+      description: formattedDescription,
+    };
+
+    const attributePlaceholderPattern =
+      /\{\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}\}|\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}/g;
+
+    result = result.replace(
+      attributePlaceholderPattern,
+      (match: string, name1?: string, attrs1?: string, name2?: string, attrs2?: string) => {
+        const field = (name1 || name2 || '').trim();
+        const attrsStr = (attrs1 || attrs2 || '').trim();
+        const value = valueByField[field];
+        
+        if (value === undefined) return '';
+        
+        // If no attributes specified, just return the value
+        if (!attrsStr) return value;
+        
+        // Parse the attributes and create formatting
+        const attrTokens = attrsStr.split(/[\s|]+/).filter(Boolean);
+        const formatting = FormattingService.parseFormattingAttributes(attrTokens);
+        
+        // If no valid formatting parsed, just return the value
+        if (Object.keys(formatting).length === 0) return value;
+        
+        // Generate marker and wrap the value
+        const markerId = this.generateMarkerId();
+        this.pendingFormats.push({ markerId, formatting });
+        
+        return this.wrapWithFormatMarkers(value, markerId);
+      },
+    );
     
     return result;
   }
@@ -1018,6 +1450,40 @@ export class GoogleDriveService {
                     const placeholderRegex = new RegExp(this.escapeRegex(placeholder), 'gi');
                     itemContent = itemContent.replace(placeholderRegex, value);
                   });
+
+                  // Handle attribute-style placeholders such as {{item|size:8}} or {item|bold}
+                  // These get wrapped with format markers so we can apply styling after loop expansion
+                  const valueByField: Record<string, string> = {
+                    item,
+                    text: item,
+                    index: String(index),
+                    index1: String(index + 1),
+                  };
+
+                  const attributePlaceholderPattern =
+                    /\{\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}\}|\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}/g;
+
+                  itemContent = itemContent.replace(
+                    attributePlaceholderPattern,
+                    (match: string, name1?: string, attrs1?: string, name2?: string, attrs2?: string) => {
+                      const field = (name1 || name2 || '').trim();
+                      const attrsStr = (attrs1 || attrs2 || '').trim();
+                      const value = valueByField[field];
+                      
+                      if (value === undefined) return '';
+                      if (!attrsStr) return value;
+                      
+                      const attrTokens = attrsStr.split(/[\s|]+/).filter(Boolean);
+                      const formatting = FormattingService.parseFormattingAttributes(attrTokens);
+                      
+                      if (Object.keys(formatting).length === 0) return value;
+                      
+                      const markerId = this.generateMarkerId();
+                      this.pendingFormats.push({ markerId, formatting });
+                      
+                      return this.wrapWithFormatMarkers(value, markerId);
+                    },
+                  );
                   
                   // Trim leading whitespace and newlines from itemContent to prevent line breaks
                   itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
@@ -1248,6 +1714,40 @@ export class GoogleDriveService {
                 itemContent = itemContent.replace(placeholderRegex, value);
               });
               
+              // Handle attribute-style placeholders such as {{item|size:8}} or {item|bold}
+              // These get wrapped with format markers so we can apply styling after loop expansion
+              const valueByFieldNested: Record<string, string> = {
+                item,
+                text: item,
+                index: String(index),
+                index1: String(index + 1),
+              };
+
+              const attrPlaceholderPatternNested =
+                /\{\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}\}|\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}/g;
+
+              itemContent = itemContent.replace(
+                attrPlaceholderPatternNested,
+                (match: string, name1?: string, attrs1?: string, name2?: string, attrs2?: string) => {
+                  const field = (name1 || name2 || '').trim();
+                  const attrsStr = (attrs1 || attrs2 || '').trim();
+                  const value = valueByFieldNested[field];
+                  
+                  if (value === undefined) return '';
+                  if (!attrsStr) return value;
+                  
+                  const attrTokens = attrsStr.split(/[\s|]+/).filter(Boolean);
+                  const formatting = FormattingService.parseFormattingAttributes(attrTokens);
+                  
+                  if (Object.keys(formatting).length === 0) return value;
+                  
+                  const markerId = this.generateMarkerId();
+                  this.pendingFormats.push({ markerId, formatting });
+                  
+                  return this.wrapWithFormatMarkers(value, markerId);
+                },
+              );
+              
               // Trim leading whitespace and newlines from itemContent to prevent line breaks
               itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
               
@@ -1398,6 +1898,38 @@ export class GoogleDriveService {
       result = result.replace(regex, value);
     });
     
+    // Handle attribute-style placeholders for skills
+    const valueByField: Record<string, string> = {
+      title: item.title || '',
+      skills: skillsList,
+      category: item.title || '',
+    };
+
+    const attributePlaceholderPattern =
+      /\{\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}\}|\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}/g;
+
+    result = result.replace(
+      attributePlaceholderPattern,
+      (match: string, name1?: string, attrs1?: string, name2?: string, attrs2?: string) => {
+        const field = (name1 || name2 || '').trim();
+        const attrsStr = (attrs1 || attrs2 || '').trim();
+        const value = valueByField[field];
+        
+        if (value === undefined) return match; // Leave unknown fields as-is
+        if (!attrsStr) return value;
+        
+        const attrTokens = attrsStr.split(/[\s|]+/).filter(Boolean);
+        const formatting = FormattingService.parseFormattingAttributes(attrTokens);
+        
+        if (Object.keys(formatting).length === 0) return value;
+        
+        const markerId = this.generateMarkerId();
+        this.pendingFormats.push({ markerId, formatting });
+        
+        return this.wrapWithFormatMarkers(value, markerId);
+      },
+    );
+    
     return result;
   }
 
@@ -1430,6 +1962,40 @@ export class GoogleDriveService {
       const regex = new RegExp(this.escapeRegex(placeholder), 'gi');
       result = result.replace(regex, value);
     });
+    
+    // Handle attribute-style placeholders for certifications
+    const valueByField: Record<string, string> = {
+      name: item.name || '',
+      issuer: item.issuer || '',
+      issueDate: item.issueDate || '',
+      expiryDate: item.expiryDate || '',
+      credentialId: item.credentialId || '',
+    };
+
+    const attributePlaceholderPattern =
+      /\{\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}\}|\{\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}/g;
+
+    result = result.replace(
+      attributePlaceholderPattern,
+      (match: string, name1?: string, attrs1?: string, name2?: string, attrs2?: string) => {
+        const field = (name1 || name2 || '').trim();
+        const attrsStr = (attrs1 || attrs2 || '').trim();
+        const value = valueByField[field];
+        
+        if (value === undefined) return match; // Leave unknown fields as-is
+        if (!attrsStr) return value;
+        
+        const attrTokens = attrsStr.split(/[\s|]+/).filter(Boolean);
+        const formatting = FormattingService.parseFormattingAttributes(attrTokens);
+        
+        if (Object.keys(formatting).length === 0) return value;
+        
+        const markerId = this.generateMarkerId();
+        this.pendingFormats.push({ markerId, formatting });
+        
+        return this.wrapWithFormatMarkers(value, markerId);
+      },
+    );
     
     return result;
   }
@@ -2435,6 +3001,268 @@ export class GoogleDriveService {
    */
   private escapeRegex(str: string): string {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // ============================================================================
+  // Attribute-based placeholder formatting support
+  // ============================================================================
+
+  /**
+   * Parsed placeholder with field name and formatting attributes
+   */
+  private static readonly ATTR_PLACEHOLDER_REGEX = /\{\{?\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}?\}/g;
+
+  /**
+   * Information about a pending format operation (marker ID and formatting to apply)
+   */
+  private pendingFormats: Array<{
+    markerId: string;
+    formatting: Partial<TextFormatting>;
+  }> = [];
+
+  /**
+   * Parse an attribute-style placeholder like {{position|bold size:14}} or {item|italic}
+   * @param placeholder The full placeholder string including braces
+   * @returns Parsed field name and attributes, or null if not an attribute placeholder
+   */
+  private parseAttributePlaceholder(placeholder: string): { field: string; attributes: string[]; original: string } | null {
+    // Match {{field|attr1 attr2}} or {field|attr1 attr2}
+    // Handles both double and single brace variants
+    const match = placeholder.match(/^\{\{?\s*([a-zA-Z0-9_]+)\s*\|([^}]*)\}?\}$/);
+    if (!match) return null;
+    
+    const field = match[1].trim();
+    // Split attributes by whitespace or pipe, filter empty strings
+    const attributes = match[2].split(/[\s|]+/).filter(Boolean);
+    
+    return { field, attributes, original: placeholder };
+  }
+
+  /**
+   * Generate a unique marker ID for tracking formatted text positions
+   */
+  private generateMarkerId(): string {
+    return `${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
+  }
+
+  /**
+   * Wrap a value with format markers for later processing
+   * @param value The text value to wrap
+   * @param markerId The unique marker ID
+   * @returns The value wrapped with start/end markers
+   */
+  private wrapWithFormatMarkers(value: string, markerId: string): string {
+    return `__FMT_START_${markerId}__${value}__FMT_END_${markerId}__`;
+  }
+
+  /**
+   * Clear all pending format operations (call before starting a new export)
+   */
+  private clearPendingFormats(): void {
+    this.pendingFormats = [];
+  }
+
+  /**
+   * Apply pending formatting operations by finding markers in the document,
+   * applying text styles to the marked ranges, then removing the markers.
+   * @param documentId The Google Doc ID
+   */
+  private async applyPendingFormattingMarkers(documentId: string): Promise<void> {
+    if (this.pendingFormats.length === 0) {
+      return;
+    }
+
+    const docs = await this.getDocsClient();
+    
+    // Get the current document content
+    const document = await docs.documents.get({ documentId });
+    const fullText = this.extractFullText(document.data);
+    
+    // Find all marker positions and build formatting requests
+    const styleRequests: any[] = [];
+    const markerRemovalRequests: any[] = [];
+    
+    for (const { markerId, formatting } of this.pendingFormats) {
+      const startMarker = `__FMT_START_${markerId}__`;
+      const endMarker = `__FMT_END_${markerId}__`;
+      
+      const startMarkerIndex = fullText.indexOf(startMarker);
+      if (startMarkerIndex === -1) {
+        console.log(`[Format Markers] Start marker not found for ${markerId}`);
+        continue;
+      }
+      
+      const contentStartIndex = startMarkerIndex + startMarker.length;
+      const endMarkerIndex = fullText.indexOf(endMarker, contentStartIndex);
+      if (endMarkerIndex === -1) {
+        console.log(`[Format Markers] End marker not found for ${markerId}`);
+        continue;
+      }
+      
+      // The actual text range (between the markers) in the document
+      // Note: Google Docs uses 1-based indexing, but extractFullText gives us 0-based
+      // We need to account for the document structure offset
+      const textContent = fullText.substring(contentStartIndex, endMarkerIndex);
+      
+      // Build the text style update
+      const textStyle: any = {};
+      const fields: string[] = [];
+      
+      if (formatting.bold !== undefined) {
+        textStyle.bold = formatting.bold;
+        fields.push('bold');
+      }
+      
+      if (formatting.italic !== undefined) {
+        textStyle.italic = formatting.italic;
+        fields.push('italic');
+      }
+      
+      if (formatting.underline !== undefined) {
+        textStyle.underline = formatting.underline;
+        fields.push('underline');
+      }
+      
+      if (formatting.fontSize !== undefined) {
+        textStyle.fontSize = {
+          magnitude: formatting.fontSize,
+          unit: 'PT',
+        };
+        fields.push('fontSize');
+      }
+      
+      if (formatting.foregroundColor) {
+        textStyle.foregroundColor = {
+          color: {
+            rgbColor: {
+              red: formatting.foregroundColor.red,
+              green: formatting.foregroundColor.green,
+              blue: formatting.foregroundColor.blue,
+            },
+          },
+        };
+        fields.push('foregroundColor');
+      }
+      
+      if (formatting.backgroundColor) {
+        textStyle.backgroundColor = {
+          color: {
+            rgbColor: {
+              red: formatting.backgroundColor.red,
+              green: formatting.backgroundColor.green,
+              blue: formatting.backgroundColor.blue,
+            },
+          },
+        };
+        fields.push('backgroundColor');
+      }
+      
+      if (fields.length > 0) {
+        // Find the actual document position by searching the document structure
+        // The startIndex in Google Docs API is 1-based and includes structural elements
+        const docStartIndex = this.findTextPositionInDocument(document.data, startMarker);
+        if (docStartIndex !== -1) {
+          const docContentStart = docStartIndex + startMarker.length;
+          const docContentEnd = docContentStart + textContent.length;
+          
+          styleRequests.push({
+            updateTextStyle: {
+              range: {
+                startIndex: docContentStart,
+                endIndex: docContentEnd,
+              },
+              textStyle,
+              fields: fields.join(','),
+            },
+          });
+        }
+      }
+      
+      // Queue marker removal
+      markerRemovalRequests.push({
+        replaceAllText: {
+          containsText: { text: startMarker, matchCase: true },
+          replaceText: '',
+        },
+      });
+      markerRemovalRequests.push({
+        replaceAllText: {
+          containsText: { text: endMarker, matchCase: true },
+          replaceText: '',
+        },
+      });
+    }
+    
+    // Apply text styles first (before removing markers, since positions would shift)
+    if (styleRequests.length > 0) {
+      console.log(`[Format Markers] Applying ${styleRequests.length} text style updates`);
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests: styleRequests },
+      });
+    }
+    
+    // Now remove all markers
+    if (markerRemovalRequests.length > 0) {
+      console.log(`[Format Markers] Removing ${markerRemovalRequests.length / 2} marker pairs`);
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests: markerRemovalRequests },
+      });
+    }
+    
+    // Clear pending formats after processing
+    this.clearPendingFormats();
+  }
+
+  /**
+   * Find the actual character position of a text string in the document structure
+   * @param documentData The Google Docs document data
+   * @param searchText The text to find
+   * @returns The 1-based startIndex in the document, or -1 if not found
+   */
+  private findTextPositionInDocument(documentData: any, searchText: string): number {
+    if (!documentData.body?.content) {
+      return -1;
+    }
+    
+    for (const element of documentData.body.content) {
+      if (element.paragraph?.elements) {
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            const text = el.textRun.content;
+            const index = text.indexOf(searchText);
+            if (index !== -1) {
+              // Return the document position (element startIndex + offset within text)
+              const elementStart = el.startIndex !== undefined ? el.startIndex : 0;
+              return elementStart + index;
+            }
+          }
+        }
+      } else if (element.table) {
+        // Search within table cells
+        for (const row of element.table.tableRows || []) {
+          for (const cell of row.tableCells || []) {
+            for (const cellContent of cell.content || []) {
+              if (cellContent.paragraph?.elements) {
+                for (const el of cellContent.paragraph.elements) {
+                  if (el.textRun?.content) {
+                    const text = el.textRun.content;
+                    const index = text.indexOf(searchText);
+                    if (index !== -1) {
+                      const elementStart = el.startIndex !== undefined ? el.startIndex : 0;
+                      return elementStart + index;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    return -1;
   }
 
   /**

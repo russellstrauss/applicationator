@@ -8,9 +8,9 @@
     "backend"
   ],
   "scripts": {
-    "dev": "concurrently -n \"backend,frontend\" -c \"blue,green\" \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:frontend": "npm --prefix frontend run dev",
-    "dev:backend": "npm --prefix backend run dev",
+    "dev": "concurrently --raw -n \"backend,frontend\" -c \"blue,green\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+	"dev:frontend": "cd frontend && npm run dev",
+	"dev:backend": "scripts\\dev-backend.cmd",
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "npm --prefix frontend run build",
     "build:backend": "npm --prefix backend run build",

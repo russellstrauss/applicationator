@@ -182,3 +182,16 @@ export interface TextFormatting {
   backgroundColor?: { red: number; green: number; blue: number };
 }
 
+/**
+ * Parsed formatting attributes for an attribute-based placeholder syntax,
+ * for example: {{field|bold|size:14|color:blue}}
+ */
+export interface PlaceholderAttributes {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  fontSize?: number;
+  foregroundColorName?: string;
+  backgroundColorName?: string;
+}
+

@@ -1,4 +1,4 @@
-import type { TextFormatting } from '../../../shared/types.js';
+import type { TextFormatting, PlaceholderAttributes } from '../../../shared/types.js';
 
 /**
  * Formatting service for applying text formatting rules to resume templates
@@ -64,6 +64,84 @@ export class FormattingService {
     return {
       foregroundColor: color,
     };
+  }
+
+  /**
+   * Parse attribute tokens from attribute-based placeholder syntax into a
+   * TextFormatting object.
+   *
+   * Supported attributes (case-insensitive):
+   * - bold, italic, underline
+   * - size:NN (font size in points)
+   * - color:name (named foreground color)
+   * - bgcolor:name (named background color)
+   */
+  static parseFormattingAttributes(tokens: string[]): Partial<TextFormatting> {
+    const formatting: Partial<TextFormatting> = {};
+
+    const normalize = (value: string) => value.trim().toLowerCase();
+
+    const colorMap: Record<string, { red: number; green: number; blue: number }> = {
+      black: { red: 0, green: 0, blue: 0 },
+      white: { red: 1, green: 1, blue: 1 },
+      red: { red: 1, green: 0, blue: 0 },
+      green: { red: 0, green: 0.5, blue: 0 },
+      blue: { red: 0, green: 0, blue: 1 },
+      gray: { red: 0.5, green: 0.5, blue: 0.5 },
+      grey: { red: 0.5, green: 0.5, blue: 0.5 },
+      orange: { red: 1, green: 0.65, blue: 0 },
+      purple: { red: 0.5, green: 0, blue: 0.5 },
+      teal: { red: 0, green: 0.5, blue: 0.5 },
+    };
+
+    for (const rawToken of tokens) {
+      const token = normalize(rawToken);
+      if (!token) continue;
+
+      if (token === 'bold') {
+        formatting.bold = true;
+        continue;
+      }
+
+      if (token === 'italic') {
+        formatting.italic = true;
+        continue;
+      }
+
+      if (token === 'underline') {
+        formatting.underline = true;
+        continue;
+      }
+
+      if (token.startsWith('size:')) {
+        const value = token.slice('size:'.length).trim();
+        const size = Number(value);
+        if (!Number.isNaN(size) && size > 0) {
+          formatting.fontSize = size;
+        }
+        continue;
+      }
+
+      if (token.startsWith('color:')) {
+        const name = token.slice('color:'.length).trim().toLowerCase();
+        const color = colorMap[name];
+        if (color) {
+          formatting.foregroundColor = color;
+        }
+        continue;
+      }
+
+      if (token.startsWith('bgcolor:')) {
+        const name = token.slice('bgcolor:'.length).trim().toLowerCase();
+        const color = colorMap[name];
+        if (color) {
+          formatting.backgroundColor = color;
+        }
+        continue;
+      }
+    }
+
+    return formatting;
   }
 
   /**

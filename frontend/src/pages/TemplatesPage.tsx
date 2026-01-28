@@ -122,6 +122,51 @@ export default function TemplatesPage() {
         </div>
       )}
 
+      {isConnected && (
+        <div className="mb-4 bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-md text-sm">
+          <p className="font-semibold mb-1">Template formatting tips</p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              Use{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{position}}, {{company}}, {{location}}'}
+              </code>{' '}
+              and other field placeholders directly in your Google Doc so you can control their fonts, sizes, and styles.
+            </li>
+            <li>
+              For repeating sections (like work experience and skills), wrap a single “prototype” item in{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{#each workExperience}}'}
+              </code>{' '}
+              …{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{/endeach}}'}
+              </code>{' '}
+              or{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{#each skills}}'}
+              </code>{' '}
+              …{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{/endeach}}'}
+              </code>
+              , and place the field placeholders inside that prototype.
+            </li>
+            <li>
+              Avoid using “mega” placeholders like{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{workExperience}}'}
+              </code>{' '}
+              or{' '}
+              <code className="bg-white px-1 py-0.5 rounded border border-blue-100">
+                {'{{skills}}'}
+              </code>{' '}
+              when you need fine-grained formatting; instead, style each field in the template itself.
+            </li>
+          </ul>
+        </div>
+      )}
+
       {!isConnected ? (
         <div className="bg-white shadow rounded-lg p-6 text-center">
           <p className="text-gray-600 mb-4">

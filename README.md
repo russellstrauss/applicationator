@@ -88,6 +88,133 @@ applicationator/
 3. **Manage Templates**: Connect Google Drive and link resume templates
 4. **View Field Mappings**: Check and edit learned field mappings on the Field Mappings page
 
+## Google Docs resume templates and nested loops
+
+The backend integrates with Google Docs to fill placeholders in a template and export the result to PDF. Templates live in your Google Drive; this section describes how to structure them so that work experience and nested bullet points render correctly.
+
+### Basic placeholders
+
+Most top-level values (name, email, etc.) are exposed as simple placeholders built from `TemplateDataService`:
+
+- `{{fullName}}`, `{{firstName}}`, `{{lastName}}`
+- `{{email}}`, `{{phone}}`
+- `{{addressFull}}` (or individual pieces like `{{addressCity}}`, `{{addressState}}`, etc.)
+
+You can drop these anywhere in the document; the Google Docs API replaces only the text while preserving your font, weight, size, and color.
+
+### Work experience loop
+
+For repeating sections like work experience, use a loop block in the template:
+
+```text
+{{#each workExperience}}
+{{position}} at {{company}}
+{{location}}
+{{startDate}} - {{endDate}}
+
+{{#each description}}
+• {{item}}
+{{/endeach}}
+
+{{/endeach}}
+```
+
+Supported loop markers for the outer block:
+
+- **Start**: `{{#each workExperience}}`, `{{#each workExperience }}`, `{#each workExperience}`, `{#each workExperience }`
+- **End**: `{{/endeach}}`, `{{/endeach }}`, `{/endeach}`, `{/endeach }`
+
+Within the `{{#each workExperience}}` block, these placeholders are available (from `TemplateDataService.buildItemPlaceholderMap` and related helpers):
+
+- `{{position}}`, `{{company}}`, `{{location}}`
+- `{{startDate}}`, `{{endDate}}` (year or `"Present"` for current roles)
+- `{{current}}` (`"Yes"` / `"No"`)
+- `{{description}}` (raw multi-line description text, see next section for per-bullet control)
+
+You can style each placeholder directly in the Google Doc (e.g. bold `{{position}}`, normal `{{company}}`); the backend replaces only the text.
+
+### Nested description loop for bullet points
+
+To turn a multi-line description into bullets under each job, use a nested loop inside the work experience block:
+
+```text
+{{#each workExperience}}
+{{position}} at {{company}}
+{{location}}
+{{startDate}} - {{endDate}}
+
+{{#each description}}
+• {{item}}
+{{/endeach}}
+
+{{/endeach}}
+```
+
+How this works:
+
+- Each `WorkExperience.description` in the profile is stored as a **newline-separated list**:
+  - Example value: `Increased sales by 20%\nLed 5-person team\nImplemented CI/CD`
+- The backend (`parseDescriptionItems` in `googleDriveService`) splits on newlines and trims blank lines.
+- For each description line it:
+  - Starts from the template content (e.g. `• {{item}}`).
+  - Replaces placeholders:
+    - `{{item}}` / `{item}` – the description text
+    - `{{text}}` / `{text}` – alias for the text
+    - `{{index}}`, `{index}` – 0-based index
+    - `{{index1}}`, `{index1}` – 1-based index
+  - Detects a leading bullet character (`•`, `*`, `-`, `▪`, `▫`) once, strips it from the template, and prepends it to every expanded item.
+- All expanded lines are joined with `\n` so each bullet stays on its own line in the final PDF.
+
+### Attribute-based formatting in loops
+
+You can specify formatting directly in placeholder attributes. The backend will parse these attributes and apply the corresponding text styles to the exported PDF:
+
+```text
+{{#each workExperience}}
+{{position|bold size:14}} at {{company|bold}}
+{{location}} | {{startDate}} - {{endDate}}
+
+{{#each description}}
+• {{item|size:10}}
+{{/endeach}}
+
+{{/endeach}}
+```
+
+**Supported formatting attributes:**
+
+- `bold` - bold text
+- `italic` - italic text  
+- `underline` - underlined text
+- `size:NN` - font size in points (e.g., `size:14`, `size:10`)
+
+**Example usage:**
+
+- `{{position|bold}}` - position in bold
+- `{{position|bold size:14}}` - position in bold, 14pt font
+- `{{item|size:10}}` - description item in 10pt font
+- `{{company|bold italic}}` - company name in bold italic
+
+This works in all loop types (workExperience, skills, certifications) and in nested description loops.
+
+### Template authoring tips
+
+- **Keep loop markers on their own lines** whenever possible (`{{#each ...}}` / `{{/endeach}}` and `{{#each description}}` / `{{/endeach}}`).
+- **Avoid mixing loop tags and unrelated text on the same line** to make the parser's job easier.
+- **Prefer granular placeholders** (e.g. `{{position}}`, `{{company}}`) inside loops instead of a single pre-formatted mega field like `{{workExperience}}`, so that Docs can preserve per-field styling.
+- **Use the preview in Google Docs**: the layout and typography you set there (fonts, sizes, spacing, list indentation) will be preserved when the backend fills placeholders and exports to PDF.
+
+### Advanced formatting ideas (potential future extensions)
+
+The current implementation supports attribute-based formatting (`{{field|bold size:14}}`). These additional extensions could be implemented later:
+
+- **Numbered or custom-prefix lists for descriptions**:
+  - Extend `detectAndPreserveBullet` and the nested description loop handlers in `googleDriveService` to recognise patterns like `{{index1}}.` or template options (for example, `{{#each description type="numbered"}}`).
+  - Use `index` / `index1` to compute prefixes (`"1."`, `"2."`, `"a)"`, etc.) instead of a single static bullet character.
+- **Prototype-cloning loops**:
+  - Replace the current "flatten to text and `replaceAllText`" approach with a structural one that finds paragraphs/list items/table rows between `{{#each ...}}` and `{{/endeach}}`, clones them per item, and only swaps text.
+  - This is already sketched in comments in `googleDriveService.processLoops` and `TemplateDataService`, and would preserve character-level styling exactly as authored in the template.
+
 ## Profile Git Sync
 
 All application data is stored as JSON under the `data/` directory at the repo root:
@@ -166,4 +293,3 @@ For power users or CI, there are helper commands that work against the running b
 ## License
 
 Private project
-
