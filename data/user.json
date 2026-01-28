@@ -1,0 +1,41 @@
+{
+  "id": "default",
+  "personalInfo": {
+    "firstName": "Russell",
+    "lastName": "Strauss",
+    "email": "russellstrauss@gmail.com",
+    "phone": "678.927.3289",
+    "address": {
+      "street": "333 Lawton St SW",
+      "city": "Atlanta",
+      "state": "GA",
+      "zipCode": "30310",
+      "country": "USA"
+    },
+    "onlinePortfolio": "https://farmerjohn.art",
+    "github": "https://github.com/russellstrauss"
+  },
+  "education": [
+    {
+      "id": "7231700c-1a57-4738-b083-bce894acd82a",
+      "institution": "Georgia Institute of Technology",
+      "degree": "M.S. Computer Science",
+      "fieldOfStudy": "Specialized in 3D Computer Graphics",
+      "startDate": "2019-08-01",
+      "endDate": "2020-12-01",
+      "gpa": "3.8",
+      "honors": ""
+    },
+    {
+      "id": "d6aec823-451d-4b9e-b3a3-424f49970743",
+      "institution": "Georgia Institute of Technology",
+      "degree": "B.S. Computational Media",
+      "fieldOfStudy": "",
+      "startDate": "2008-08-01",
+      "endDate": "2012-05-01",
+      "gpa": "3.7",
+      "honors": ""
+    }
+  ],
+  "updatedAt": "2026-01-28T00:40:39.268Z"
+}

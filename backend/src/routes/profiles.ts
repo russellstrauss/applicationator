@@ -5,6 +5,59 @@ import type { Profile } from '../../../shared/types.js';
 
 const router = Router();
 
+// Export all profiles
+router.get('/export', async (req, res) => {
+  try {
+    const profiles = await StorageService.getAllProfiles();
+    res.json({
+      profiles,
+      exportedAt: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Import profiles (upsert)
+router.post('/import', async (req, res) => {
+  try {
+    const body = req.body as { profiles?: Profile[] };
+    const profiles = body?.profiles || [];
+
+    for (const profile of profiles) {
+      // Ensure required fields exist; fall back to existing profile shape
+      const existing = profile.id
+        ? await StorageService.getProfile(profile.id)
+        : null;
+
+      const base: Profile =
+        existing || {
+          id: profile.id || uuidv4(),
+          name: profile.name || 'Unnamed Profile',
+          summary: profile.summary,
+          workExperience: profile.workExperience || [],
+          skills: profile.skills || [],
+          certifications: profile.certifications || [],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+
+      const merged: Profile = {
+        ...base,
+        ...profile,
+        id: base.id,
+        updatedAt: new Date().toISOString(),
+      };
+
+      await StorageService.saveProfile(merged);
+    }
+
+    res.json({ success: true, importedCount: profiles.length });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Get all profiles
 router.get('/', async (req, res) => {
   try {

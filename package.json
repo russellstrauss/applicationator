@@ -14,7 +14,9 @@
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "npm --prefix frontend run build",
     "build:backend": "npm --prefix backend run build",
-    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend"
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend",
+    "profiles:export": "node scripts/profiles-export.mjs",
+    "profiles:import": "node scripts/profiles-import.mjs"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

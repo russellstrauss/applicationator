@@ -1,0 +1,117 @@
+{
+  "id": "2c2a9d3d-3f35-48e3-b305-df790bb0f8f0",
+  "name": "UX",
+  "summary": "Front End Software Architect with experience building and shipping production-grade web applications and strong front end specialization. Deep expertise in modern JavaScript, rapid prototyping, UI architecture,  and design system patterns, with a product-driven mindset. Known for bridging product, design, and engineering to deliver scalable, high-quality user experiences in fast-moving environments. Strong foundation in performance, accessibility, developer experience, and expert in AI-assisted workflows.",
+  "workExperience": [
+    {
+      "id": "bc6d9c5f-772b-4145-99db-dc8b9a4bf5ad",
+      "company": "Farmer John Technologies",
+      "position": "Front End Architect",
+      "startDate": "2018-01-01",
+      "current": true,
+      "description": "Introduced AI-assisted development workflows to reduce iteration time while preserving high code quality and design fidelity.\nLaunched eCommerce web stores allowing business owners to market and sell their products.",
+      "location": "Atlanta, GA"
+    },
+    {
+      "id": "20a870bf-89e7-4c3a-a3f8-17251630ce90",
+      "company": "Rightpoint Consulting",
+      "position": "Senior Front End Engineer",
+      "startDate": "2014-10-01",
+      "endDate": "2019-08-01",
+      "current": false,
+      "description": "Built large-scale, enterprise production web applications, delivering over ten major $4M  enterprise launches.\nTook ownership of complex front end systems, translating design and business requirements into maintainable, scalable solutions.\nDeveloped reusable component libraries and front end architecture standards adopted across multiple teams.\nCollaborated with back end engineers to integrate APIs and ensure seamless end-to-end user experiences.\nHired and mentored developers through code reviews and hands-on guidance.",
+      "location": "Atlanta, GA"
+    },
+    {
+      "id": "67a23f9b-ca0b-4ee6-b4a2-7758d49f23f1",
+      "company": "Moxie Interactive",
+      "position": "Front End Engineer",
+      "startDate": "2013-07-01",
+      "endDate": "2014-10-01",
+      "current": false,
+      "description": "Built interactive experiences using custom JavaScript, animation, and CMS-driven content.\nPartnered with design teams to refine usability across campaigns.",
+      "location": "Atlanta, GA"
+    },
+    {
+      "id": "e7b1e83a-d994-488b-9bba-123900d9c18f",
+      "company": "SolDesignCo",
+      "position": "Front End Engineer",
+      "startDate": "2012-05-01",
+      "endDate": "2013-07-01",
+      "current": false,
+      "description": "Developed and maintained client websites using WordPress and Drupal.\nWorked directly with clients to translate requirements into functional web solutions.",
+      "location": "Atlanta, GA"
+    },
+    {
+      "id": "af517a57-004f-4e62-89c1-96d0d79c9533",
+      "company": "Georgia Institute of Technology",
+      "position": "Computing Education Program Leader",
+      "startDate": "2008-08-01",
+      "endDate": "2012-05-01",
+      "current": false,
+      "description": "Taught robotics and introductory programming concepts, led workshops and managed technical inventory for NSF-funded computing education programs.",
+      "location": "Atlanta, GA"
+    }
+  ],
+  "skills": [
+    {
+      "id": "6cf5c1eb-bb82-4303-b57f-54231cfe77eb",
+      "title": "Front End",
+      "skills": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "SASS",
+        "Responsive Design",
+        "Accessibility (WCAG)",
+        "Rapid Prototyping",
+        "Design Systems",
+        "REST API"
+      ]
+    },
+    {
+      "id": "59b79d40-ee2c-40a9-9d6a-49e7a2b17241",
+      "title": "Back End",
+      "skills": [
+        "Node.js",
+        "C#",
+        ".NET",
+        "SQL",
+        "Python"
+      ]
+    },
+    {
+      "id": "7f37a8c3-0b62-4b3b-90d9-b82d733874da",
+      "title": "DevOps",
+      "skills": [
+        "CI/CD",
+        "Git",
+        "Vite",
+        "Docker",
+        "AWS",
+        "Azure",
+        "Google Cloud",
+        "Cloudflare"
+      ]
+    },
+    {
+      "id": "d3e1a9b1-d077-4290-aa65-567376830098",
+      "title": "Interactive",
+      "skills": [
+        "three.js",
+        "3D",
+        "WebGL",
+        "Data Visualization",
+        "D3.js"
+      ]
+    }
+  ],
+  "certifications": [],
+  "createdAt": "2026-01-27T06:25:30.734Z",
+  "updatedAt": "2026-01-28T19:12:34.289Z",
+  "positionSummaryHeadline": "Product Engineer / Senior UI Engineer",
+  "summaryTitle": "Summary",
+  "workExperienceTitle": "Experience",
+  "skillsTitle": "Skills",
+  "hideLocation": true
+}

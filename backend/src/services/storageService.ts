@@ -6,7 +6,10 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const DATA_DIR = path.join(__dirname, '../../data');
+// Root-level data directory (applicationator/data)
+const DATA_DIR = path.join(__dirname, '../../../data');
+// Legacy backend-local data directory (backend/data) for migration
+const LEGACY_DATA_DIR = path.join(__dirname, '../../data');
 const PROFILES_DIR = path.join(DATA_DIR, 'profiles');
 const FIELD_MAPPINGS_DIR = path.join(DATA_DIR, 'field-mappings');
 const LEARNED_PATTERNS_DIR = path.join(DATA_DIR, 'learned-patterns');
@@ -15,6 +18,21 @@ const USER_FILE = path.join(DATA_DIR, 'user.json');
 
 // Ensure directories exist
 async function ensureDirectories() {
+  // Best-effort migration from legacy backend/data to root-level data directory.
+  // This allows existing installations to keep their profiles and other data.
+  if (LEGACY_DATA_DIR !== DATA_DIR && await fs.pathExists(LEGACY_DATA_DIR)) {
+    try {
+      await fs.ensureDir(DATA_DIR);
+      // Copy without overwriting any files that already exist in the new location.
+      await fs.copy(LEGACY_DATA_DIR, DATA_DIR, {
+        overwrite: false,
+        errorOnExist: false,
+      });
+    } catch {
+      // Migration failures should not prevent the app from running.
+    }
+  }
+
   await fs.ensureDir(PROFILES_DIR);
   await fs.ensureDir(FIELD_MAPPINGS_DIR);
   await fs.ensureDir(LEARNED_PATTERNS_DIR);

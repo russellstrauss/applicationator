@@ -88,6 +88,75 @@ applicationator/
 3. **Manage Templates**: Connect Google Drive and link resume templates
 4. **View Field Mappings**: Check and edit learned field mappings on the Field Mappings page
 
+## Profile Git Sync
+
+All application data is stored as JSON under the `data/` directory at the repo root:
+
+- `data/profiles/`: individual profile files (`<id>.json`)
+- `data/field-mappings/mappings.json`: learned field mappings
+- `data/learned-patterns/patterns.json`: learned patterns
+- `data/templates/`: template configuration
+- `data/user.json`: user-level defaults and personal info
+
+This directory is intended to be committed to git so profiles and other settings can be shared across machines and branches.
+
+### Basic workflow
+
+- **Edit via UI**:
+  - Run the app with `npm run dev`.
+  - Create or update profiles from the Profiles page.
+  - The backend writes JSON files under `data/profiles/`.
+  - `git status` will show changed files under `data/`, which you can commit and push.
+
+- **Sync between machines**:
+  - On machine A:
+    - Work with profiles normally in the app.
+    - Commit and push the changes under `data/`.
+  - On machine B:
+    - `git pull` to get the latest `data/` contents.
+    - Start the app; it will read whatever profiles exist in `data/profiles/` for the current branch.
+
+- **Manual edits**:
+  - You can edit `data/profiles/*.json` directly in your editor.
+  - Refresh the app and the updated values will be reflected in the UI.
+
+### Profile bundle helpers
+
+For power users or CI, there are helper commands that work against the running backend (default `http://localhost:5000`):
+
+- Export all profiles to a single bundle file:
+
+  ```bash
+  npm run profiles:export
+  ```
+
+  This writes `data/profiles-bundle.json` containing:
+
+  ```json
+  {
+    "profiles": [/* Profile[] */],
+    "exportedAt": "2026-01-28T00:00:00.000Z"
+  }
+  ```
+
+- Import profiles from the bundle (upsert by `id`):
+
+  ```bash
+  npm run profiles:import
+  ```
+
+  This reads `data/profiles-bundle.json` and sends it to the backend, creating new profiles or updating existing ones with matching `id`s.
+
+### Notes and caveats
+
+- **Sensitive data**:
+  - Profiles and user data can contain personal information (name, email, address, work history, etc.).
+  - Only push this repository (or the `data/` directory) to private, trusted remotes.
+
+- **Merge conflicts**:
+  - Because profiles are stored as JSON, git merge conflicts may appear in `data/profiles/*.json`.
+  - Resolve conflicts by choosing the correct fields manually in the JSON file, then restart/reload the app.
+
 ## Development
 
 - Frontend development: `npm run dev:frontend`
