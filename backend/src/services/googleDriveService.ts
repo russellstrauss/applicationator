@@ -491,6 +491,34 @@ export class GoogleDriveService {
   }
 
   /**
+   * Extract year from a date string (handles YYYY-MM-DD, MM/DD/YYYY, and other formats)
+   */
+  private extractYear(dateString: string | undefined | null): string {
+    if (!dateString) return '';
+    
+    // Try YYYY-MM-DD format first (ISO format)
+    const isoMatch = dateString.match(/^(\d{4})-\d{2}-\d{2}/);
+    if (isoMatch) {
+      return isoMatch[1];
+    }
+    
+    // Try MM/DD/YYYY format
+    const slashMatch = dateString.match(/\/(\d{4})$/);
+    if (slashMatch) {
+      return slashMatch[1];
+    }
+    
+    // Try to parse as Date and extract year
+    const date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      return String(date.getFullYear());
+    }
+    
+    // If all else fails, return the original string
+    return dateString;
+  }
+
+  /**
    * Replace work experience placeholders within a loop block
    * Also handles nested {{#each description}} loops
    */
@@ -528,29 +556,33 @@ export class GoogleDriveService {
       }
     }
     
+    // Format dates - extract year from start date, and use "Present" for current jobs
+    const startDateYear = this.extractYear(item.startDate);
+    const endDateDisplay = item.current ? 'Present' : this.extractYear(item.endDate);
+    
     // Then replace regular placeholders
     const replacements: { [key: string]: string } = {
       '{{position}}': item.position || '',
       '{{company}}': item.company || '',
       '{{location}}': item.location || '',
-      '{{startDate}}': item.startDate || '',
-      '{{endDate}}': item.current ? '' : (item.endDate || ''),
+      '{{startDate}}': startDateYear,
+      '{{endDate}}': endDateDisplay,
       '{{current}}': item.current ? 'Yes' : 'No',
       '{{description}}': item.description || '', // Keep for backward compatibility
       // Also support with spaces
       '{{ position }}': item.position || '',
       '{{ company }}': item.company || '',
       '{{ location }}': item.location || '',
-      '{{ startDate }}': item.startDate || '',
-      '{{ endDate }}': item.current ? '' : (item.endDate || ''),
+      '{{ startDate }}': startDateYear,
+      '{{ endDate }}': endDateDisplay,
       '{{ current }}': item.current ? 'Yes' : 'No',
       '{{ description }}': item.description || '',
       // Without double braces
       '{position}': item.position || '',
       '{company}': item.company || '',
       '{location}': item.location || '',
-      '{startDate}': item.startDate || '',
-      '{endDate}': item.current ? '' : (item.endDate || ''),
+      '{startDate}': startDateYear,
+      '{endDate}': endDateDisplay,
       '{current}': item.current ? 'Yes' : 'No',
       '{description}': item.description || '',
     };

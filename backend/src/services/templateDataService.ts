@@ -266,9 +266,9 @@ export class TemplateDataService {
         (data as any)[`${workExpItems[index]}Position`] = exp.position || '';
         (data as any)[`${workExpItems[index]}Company`] = exp.company || '';
         (data as any)[`${workExpItems[index]}Location`] = exp.location || '';
-        (data as any)[`${workExpItems[index]}StartDate`] = exp.startDate || '';
-        // End date - empty if current, otherwise use endDate or empty
-        (data as any)[`${workExpItems[index]}EndDate`] = exp.current ? '' : (exp.endDate || '');
+        // Format dates - extract year from start date, and use "Present" for current jobs
+        (data as any)[`${workExpItems[index]}StartDate`] = this.extractYear(exp.startDate);
+        (data as any)[`${workExpItems[index]}EndDate`] = exp.current ? 'Present' : this.extractYear(exp.endDate);
         (data as any)[`${workExpItems[index]}Current`] = exp.current ? 'Yes' : 'No';
         // Description - preserve newlines for template formatting
         (data as any)[`${workExpItems[index]}Description`] = exp.description || '';
@@ -366,14 +366,42 @@ export class TemplateDataService {
     return lines.join('\n');
   }
   
+  /**
+   * Extract year from a date string (handles YYYY-MM-DD, MM/DD/YYYY, and other formats)
+   */
+  private static extractYear(dateString: string | undefined | null): string {
+    if (!dateString) return '';
+    
+    // Try YYYY-MM-DD format first (ISO format)
+    const isoMatch = dateString.match(/^(\d{4})-\d{2}-\d{2}/);
+    if (isoMatch) {
+      return isoMatch[1];
+    }
+    
+    // Try MM/DD/YYYY format
+    const slashMatch = dateString.match(/\/(\d{4})$/);
+    if (slashMatch) {
+      return slashMatch[1];
+    }
+    
+    // Try to parse as Date and extract year
+    const date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      return String(date.getFullYear());
+    }
+    
+    // If all else fails, return the original string
+    return dateString;
+  }
+
   private static formatWorkExperience(workExp: WorkExperience[]): string {
     return workExp
       .map((exp) => {
         const parts = [`${exp.position} at ${exp.company}`];
         if (exp.location) parts.push(`(${exp.location})`);
-        const dates = exp.current
-          ? `${exp.startDate} - Present`
-          : `${exp.startDate} - ${exp.endDate || 'Present'}`;
+        const startYear = this.extractYear(exp.startDate);
+        const endYear = exp.current ? 'Present' : this.extractYear(exp.endDate);
+        const dates = `${startYear} - ${endYear}`;
         parts.push(dates);
         if (exp.description) {
           parts.push(`\n${exp.description}`);
@@ -405,14 +433,20 @@ export class TemplateDataService {
       parts.push(`Location: ${exp.location}`);
     }
     
-    // Start Date
-    if (exp.startDate) {
-      parts.push(`Start Date: ${exp.startDate}`);
+    // Start Date - extract year only
+    const startYear = this.extractYear(exp.startDate);
+    if (startYear) {
+      parts.push(`Start Date: ${startYear}`);
     }
     
-    // End Date (only if not current)
-    if (!exp.current && exp.endDate) {
-      parts.push(`End Date: ${exp.endDate}`);
+    // End Date - extract year only, or "Present" for current jobs
+    if (exp.current) {
+      parts.push(`End Date: Present`);
+    } else if (exp.endDate) {
+      const endYear = this.extractYear(exp.endDate);
+      if (endYear) {
+        parts.push(`End Date: ${endYear}`);
+      }
     }
     
     // Current Status
