@@ -388,3 +388,342 @@ onloadend@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1616
 
 [2026-01-28T18:52:54.217Z] LOG   [http://localhost:3000/templates] Synced 57 pending logs to server
 
+[2026-01-28T18:46:40.767Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=f8f22491",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=f8f22491:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=f8f22491:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T18:46:40.768Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=f8f22491",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=f8f22491:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=f8f22491:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T19:13:29.036Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-28T19:13:29.036Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/CreateTemplateModal.tsx
+[2026-01-28T19:13:29.076Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-28T19:13:29.076Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/WorkExperienceItem.tsx
+[2026-01-28T19:13:29.081Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/index.css
+[2026-01-28T19:13:29.081Z] DEBUG [http://localhost:3000/] [vite] hot updated: /src/components/ListItemDisplay.tsx
+[2026-01-28T19:13:44.750Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T19:21:27.978Z] LOG   [http://localhost:3000/] Synced 9 pending logs to server
+
+[2026-01-28T19:33:40.282Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T19:26:51.257Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=d5cf362a",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=d5cf362a:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=d5cf362a:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T19:26:51.287Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=d5cf362a",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=d5cf362a:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=d5cf362a:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T19:28:07.971Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+[2026-01-28T19:29:24.328Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=be02324c",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=be02324c:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=be02324c:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T19:29:24.330Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=be02324c",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=be02324c:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=be02324c:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-28T19:33:41.394Z] LOG   [http://localhost:3000/] Synced 5 pending logs to server
+
+[2026-01-28T19:36:41.020Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+[2026-01-28T19:36:46.925Z] ERROR [http://localhost:3000/] Failed to load profiles: {
+  "message": "Network Error",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:433:5\nhandleError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=99a3b55b:1647:19\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/profiles",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_NETWORK"
+}
+
+[2026-01-28T19:42:19.107Z] LOG   [http://localhost:3000/] Synced 2 pending logs to server
+
+[2026-01-28T19:42:25.743Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T19:42:56.754Z] LOG   [http://localhost:3000/] Synced 1 pending logs to server
+
+[2026-01-28T19:55:20.072Z] LOG   [http://localhost:3000/] [vite] server connection lost. Polling for restart...
+
+[2026-01-28T19:55:42.212Z] LOG   [http://localhost:3000/] Synced 1 pending logs to server
+
