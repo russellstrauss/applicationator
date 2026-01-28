@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { SkillCategory } from '../../../shared/types';
 import { v4 as uuidv4 } from 'uuid';
+import SkillCategoryItem from './SkillCategoryItem';
 
 interface SkillsInputProps {
   skills: SkillCategory[];
@@ -195,158 +196,33 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
       {skills.map((category, categoryIndex) => {
         const isCollapsed = !!collapsedCategories[category.id];
         return (
-          <div key={category.id}>
-            {dragOverCategoryIndex === categoryIndex && (
-              <div className="h-0 border-t-2 border-blue-400 -mt-px mb-2" />
-            )}
-            <div
-              className="border rounded-lg p-4 bg-gray-50"
-              draggable
-              onDragStart={(e) => handleDragCategoryStart(e, category.id)}
-              onDragOver={(e) => handleDragCategoryOver(e, categoryIndex)}
-              onDragLeave={handleDragCategoryLeave}
-              onDrop={(e) => handleDragCategoryDrop(e, category.id)}
-            >
-              <div className="flex justify-between items-center mb-3">
-                <div className="flex items-center gap-2 flex-1">
-                  <div
-                    className="cursor-move text-gray-400 hover:text-gray-600"
-                    title="Drag to reorder category"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M7 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
-                    </svg>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => toggleCategoryCollapse(category.id)}
-                    className="text-gray-500 hover:text-gray-700 focus:outline-none flex items-center justify-center w-7 h-7"
-                    aria-label={isCollapsed ? 'Expand skills' : 'Collapse skills'}
-                  >
-                    <span className="text-2xl leading-none">
-                      {isCollapsed ? '▸' : '▾'}
-                    </span>
-                  </button>
-                  {editingCategory?.id === category.id ? (
-                    <input
-                      type="text"
-                      value={editingCategory.title}
-                      onChange={(e) =>
-                        setEditingCategory({ ...editingCategory, title: e.target.value })
-                      }
-                      onBlur={() => {
-                        if (editingCategory.title.trim()) {
-                          handleUpdateCategoryTitle(category.id, editingCategory.title);
-                        }
-                        setEditingCategory(null);
-                      }}
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          if (editingCategory.title.trim()) {
-                            handleUpdateCategoryTitle(category.id, editingCategory.title);
-                          }
-                          setEditingCategory(null);
-                        }
-                      }}
-                      className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm font-medium"
-                      autoFocus
-                    />
-                  ) : (
-                    <h5
-                      className="font-medium cursor-pointer hover:text-blue-600"
-                      onClick={() => setEditingCategory({ ...category })}
-                      title="Click to edit category name"
-                    >
-                      {category.title}
-                    </h5>
-                  )}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => handleDeleteCategory(category.id)}
-                  className="px-2 py-1 text-red-600 hover:text-red-800 text-sm"
-                >
-                  Delete Category
-                </button>
-              </div>
-
-              {!isCollapsed && (
-                <>
-                  <div className="flex gap-2 mb-2">
-                    <input
-                      type="text"
-                      value={newSkill[category.id] || ''}
-                      onChange={(e) =>
-                        setNewSkill({ ...newSkill, [category.id]: e.target.value })
-                      }
-                      onKeyPress={(e) => handleKeyPress(e, category.id)}
-                      placeholder="Enter a skill and press Enter"
-                      className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleAddSkill(category.id)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700"
-                    >
-                      Add
-                    </button>
-                  </div>
-
-                  {category.skills.length > 0 && (
-                    <ol className="list-decimal list-inside space-y-1 ml-4">
-                      {category.skills.map((skill, skillIndex) => (
-                        <li
-                          key={skillIndex}
-                          className={`flex items-center justify-between group ${
-                            dragOverSkill &&
-                            dragOverSkill.categoryId === category.id &&
-                            dragOverSkill.skillIndex === skillIndex
-                              ? 'border-t-2 border-blue-400 -mt-px pt-1'
-                              : ''
-                          }`}
-                          draggable
-                          onDragStart={(e) =>
-                            handleDragSkillStart(e, category.id, skillIndex)
-                          }
-                          onDragOver={(e) =>
-                            handleDragSkillOver(e, category.id, skillIndex)
-                          }
-                          onDragLeave={handleDragSkillLeave}
-                          onDrop={(e) =>
-                            handleDragSkillDrop(e, category.id, skillIndex)
-                          }
-                        >
-                          <div className="flex items-center gap-2 flex-1">
-                            <div
-                              className="cursor-move text-gray-400 hover:text-gray-600"
-                              title="Drag to reorder skill"
-                            >
-                              <svg
-                                className="w-4 h-4"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M7 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM7 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 14a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
-                              </svg>
-                            </div>
-                            <span className="text-sm text-gray-700">{skill}</span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveSkill(category.id, skill)}
-                            className="ml-2 px-2 py-1 text-red-600 hover:text-red-800 text-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                            aria-label={`Remove ${skill}`}
-                          >
-                            ×
-                          </button>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
+          <SkillCategoryItem
+            key={category.id}
+            category={category}
+            isCollapsed={isCollapsed}
+            editingCategory={editingCategory}
+            newSkill={newSkill[category.id] || ''}
+            draggedSkill={draggedSkill}
+            dragOverSkill={dragOverSkill}
+            onToggleCollapse={() => toggleCategoryCollapse(category.id)}
+            onEditTitle={(cat) => setEditingCategory(cat)}
+            onUpdateTitle={(newTitle) => handleUpdateCategoryTitle(category.id, newTitle)}
+            onCancelEditTitle={() => setEditingCategory(null)}
+            onDeleteCategory={() => handleDeleteCategory(category.id)}
+            onNewSkillChange={(value) => setNewSkill({ ...newSkill, [category.id]: value })}
+            onAddSkill={() => handleAddSkill(category.id)}
+            onKeyPress={(e) => handleKeyPress(e, category.id)}
+            onRemoveSkill={(skill) => handleRemoveSkill(category.id, skill)}
+            onDragSkillStart={(e, skillIndex) => handleDragSkillStart(e, category.id, skillIndex)}
+            onDragSkillOver={(e, skillIndex) => handleDragSkillOver(e, category.id, skillIndex)}
+            onDragSkillLeave={handleDragSkillLeave}
+            onDragSkillDrop={(e, skillIndex) => handleDragSkillDrop(e, category.id, skillIndex)}
+            onDragCategoryStart={(e) => handleDragCategoryStart(e, category.id)}
+            onDragCategoryOver={(e) => handleDragCategoryOver(e, categoryIndex)}
+            onDragCategoryLeave={handleDragCategoryLeave}
+            onDragCategoryDrop={(e) => handleDragCategoryDrop(e, category.id)}
+            showDragIndicator={dragOverCategoryIndex === categoryIndex}
+          />
         );
       })}
 

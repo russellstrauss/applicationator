@@ -1,0 +1,162 @@
+[2026-01-28T00:32:34.756Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T00:32:34.835Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T00:50:33.175Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T00:50:33.176Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T00:50:33.175Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T00:50:33.176Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T00:50:40.668Z] LOG   [http://localhost:3000/templates] Synced 2 pending logs to server
+
+[2026-01-28T00:53:47.290Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T00:53:47.291Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T00:54:06.208Z] LOG   [http://localhost:3000/templates] Synced 2 pending logs to server
+
+[2026-01-28T00:58:47.024Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T00:58:47.024Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T00:58:48.759Z] ERROR [http://localhost:3000/templates] Failed to list Google Docs: {
+  "message": "Request failed with status code 500",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nsettle@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1267:12\nonloadend@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1616:13\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates/drive/list",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_BAD_RESPONSE",
+  "status": 500
+}
+[2026-01-28T00:58:48.761Z] ERROR [http://localhost:3000/templates] Failed to list Google Docs: {
+  "message": "Request failed with status code 500",
+  "name": "AxiosError",
+  "fileName": "http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d",
+  "lineNumber": 433,
+  "columnNumber": 5,
+  "stack": "_AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5\nsettle@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1267:12\nonloadend@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1616:13\n",
+  "config": {
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    },
+    "adapter": [
+      "xhr",
+      "http",
+      "fetch"
+    ],
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "env": {},
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    },
+    "method": "get",
+    "url": "http://localhost:5000/api/templates/drive/list",
+    "allowAbsoluteUrls": true
+  },
+  "code": "ERR_BAD_RESPONSE",
+  "status": 500
+}
+[2026-01-28T00:58:48.765Z] ERROR [http://localhost:3000/templates] Unhandled Promise Rejection: AxiosError: Request failed with status code 500 _AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5
+settle@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1267:12
+onloadend@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1616:13
+
+[2026-01-28T00:58:48.766Z] ERROR [http://localhost:3000/templates] Unhandled Promise Rejection: AxiosError: Request failed with status code 500 _AxiosError@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:433:5
+settle@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1267:12
+onloadend@http://localhost:3000/node_modules/.vite/deps/axios.js?v=31b5f82d:1616:13
+
+
+[2026-01-28T01:03:11.724Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T01:03:11.724Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T01:03:27.333Z] LOG   [http://localhost:3000/templates] Synced 2 pending logs to server
+
+[2026-01-28T01:13:26.678Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T01:13:26.678Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T01:13:54.862Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T01:13:54.862Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T01:22:01.281Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:22:01.288Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-28T01:22:11.227Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:22:11.228Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-28T01:22:11.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:22:11.241Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-28T01:22:15.491Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:22:15.492Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-28T01:22:50.637Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:22:50.637Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-28T01:23:00.296Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:23:00.296Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-28T01:23:08.077Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:23:08.078Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+
+[2026-01-28T01:23:35.353Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:23:35.354Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillCategoryItem.tsx
+[2026-01-28T01:23:38.932Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:23:38.932Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillCategoryItem.tsx
+
+[2026-01-28T01:24:01.864Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:24:01.864Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ListItemDisplay.tsx
+[2026-01-28T01:24:01.896Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:24:01.896Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/WorkExperienceItem.tsx
+[2026-01-28T01:24:01.939Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:24:01.939Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillCategoryItem.tsx
+[2026-01-28T01:24:02.035Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:24:02.036Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/ProfileForm.tsx
+[2026-01-28T01:24:02.044Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/index.css
+[2026-01-28T01:24:02.044Z] DEBUG [http://localhost:3000/templates] [vite] hot updated: /src/components/SkillsInput.tsx
+
+[2026-01-28T02:16:07.449Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T02:16:07.451Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T02:45:04.937Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+[2026-01-28T02:45:04.947Z] ERROR [http://localhost:3000/templates] Failed to export template: {}
+
+[2026-01-28T02:45:33.934Z] LOG   [http://localhost:3000/templates] Synced 2 pending logs to server
+

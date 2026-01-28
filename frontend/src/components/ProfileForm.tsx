@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Profile, WorkExperience, Certification, SkillCategory } from '../../../shared/types';
+import { Profile, WorkExperience, Certification } from '../../../shared/types';
 import { v4 as uuidv4 } from 'uuid';
 import WorkExperienceForm from './WorkExperienceForm';
 import CertificationForm from './CertificationForm';
 import SkillsInput from './SkillsInput';
+import WorkExperienceItem from './WorkExperienceItem';
 
 interface ProfileFormProps {
   profile: Profile | null;
@@ -56,7 +57,7 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
             {
               id: uuidv4(),
               title: 'Skills',
-              skills: profile.skills as string[],
+              skills: profile.skills as unknown as string[],
             },
           ];
         }
@@ -257,65 +258,15 @@ export default function ProfileForm({ profile, onSave, onCancel }: ProfileFormPr
             {formData.workExperience && formData.workExperience.length > 0 && (
               <div className="space-y-3">
                 {formData.workExperience.map((exp, index) => (
-                  <div key={exp.id} className="border rounded-lg p-3 bg-gray-50">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <h5 className="font-medium">{exp.position} at {exp.company}</h5>
-                        <p className="text-sm text-gray-600">
-                          {exp.location && `${exp.location} • `}
-                          {exp.startDate} - {exp.current ? 'Present' : exp.endDate || 'N/A'}
-                        </p>
-                        {exp.description && (
-                          <div className="text-sm text-gray-700 mt-2">
-                            <ul className="list-disc list-outside ml-5 space-y-1">
-                              {exp.description
-                                .split('\n')
-                                .filter(line => line.trim())
-                                .map((line, idx) => (
-                                  <li key={idx} className="pl-1">{line.trim()}</li>
-                                ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex gap-2 ml-4 items-center">
-                        <div className="flex flex-col gap-1">
-                          <button
-                            type="button"
-                            onClick={() => handleMoveWorkExp(exp.id, 'up')}
-                            disabled={index === 0}
-                            className="px-2 py-1 text-gray-600 hover:text-gray-800 text-sm disabled:opacity-30 disabled:cursor-not-allowed"
-                            title="Move up"
-                          >
-                            ↑
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleMoveWorkExp(exp.id, 'down')}
-                            disabled={index === formData.workExperience!.length - 1}
-                            className="px-2 py-1 text-gray-600 hover:text-gray-800 text-sm disabled:opacity-30 disabled:cursor-not-allowed"
-                            title="Move down"
-                          >
-                            ↓
-                          </button>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => handleEditWorkExp(exp)}
-                          className="px-2 py-1 text-blue-600 hover:text-blue-800 text-sm"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteWorkExp(exp.id)}
-                          className="px-2 py-1 text-red-600 hover:text-red-800 text-sm"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <WorkExperienceItem
+                    key={exp.id}
+                    experience={exp}
+                    index={index}
+                    totalItems={formData.workExperience!.length}
+                    onEdit={handleEditWorkExp}
+                    onDelete={handleDeleteWorkExp}
+                    onMove={handleMoveWorkExp}
+                  />
                 ))}
               </div>
             )}

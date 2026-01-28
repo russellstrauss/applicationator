@@ -87,8 +87,8 @@ router.get('/:id/export', async (req, res) => {
     conditionMap.set('hideLocation', profile.hideLocation || false);
     conditionMap.set('showLocation', !(profile.hideLocation || false));
     
-    // Fill placeholders and export to PDF
-    const pdf = await googleDriveService.fillAndExportToPDF(template.googleDriveId, placeholderMap, conditionMap);
+    // Fill placeholders and export to PDF (pass profile for loop processing)
+    const pdf = await googleDriveService.fillAndExportToPDF(template.googleDriveId, placeholderMap, conditionMap, profile);
     
     // Set response headers for PDF download
     res.setHeader('Content-Type', 'application/pdf');
