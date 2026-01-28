@@ -270,8 +270,8 @@ export class TemplateDataService {
         (data as any)[`${workExpItems[index]}StartDate`] = this.extractYear(exp.startDate);
         (data as any)[`${workExpItems[index]}EndDate`] = exp.current ? 'Present' : this.extractYear(exp.endDate);
         (data as any)[`${workExpItems[index]}Current`] = exp.current ? 'Yes' : 'No';
-        // Description - preserve newlines for template formatting
-        (data as any)[`${workExpItems[index]}Description`] = exp.description || '';
+        // Description - format with proper line breaks for PDF output
+        (data as any)[`${workExpItems[index]}Description`] = this.formatDescription(exp.description || '');
       });
     }
     
@@ -486,6 +486,21 @@ export class TemplateDataService {
         if (cert.credentialId) parts.push(`ID: ${cert.credentialId}`);
         return parts.join(' ');
       })
+      .join('\n');
+  }
+
+  /**
+   * Format description text to preserve line breaks in PDF output
+   * Converts newlines to ensure they render properly in Google Docs/PDF
+   */
+  private static formatDescription(description: string): string {
+    if (!description) return '';
+    // Split by newlines and join with newlines to ensure proper formatting
+    // Google Docs API replaceAllText supports \n for line breaks
+    return description
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0)
       .join('\n');
   }
 }

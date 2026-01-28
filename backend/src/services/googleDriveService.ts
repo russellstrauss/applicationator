@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import type { GoogleAuthToken } from '../../../shared/types.js';
+import type { GoogleAuthToken, TextFormatting } from '../../../shared/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,54 +27,136 @@ export class GoogleDriveService {
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
     const redirectUri = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:5000/api/google-auth/callback';
 
-    if (clientId && clientSecret) {
-      this.oauth2Client = new OAuth2Client(clientId, clientSecret, redirectUri);
-      
-      // Try to load existing token
-      try {
-        const tokenPath = path.join(TOKEN_PATH, 'token.json');
-        if (await fs.pathExists(tokenPath)) {
-          const token = await fs.readJson(tokenPath);
-          this.oauth2Client.setCredentials(token);
-          
-          // Check if token needs refresh
-          if (token.expiry_date && token.expiry_date <= Date.now()) {
-            await this.refreshTokenIfNeeded();
-          }
-        }
-      } catch (error) {
-        // No existing token
-      }
+    if (!clientId || !clientSecret) {
+      console.log('[OAuth] OAuth credentials not configured. Google Drive features will be unavailable.');
+      return;
     }
+
+    // Always create OAuth client when credentials exist, even if token loading fails
+    this.oauth2Client = new OAuth2Client(clientId, clientSecret, redirectUri);
+    console.log('[OAuth] OAuth client created successfully');
+    
+    // Ensure token directory exists
+    try {
+      await fs.ensureDir(TOKEN_PATH);
+    } catch (error) {
+      console.error('[OAuth] Failed to ensure token directory exists:', error);
+      // Continue anyway - token loading will fail gracefully
+    }
+    
+    // Try to load existing token
+    const tokenPath = path.join(TOKEN_PATH, 'token.json');
+    try {
+      if (await fs.pathExists(tokenPath)) {
+        console.log('[OAuth] Token file found, attempting to load...');
+        const token = await fs.readJson(tokenPath);
+        
+        // Validate token structure
+        if (this.validateToken(token)) {
+          this.oauth2Client.setCredentials(token);
+          console.log('[OAuth] Token loaded successfully');
+          
+          // Check if token needs refresh (proactive refresh if expired or expiring soon)
+          const needsRefresh = token.expiry_date && token.expiry_date <= Date.now() + 5 * 60 * 1000;
+          if (needsRefresh) {
+            console.log('[OAuth] Token expired or expiring soon, attempting refresh...');
+            await this.refreshTokenIfNeeded();
+          } else {
+            console.log('[OAuth] Token is valid, no refresh needed');
+          }
+        } else {
+          console.warn('[OAuth] Token file exists but is invalid. User will need to re-authenticate.');
+        }
+      } else {
+        console.log('[OAuth] No token file found. User will need to authenticate.');
+      }
+    } catch (error: any) {
+      // Log the error but don't throw - allow the service to continue
+      // The user can still authenticate even if token loading fails
+      console.error('[OAuth] Failed to load token file:', error.message || error);
+      console.log('[OAuth] User will need to authenticate to use Google Drive features.');
+    }
+  }
+
+  /**
+   * Validate that a token has the required structure and fields
+   */
+  private validateToken(token: any): boolean {
+    if (!token || typeof token !== 'object') {
+      return false;
+    }
+
+    // Check for required fields
+    if (!token.access_token || typeof token.access_token !== 'string') {
+      console.warn('[OAuth] Token missing access_token');
+      return false;
+    }
+
+    // Refresh token is critical for offline access - warn if missing but don't fail
+    // (some tokens might not have refresh_token if access_type wasn't 'offline')
+    if (!token.refresh_token) {
+      console.warn('[OAuth] Token missing refresh_token. Token may not persist across restarts.');
+    }
+
+    return true;
   }
 
   private async ensureInitialized(): Promise<void> {
     if (this.initializationPromise) {
-      await this.initializationPromise;
+      try {
+        await this.initializationPromise;
+      } catch (error: any) {
+        console.error('[OAuth] Initialization promise failed:', error.message || error);
+        // Reset promise to allow retry
+        this.initializationPromise = null;
+        // Try to initialize again
+        this.initializationPromise = this.initializeOAuth();
+        await this.initializationPromise;
+      }
     } else {
-      await this.initializeOAuth();
+      // Start initialization if not already started
+      this.initializationPromise = this.initializeOAuth();
+      await this.initializationPromise;
     }
   }
 
   private async refreshTokenIfNeeded(): Promise<void> {
-    if (!this.oauth2Client) return;
+    if (!this.oauth2Client) {
+      console.warn('[OAuth] Cannot refresh token: OAuth client not initialized');
+      return;
+    }
 
     const credentials = this.oauth2Client.credentials;
-    if (!credentials.refresh_token) return;
+    if (!credentials.refresh_token) {
+      console.warn('[OAuth] Cannot refresh token: No refresh_token available');
+      return;
+    }
 
     try {
       // Check if token is expired or will expire soon (within 5 minutes)
-      if (credentials.expiry_date && credentials.expiry_date <= Date.now() + 5 * 60 * 1000) {
+      const now = Date.now();
+      const expiryTime = credentials.expiry_date || 0;
+      const timeUntilExpiry = expiryTime - now;
+      const fiveMinutes = 5 * 60 * 1000;
+
+      if (expiryTime && timeUntilExpiry <= fiveMinutes) {
+        console.log('[OAuth] Refreshing access token...');
         const { credentials: newCredentials } = await this.oauth2Client.refreshAccessToken();
         this.oauth2Client.setCredentials(newCredentials);
         
-        // Save refreshed token
+        // Save refreshed token to persist across restarts
         await fs.ensureDir(TOKEN_PATH);
-        await fs.writeJson(path.join(TOKEN_PATH, 'token.json'), newCredentials);
+        const tokenPath = path.join(TOKEN_PATH, 'token.json');
+        await fs.writeJson(tokenPath, newCredentials);
+        console.log('[OAuth] Token refreshed and saved successfully');
+      } else if (expiryTime) {
+        const minutesUntilExpiry = Math.floor(timeUntilExpiry / (60 * 1000));
+        console.log(`[OAuth] Token is valid for ${minutesUntilExpiry} more minutes, no refresh needed`);
       }
-    } catch (error) {
-      console.error('Failed to refresh token:', error);
-      // Token refresh failed, user will need to re-authenticate
+    } catch (error: any) {
+      console.error('[OAuth] Failed to refresh token:', error.message || error);
+      console.error('[OAuth] Token refresh failed. User will need to re-authenticate.');
+      // Don't throw - allow the service to continue, user can re-authenticate
     }
   }
 
@@ -115,12 +197,31 @@ export class GoogleDriveService {
       throw new Error('OAuth not initialized');
     }
 
+    console.log('[OAuth] Processing OAuth callback...');
     const { tokens } = await this.oauth2Client.getToken(code);
     this.oauth2Client.setCredentials(tokens);
 
-    // Save token
-    await fs.ensureDir(TOKEN_PATH);
-    await fs.writeJson(path.join(TOKEN_PATH, 'token.json'), tokens);
+    // Validate token before saving
+    if (!this.validateToken(tokens)) {
+      console.error('[OAuth] Received invalid token structure from OAuth callback');
+      throw new Error('Invalid token received from OAuth provider');
+    }
+
+    // Save token to persist across restarts
+    try {
+      await fs.ensureDir(TOKEN_PATH);
+      const tokenPath = path.join(TOKEN_PATH, 'token.json');
+      await fs.writeJson(tokenPath, tokens);
+      console.log('[OAuth] Token saved successfully to', tokenPath);
+      
+      if (!tokens.refresh_token) {
+        console.warn('[OAuth] Warning: No refresh_token in response. Token may not persist across restarts.');
+      }
+    } catch (error: any) {
+      console.error('[OAuth] Failed to save token:', error.message || error);
+      // Don't throw - token is still set in memory, just not persisted
+      console.warn('[OAuth] Token is set in memory but not saved to disk. Authentication may be lost on restart.');
+    }
 
     return tokens as GoogleAuthToken;
   }
@@ -132,69 +233,132 @@ export class GoogleDriveService {
     const clientId = process.env.GOOGLE_CLIENT_ID;
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
     if (!clientId || !clientSecret) {
+      console.log('[OAuth] Connection check: OAuth credentials not configured');
       return false;
     }
 
     // Check if we have a valid token
     if (!this.oauth2Client) {
+      console.log('[OAuth] Connection check: OAuth client not initialized');
       return false;
     }
 
     const credentials = this.oauth2Client.credentials;
     if (!credentials.access_token) {
+      console.log('[OAuth] Connection check: No access token available');
       return false;
     }
 
     // Check if token is expired and try to refresh
-    if (credentials.expiry_date && credentials.expiry_date <= Date.now()) {
+    const now = Date.now();
+    if (credentials.expiry_date && credentials.expiry_date <= now) {
+      console.log('[OAuth] Connection check: Token expired, attempting refresh...');
       try {
         await this.refreshTokenIfNeeded();
         // Check again after refresh attempt
         const newCredentials = this.oauth2Client.credentials;
-        return !!newCredentials.access_token;
-      } catch (error) {
+        const isConnected = !!newCredentials.access_token;
+        console.log(`[OAuth] Connection check: ${isConnected ? 'Connected' : 'Not connected'} after refresh attempt`);
+        return isConnected;
+      } catch (error: any) {
+        console.error('[OAuth] Connection check: Token refresh failed:', error.message || error);
         return false;
       }
     }
 
+    const timeUntilExpiry = credentials.expiry_date ? credentials.expiry_date - now : null;
+    if (timeUntilExpiry) {
+      const minutesLeft = Math.floor(timeUntilExpiry / (60 * 1000));
+      console.log(`[OAuth] Connection check: Connected (token valid for ${minutesLeft} minutes)`);
+    } else {
+      console.log('[OAuth] Connection check: Connected (token has no expiry)');
+    }
     return true;
   }
 
   async disconnect(): Promise<void> {
+    console.log('[OAuth] Disconnecting Google Drive...');
+    
     // Remove saved token
     try {
       const tokenPath = path.join(TOKEN_PATH, 'token.json');
       if (await fs.pathExists(tokenPath)) {
         await fs.remove(tokenPath);
+        console.log('[OAuth] Token file removed successfully');
+      } else {
+        console.log('[OAuth] No token file found to remove');
       }
-    } catch (error) {
-      console.error('Failed to remove token:', error);
+    } catch (error: any) {
+      console.error('[OAuth] Failed to remove token file:', error.message || error);
+      // Continue with disconnection even if file removal fails
     }
 
     // Clear OAuth client
     if (this.oauth2Client) {
       this.oauth2Client.setCredentials({});
+      console.log('[OAuth] OAuth client credentials cleared');
     }
     this.oauth2Client = null;
+    console.log('[OAuth] Disconnected successfully');
   }
 
   async getDriveClient() {
     await this.ensureInitialized();
+    
+    // Check if credentials are configured
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+    
+    if (!clientId || !clientSecret) {
+      throw new Error('Google OAuth credentials not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.');
+    }
+    
+    // If OAuth client doesn't exist but credentials do, try to initialize
+    if (!this.oauth2Client) {
+      console.log('[OAuth] OAuth client is null but credentials exist, attempting to initialize...');
+      await this.initializeOAuth();
+      
+      if (!this.oauth2Client) {
+        throw new Error('Failed to initialize OAuth client. Please check your credentials and try again.');
+      }
+    }
+    
     await this.refreshTokenIfNeeded();
     
     if (!this.oauth2Client) {
-      throw new Error('OAuth not initialized');
+      throw new Error('OAuth client is not available. Please authenticate with Google Drive first.');
     }
+    
     return google.drive({ version: 'v3', auth: this.oauth2Client });
   }
 
   async getDocsClient() {
     await this.ensureInitialized();
+    
+    // Check if credentials are configured
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+    
+    if (!clientId || !clientSecret) {
+      throw new Error('Google OAuth credentials not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.');
+    }
+    
+    // If OAuth client doesn't exist but credentials do, try to initialize
+    if (!this.oauth2Client) {
+      console.log('[OAuth] OAuth client is null but credentials exist, attempting to initialize...');
+      await this.initializeOAuth();
+      
+      if (!this.oauth2Client) {
+        throw new Error('Failed to initialize OAuth client. Please check your credentials and try again.');
+      }
+    }
+    
     await this.refreshTokenIfNeeded();
     
     if (!this.oauth2Client) {
-      throw new Error('OAuth not initialized');
+      throw new Error('OAuth client is not available. Please authenticate with Google Drive first.');
     }
+    
     return google.docs({ version: 'v1', auth: this.oauth2Client });
   }
 
@@ -221,11 +385,16 @@ export class GoogleDriveService {
    * @param placeholderMap Map of placeholder strings to replacement values
    * @param conditionMap Map of condition names to boolean values for conditional blocks
    * @param profile Optional profile data for loop processing
+   * 
+   * Note: The Google Docs API's replaceAllText automatically preserves the formatting
+   * of the surrounding text when replacing placeholders. This ensures that template
+   * formatting (bold, italic, colors, font sizes) is maintained in the output.
    */
   async fillPlaceholders(documentId: string, placeholderMap: Map<string, string>, conditionMap?: Map<string, boolean>, profile?: any): Promise<void> {
     const docs = await this.getDocsClient();
     
     // First, replace placeholders (this makes location fields empty when hideLocation is true)
+    // The replaceAllText API preserves formatting of surrounding text automatically
     const requests: any[] = [];
     
     placeholderMap.forEach((replacementText, placeholder) => {
@@ -236,6 +405,8 @@ export class GoogleDriveService {
             matchCase: false, // Case-insensitive matching
           },
           replaceText: replacementText || '', // Replace with empty string if value is null/undefined
+          // Note: Text style is automatically preserved by the Google Docs API
+          // The replacement text inherits the formatting of the placeholder's context
         },
       });
     });
@@ -259,6 +430,16 @@ export class GoogleDriveService {
       await this.processNestedDescriptionLoops(documentId, profile);
       // Clean up any remaining loop closing tags that might have been left behind
       await this.cleanupRemainingLoopTags(documentId);
+      
+      // Apply formatting to work experience attributes (bold labels) AFTER loops are processed
+      // This ensures work experience attributes in expanded loops are formatted
+      await this.formatWorkExperienceAttributes(documentId);
+      
+      // Preserve work experience position title formatting AFTER loops are processed
+      // This ensures position titles in expanded loops maintain their font size
+      if (profile.workExperience) {
+        await this.preservePositionTitleFormatting(documentId, profile.workExperience);
+      }
     }
     
     // Then, handle conditional blocks AFTER placeholders and loops are replaced
@@ -329,6 +510,7 @@ export class GoogleDriveService {
                 replaceAllText: {
                   containsText: { text: block, matchCase: false },
                   replaceText: content,
+                  // Note: Text style is automatically preserved by the API
                 },
               });
             } else {
@@ -472,6 +654,7 @@ export class GoogleDriveService {
                   replaceAllText: {
                     containsText: { text: block.full, matchCase: false },
                     replaceText: replacement,
+                    // Note: Text style is automatically preserved by the API
                   },
                 });
               }
@@ -560,6 +743,9 @@ export class GoogleDriveService {
     const startDateYear = this.extractYear(item.startDate);
     const endDateDisplay = item.current ? 'Present' : this.extractYear(item.endDate);
     
+    // Format description to preserve line breaks
+    const formattedDescription = this.formatDescriptionForPDF(item.description || '');
+    
     // Then replace regular placeholders
     const replacements: { [key: string]: string } = {
       '{{position}}': item.position || '',
@@ -568,7 +754,7 @@ export class GoogleDriveService {
       '{{startDate}}': startDateYear,
       '{{endDate}}': endDateDisplay,
       '{{current}}': item.current ? 'Yes' : 'No',
-      '{{description}}': item.description || '', // Keep for backward compatibility
+      '{{description}}': formattedDescription, // Format to preserve line breaks
       // Also support with spaces
       '{{ position }}': item.position || '',
       '{{ company }}': item.company || '',
@@ -576,7 +762,7 @@ export class GoogleDriveService {
       '{{ startDate }}': startDateYear,
       '{{ endDate }}': endDateDisplay,
       '{{ current }}': item.current ? 'Yes' : 'No',
-      '{{ description }}': item.description || '',
+      '{{ description }}': formattedDescription,
       // Without double braces
       '{position}': item.position || '',
       '{company}': item.company || '',
@@ -584,7 +770,7 @@ export class GoogleDriveService {
       '{startDate}': startDateYear,
       '{endDate}': endDateDisplay,
       '{current}': item.current ? 'Yes' : 'No',
-      '{description}': item.description || '',
+      '{description}': formattedDescription,
     };
     
     Object.entries(replacements).forEach(([placeholder, value]) => {
@@ -593,6 +779,49 @@ export class GoogleDriveService {
     });
     
     return result;
+  }
+
+  /**
+   * Detect and extract bullet character from template block content
+   * Supports common bullet types: •, *, -, ▪, ▫
+   * @param content The template block content to analyze
+   * @returns The bullet character found, or '•' as default if none found
+   */
+  private detectAndPreserveBullet(content: string): string {
+    if (!content) return '•';
+    
+    // Try to match bullet at the start of the content (with optional whitespace and newlines)
+    // Match common bullet characters: • (bullet), * (asterisk), - (hyphen), ▪ (black square), ▫ (white square)
+    // Also check for bullets that might be on a separate line or have whitespace/newlines after them
+    const bulletMatch = content.match(/^[\s\n\r]*([•*\-▪▫])[\s\n\r]*/);
+    if (bulletMatch && bulletMatch[1]) {
+      return bulletMatch[1];
+    }
+    
+    // Also check for bullets that might appear after some text (e.g., if template has "Description: • {{item}}")
+    // Look for bullet followed by placeholder patterns
+    const bulletWithPlaceholder = content.match(/([•*\-▪▫])[\s\n\r]*(?:\{\{|\{)[\s]*item[\s]*(?:\}\}|\})/i);
+    if (bulletWithPlaceholder && bulletWithPlaceholder[1]) {
+      return bulletWithPlaceholder[1];
+    }
+    
+    // Default to bullet point if none found
+    return '•';
+  }
+
+  /**
+   * Format description text to preserve line breaks in PDF output
+   * Google Docs API replaceAllText supports \n for line breaks
+   */
+  private formatDescriptionForPDF(description: string): string {
+    if (!description) return '';
+    // Split by newlines, trim each line, filter empty lines, and join with newlines
+    // This ensures proper line breaks are preserved in Google Docs/PDF
+    return description
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0)
+      .join('\n');
   }
 
   /**
@@ -753,11 +982,19 @@ export class GoogleDriveService {
                   console.log(`[Nested Loop Debug] Removed empty description block (with closing tag)`);
                 }
               } else {
+                // Detect and preserve bullet character from template
+                const bulletChar = this.detectAndPreserveBullet(block.content);
+                
+                // Remove bullet from template content if present (we'll add it back to each item)
+                // Handle bullets that might be on a separate line or have whitespace/newlines
+                let templateContent = String(block.content);
+                templateContent = templateContent.replace(/^[\s\n\r]*[•*\-▪▫][\s\n\r]*/, '');
+                
                 // Expand block for each description item
                 const expandedContent: string[] = [];
                 
                 descriptionItems.forEach((item, index) => {
-                  let itemContent = String(block.content); // Make a copy
+                  let itemContent = String(templateContent); // Use cleaned template content
                   
                   // Replace description item placeholders
                   const itemReplacements: { [key: string]: string } = {
@@ -781,6 +1018,15 @@ export class GoogleDriveService {
                     const placeholderRegex = new RegExp(this.escapeRegex(placeholder), 'gi');
                     itemContent = itemContent.replace(placeholderRegex, value);
                   });
+                  
+                  // Trim leading whitespace and newlines from itemContent to prevent line breaks
+                  itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
+                  
+                  // Add preserved bullet character to each item
+                  // Only add bullet if the item content doesn't already start with a bullet
+                  if (!itemContent.match(/^[\s]*[•*\-▪▫]/)) {
+                    itemContent = `${bulletChar} ${itemContent}`;
+                  }
                   
                   expandedContent.push(itemContent);
                 });
@@ -964,14 +1210,22 @@ export class GoogleDriveService {
               },
             });
           } else {
+            // Detect and preserve bullet character from template
+            const bulletChar = this.detectAndPreserveBullet(block.content);
+            
+            // Remove bullet from template content if present (we'll add it back to each item)
+            // Handle bullets that might be on a separate line or have whitespace/newlines
+            let templateContent = String(block.content);
+            templateContent = templateContent.replace(/^[\s\n\r]*[•*\-▪▫][\s\n\r]*/, '');
+            
             const expandedContent: string[] = [];
             
             // Process each description item - create one expanded line per item
             // IMPORTANT: We need to process ALL items, not just the first one
             for (let index = 0; index < descriptionItems.length; index++) {
               const item = descriptionItems[index];
-              // Start with a fresh copy of the block content for each item
-              let itemContent = String(block.content); // Ensure it's a string copy
+              // Start with a fresh copy of the cleaned template content for each item
+              let itemContent = String(templateContent); // Use cleaned template content
               
               // Replace description item placeholders
               const itemReplacements: { [key: string]: string } = {
@@ -993,6 +1247,15 @@ export class GoogleDriveService {
                 const placeholderRegex = new RegExp(this.escapeRegex(placeholder), 'gi');
                 itemContent = itemContent.replace(placeholderRegex, value);
               });
+              
+              // Trim leading whitespace and newlines from itemContent to prevent line breaks
+              itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
+              
+              // Add preserved bullet character to each item
+              // Only add bullet if the item content doesn't already start with a bullet
+              if (!itemContent.match(/^[\s]*[•*\-▪▫]/)) {
+                itemContent = `${bulletChar} ${itemContent}`;
+              }
               
               expandedContent.push(itemContent);
             }
@@ -1044,6 +1307,7 @@ export class GoogleDriveService {
                       matchCase: true 
                     },
                     replaceText: replacementText,
+                    // Note: Text style is automatically preserved by the API
                   },
                 }],
               },
@@ -1173,8 +1437,11 @@ export class GoogleDriveService {
   /**
    * Format skills categories by making category names (including colon) bold
    * Processes document structure directly to find and format skill categories
+   * Enhanced to support additional formatting options (italic, underline, font size, colors)
+   * @param documentId The Google Doc ID
+   * @param additionalFormatting Optional additional formatting to apply beyond bold
    */
-  private async formatSkillsCategories(documentId: string): Promise<void> {
+  private async formatSkillsCategories(documentId: string, additionalFormatting?: Partial<TextFormatting>): Promise<void> {
     const docs = await this.getDocsClient();
     const document = await docs.documents.get({ documentId });
     
@@ -1186,6 +1453,60 @@ export class GoogleDriveService {
     
     // Pattern to match skill categories: "Category: skill1, skill2, ..."
     const skillCategoryPattern = /([A-Za-z][A-Za-z\s]*?):\s+([A-Za-z0-9#.,\s]+)/g;
+    
+    // Build text style with default bold and any additional formatting
+    const buildTextStyle = (): any => {
+      const textStyle: any = {
+        bold: true, // Default: bold category names
+      };
+      const fields: string[] = ['bold'];
+      
+      if (additionalFormatting?.italic !== undefined) {
+        textStyle.italic = additionalFormatting.italic;
+        fields.push('italic');
+      }
+      
+      if (additionalFormatting?.underline !== undefined) {
+        textStyle.underline = additionalFormatting.underline;
+        fields.push('underline');
+      }
+      
+      if (additionalFormatting?.fontSize !== undefined) {
+        textStyle.fontSize = {
+          magnitude: additionalFormatting.fontSize,
+          unit: 'PT',
+        };
+        fields.push('fontSize');
+      }
+      
+      if (additionalFormatting?.foregroundColor) {
+        textStyle.foregroundColor = {
+          color: {
+            rgbColor: {
+              red: additionalFormatting.foregroundColor.red,
+              green: additionalFormatting.foregroundColor.green,
+              blue: additionalFormatting.foregroundColor.blue,
+            },
+          },
+        };
+        fields.push('foregroundColor');
+      }
+      
+      if (additionalFormatting?.backgroundColor) {
+        textStyle.backgroundColor = {
+          color: {
+            rgbColor: {
+              red: additionalFormatting.backgroundColor.red,
+              green: additionalFormatting.backgroundColor.green,
+              blue: additionalFormatting.backgroundColor.blue,
+            },
+          },
+        };
+        fields.push('backgroundColor');
+      }
+      
+      return { textStyle, fields: fields.join(',') };
+    };
     
     // Process document structure directly
     const processElement = (element: any, baseIndex: number): number => {
@@ -1218,17 +1539,16 @@ export class GoogleDriveService {
                 const categoryStart = textStart + matchIndex;
                 const categoryEnd = categoryStart + categoryWithColon.length;
                 
-                // Bold the category name including colon
+                // Apply formatting to the category name including colon
+                const { textStyle, fields } = buildTextStyle();
                 requests.push({
                   updateTextStyle: {
                     range: {
                       startIndex: categoryStart,
                       endIndex: categoryEnd,
                     },
-                    textStyle: {
-                      bold: true,
-                    },
-                    fields: 'bold',
+                    textStyle,
+                    fields,
                   },
                 });
               }
@@ -1267,18 +1587,446 @@ export class GoogleDriveService {
                         const categoryStart = textStart + matchIndex;
                         const categoryEnd = categoryStart + categoryWithColon.length;
                         
+                        const { textStyle, fields } = buildTextStyle();
                         requests.push({
                           updateTextStyle: {
                             range: {
                               startIndex: categoryStart,
                               endIndex: categoryEnd,
                             },
-                            textStyle: {
-                              bold: true,
-                            },
-                            fields: 'bold',
+                            textStyle,
+                            fields,
                           },
                         });
+                      }
+                    }
+                    
+                    paraOffset += text.length;
+                  }
+                }
+                
+                currentIndex = paraStart + paraOffset;
+              }
+            }
+          }
+        }
+      }
+      
+      return currentIndex;
+    };
+    
+    // Process all content elements
+    let docIndex = 1;
+    for (const element of document.data.body.content || []) {
+      docIndex = processElement(element, docIndex);
+    }
+    
+    // Apply all formatting requests
+    if (requests.length > 0) {
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests },
+      });
+    }
+  }
+
+  /**
+   * Format work experience attributes by making attribute labels bold
+   * Processes document structure directly to find and format work experience attribute labels
+   * Labels: Position:, Company:, Location:, Start Date:, End Date:, Current:, Description:
+   * Enhanced to support additional formatting options (italic, underline, font size, colors)
+   * @param documentId The Google Doc ID
+   * @param additionalFormatting Optional additional formatting to apply beyond bold
+   */
+  private async formatWorkExperienceAttributes(documentId: string, additionalFormatting?: Partial<TextFormatting>): Promise<void> {
+    const docs = await this.getDocsClient();
+    const document = await docs.documents.get({ documentId });
+    
+    if (!document.data.body?.content) {
+      return;
+    }
+    
+    const requests: any[] = [];
+    
+    // Pattern to match work experience attributes: "Label: value"
+    // Matches: Position:, Company:, Location:, Start Date:, End Date:, Current:, Description:
+    const attributePattern = /(Position|Company|Location|Start Date|End Date|Current|Description):\s*/gi;
+    
+    // Build text style with default bold and any additional formatting
+    const buildTextStyle = (): any => {
+      const textStyle: any = {
+        bold: true, // Default: bold attribute labels
+      };
+      const fields: string[] = ['bold'];
+      
+      if (additionalFormatting?.italic !== undefined) {
+        textStyle.italic = additionalFormatting.italic;
+        fields.push('italic');
+      }
+      
+      if (additionalFormatting?.underline !== undefined) {
+        textStyle.underline = additionalFormatting.underline;
+        fields.push('underline');
+      }
+      
+      if (additionalFormatting?.fontSize !== undefined) {
+        textStyle.fontSize = {
+          magnitude: additionalFormatting.fontSize,
+          unit: 'PT',
+        };
+        fields.push('fontSize');
+      }
+      
+      if (additionalFormatting?.foregroundColor) {
+        textStyle.foregroundColor = {
+          color: {
+            rgbColor: {
+              red: additionalFormatting.foregroundColor.red,
+              green: additionalFormatting.foregroundColor.green,
+              blue: additionalFormatting.foregroundColor.blue,
+            },
+          },
+        };
+        fields.push('foregroundColor');
+      }
+      
+      if (additionalFormatting?.backgroundColor) {
+        textStyle.backgroundColor = {
+          color: {
+            rgbColor: {
+              red: additionalFormatting.backgroundColor.red,
+              green: additionalFormatting.backgroundColor.green,
+              blue: additionalFormatting.backgroundColor.blue,
+            },
+          },
+        };
+        fields.push('backgroundColor');
+      }
+      
+      return { textStyle, fields: fields.join(',') };
+    };
+    
+    // Process document structure directly
+    const processElement = (element: any, baseIndex: number): number => {
+      let currentIndex = baseIndex;
+      
+      if (element.paragraph?.elements) {
+        const paraStart = element.startIndex !== undefined ? element.startIndex : currentIndex;
+        let paraOffset = 0;
+        
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            const text = el.textRun.content;
+            const textStart = paraStart + paraOffset;
+            
+            // Find all attribute label patterns in this text run
+            attributePattern.lastIndex = 0;
+            let match;
+            
+            while ((match = attributePattern.exec(text)) !== null) {
+              const labelWithColon = match[0]; // Includes the colon and optional space
+              const matchIndex = match.index;
+              
+              // Calculate absolute document indices
+              const labelStart = textStart + matchIndex;
+              const labelEnd = labelStart + labelWithColon.length;
+              
+              // Apply formatting to the attribute label including colon
+              const { textStyle, fields } = buildTextStyle();
+              requests.push({
+                updateTextStyle: {
+                  range: {
+                    startIndex: labelStart,
+                    endIndex: labelEnd,
+                  },
+                  textStyle,
+                  fields,
+                },
+              });
+            }
+            
+            paraOffset += text.length;
+          }
+        }
+        
+        currentIndex = paraStart + paraOffset;
+      } else if (element.table) {
+        // Process table cells
+        for (const row of element.table.tableRows || []) {
+          for (const cell of row.tableCells || []) {
+            for (const cellElement of cell.content || []) {
+              if (cellElement.paragraph?.elements) {
+                const paraStart = cellElement.startIndex !== undefined ? cellElement.startIndex : currentIndex;
+                let paraOffset = 0;
+                
+                for (const el of cellElement.paragraph.elements) {
+                  if (el.textRun?.content) {
+                    const text = el.textRun.content;
+                    const textStart = paraStart + paraOffset;
+                    
+                    attributePattern.lastIndex = 0;
+                    let match;
+                    
+                    while ((match = attributePattern.exec(text)) !== null) {
+                      const labelWithColon = match[0];
+                      const matchIndex = match.index;
+                      
+                      const labelStart = textStart + matchIndex;
+                      const labelEnd = labelStart + labelWithColon.length;
+                      
+                      const { textStyle, fields } = buildTextStyle();
+                      requests.push({
+                        updateTextStyle: {
+                          range: {
+                            startIndex: labelStart,
+                            endIndex: labelEnd,
+                          },
+                          textStyle,
+                          fields,
+                        },
+                      });
+                    }
+                    
+                    paraOffset += text.length;
+                  }
+                }
+                
+                currentIndex = paraStart + paraOffset;
+              }
+            }
+          }
+        }
+      }
+      
+      return currentIndex;
+    };
+    
+    // Process all content elements
+    let docIndex = 1;
+    for (const element of document.data.body.content || []) {
+      docIndex = processElement(element, docIndex);
+    }
+    
+    // Apply all formatting requests
+    if (requests.length > 0) {
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests },
+      });
+    }
+  }
+
+  /**
+   * Preserve work experience position title formatting
+   * Ensures position titles maintain their font size, bold, italic, colors, and other styling after placeholder replacement
+   * Enhanced to preserve all style attributes from the template
+   */
+  private async preservePositionTitleFormatting(documentId: string, workExperience: any[]): Promise<void> {
+    const docs = await this.getDocsClient();
+    const document = await docs.documents.get({ documentId });
+    
+    if (!document.data.body?.content || !workExperience || workExperience.length === 0) {
+      return;
+    }
+    
+    // Collect all position titles
+    const positions = workExperience
+      .map(exp => exp.position)
+      .filter(pos => pos && pos.trim().length > 0);
+    
+    if (positions.length === 0) {
+      return;
+    }
+    
+    const requests: any[] = [];
+    
+    // Process document to find position titles and preserve their formatting
+    const processElement = (element: any, baseIndex: number): number => {
+      let currentIndex = baseIndex;
+      
+      if (element.paragraph?.elements) {
+        const paraStart = element.startIndex !== undefined ? element.startIndex : currentIndex;
+        let paraOffset = 0;
+        
+        // Get paragraph style to preserve default formatting
+        const paragraphStyle = element.paragraph.paragraphStyle;
+        const defaultFontSize = paragraphStyle?.fontSize?.magnitude;
+        
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            const text = el.textRun.content;
+            const textStart = paraStart + paraOffset;
+            const textStyle = el.textRun.textStyle;
+            
+            // Check if this text contains any position title
+            for (const position of positions) {
+              const positionIndex = text.indexOf(position);
+              if (positionIndex !== -1) {
+                const positionStart = textStart + positionIndex;
+                const positionEnd = positionStart + position.length;
+                
+                // Build text style to preserve all formatting attributes
+                const styleUpdate: any = {};
+                const fields: string[] = [];
+                
+                // Preserve font size
+                const fontSizeToApply = textStyle?.fontSize?.magnitude || defaultFontSize;
+                if (fontSizeToApply) {
+                  styleUpdate.fontSize = {
+                    magnitude: fontSizeToApply,
+                    unit: 'PT',
+                  };
+                  fields.push('fontSize');
+                }
+                
+                // Preserve bold
+                if (textStyle?.bold !== undefined) {
+                  styleUpdate.bold = textStyle.bold;
+                  fields.push('bold');
+                }
+                
+                // Preserve italic
+                if (textStyle?.italic !== undefined) {
+                  styleUpdate.italic = textStyle.italic;
+                  fields.push('italic');
+                }
+                
+                // Preserve underline
+                if (textStyle?.underline !== undefined) {
+                  styleUpdate.underline = textStyle.underline;
+                  fields.push('underline');
+                }
+                
+                // Preserve foreground color
+                if (textStyle?.foregroundColor?.color?.rgbColor) {
+                  styleUpdate.foregroundColor = {
+                    color: {
+                      rgbColor: textStyle.foregroundColor.color.rgbColor,
+                    },
+                  };
+                  fields.push('foregroundColor');
+                }
+                
+                // Preserve background color
+                if (textStyle?.backgroundColor?.color?.rgbColor) {
+                  styleUpdate.backgroundColor = {
+                    color: {
+                      rgbColor: textStyle.backgroundColor.color.rgbColor,
+                    },
+                  };
+                  fields.push('backgroundColor');
+                }
+                
+                // Apply formatting if we have any fields to update
+                if (fields.length > 0) {
+                  requests.push({
+                    updateTextStyle: {
+                      range: {
+                        startIndex: positionStart,
+                        endIndex: positionEnd,
+                      },
+                      textStyle: styleUpdate,
+                      fields: fields.join(','),
+                    },
+                  });
+                }
+              }
+            }
+            
+            paraOffset += text.length;
+          }
+        }
+        
+        currentIndex = paraStart + paraOffset;
+      } else if (element.table) {
+        // Process table cells
+        for (const row of element.table.tableRows || []) {
+          for (const cell of row.tableCells || []) {
+            for (const cellElement of cell.content || []) {
+              if (cellElement.paragraph?.elements) {
+                const paraStart = cellElement.startIndex !== undefined ? cellElement.startIndex : currentIndex;
+                let paraOffset = 0;
+                
+                const paragraphStyle = cellElement.paragraph.paragraphStyle;
+                const defaultFontSize = paragraphStyle?.fontSize?.magnitude;
+                
+                for (const el of cellElement.paragraph.elements) {
+                  if (el.textRun?.content) {
+                    const text = el.textRun.content;
+                    const textStart = paraStart + paraOffset;
+                    const textStyle = el.textRun.textStyle;
+                    
+                    for (const position of positions) {
+                      const positionIndex = text.indexOf(position);
+                      if (positionIndex !== -1) {
+                        const positionStart = textStart + positionIndex;
+                        const positionEnd = positionStart + position.length;
+                        
+                        // Build text style to preserve all formatting attributes
+                        const styleUpdate: any = {};
+                        const fields: string[] = [];
+                        
+                        // Preserve font size
+                        const fontSizeToApply = textStyle?.fontSize?.magnitude || defaultFontSize;
+                        if (fontSizeToApply) {
+                          styleUpdate.fontSize = {
+                            magnitude: fontSizeToApply,
+                            unit: 'PT',
+                          };
+                          fields.push('fontSize');
+                        }
+                        
+                        // Preserve bold
+                        if (textStyle?.bold !== undefined) {
+                          styleUpdate.bold = textStyle.bold;
+                          fields.push('bold');
+                        }
+                        
+                        // Preserve italic
+                        if (textStyle?.italic !== undefined) {
+                          styleUpdate.italic = textStyle.italic;
+                          fields.push('italic');
+                        }
+                        
+                        // Preserve underline
+                        if (textStyle?.underline !== undefined) {
+                          styleUpdate.underline = textStyle.underline;
+                          fields.push('underline');
+                        }
+                        
+                        // Preserve foreground color
+                        if (textStyle?.foregroundColor?.color?.rgbColor) {
+                          styleUpdate.foregroundColor = {
+                            color: {
+                              rgbColor: textStyle.foregroundColor.color.rgbColor,
+                            },
+                          };
+                          fields.push('foregroundColor');
+                        }
+                        
+                        // Preserve background color
+                        if (textStyle?.backgroundColor?.color?.rgbColor) {
+                          styleUpdate.backgroundColor = {
+                            color: {
+                              rgbColor: textStyle.backgroundColor.color.rgbColor,
+                            },
+                          };
+                          fields.push('backgroundColor');
+                        }
+                        
+                        // Apply formatting if we have any fields to update
+                        if (fields.length > 0) {
+                          requests.push({
+                            updateTextStyle: {
+                              range: {
+                                startIndex: positionStart,
+                                endIndex: positionEnd,
+                              },
+                              textStyle: styleUpdate,
+                              fields: fields.join(','),
+                            },
+                          });
+                        }
                       }
                     }
                     
@@ -1346,6 +2094,343 @@ export class GoogleDriveService {
   }
 
   /**
+   * Format a specific text range in the document
+   * @param documentId The Google Doc ID
+   * @param startIndex Start index of the text range
+   * @param endIndex End index of the text range
+   * @param textStyle The formatting to apply
+   */
+  private async formatTextRange(documentId: string, startIndex: number, endIndex: number, textStyle: TextFormatting): Promise<void> {
+    const docs = await this.getDocsClient();
+    const requests: any[] = [];
+    
+    const styleUpdate: any = {};
+    const fields: string[] = [];
+    
+    if (textStyle.bold !== undefined) {
+      styleUpdate.bold = textStyle.bold;
+      fields.push('bold');
+    }
+    
+    if (textStyle.italic !== undefined) {
+      styleUpdate.italic = textStyle.italic;
+      fields.push('italic');
+    }
+    
+    if (textStyle.underline !== undefined) {
+      styleUpdate.underline = textStyle.underline;
+      fields.push('underline');
+    }
+    
+    if (textStyle.fontSize !== undefined) {
+      styleUpdate.fontSize = {
+        magnitude: textStyle.fontSize,
+        unit: 'PT',
+      };
+      fields.push('fontSize');
+    }
+    
+    if (textStyle.foregroundColor) {
+      styleUpdate.foregroundColor = {
+        color: {
+          rgbColor: {
+            red: textStyle.foregroundColor.red,
+            green: textStyle.foregroundColor.green,
+            blue: textStyle.foregroundColor.blue,
+          },
+        },
+      };
+      fields.push('foregroundColor');
+    }
+    
+    if (textStyle.backgroundColor) {
+      styleUpdate.backgroundColor = {
+        color: {
+          rgbColor: {
+            red: textStyle.backgroundColor.red,
+            green: textStyle.backgroundColor.green,
+            blue: textStyle.backgroundColor.blue,
+          },
+        },
+      };
+      fields.push('backgroundColor');
+    }
+    
+    if (fields.length > 0) {
+      requests.push({
+        updateTextStyle: {
+          range: {
+            startIndex,
+            endIndex,
+          },
+          textStyle: styleUpdate,
+          fields: fields.join(','),
+        },
+      });
+      
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests },
+      });
+    }
+  }
+
+  /**
+   * Find text in the document and apply formatting to all occurrences
+   * @param documentId The Google Doc ID
+   * @param searchText The text to find and format
+   * @param formatOptions The formatting to apply
+   */
+  private async findAndFormatText(documentId: string, searchText: string, formatOptions: TextFormatting): Promise<void> {
+    const docs = await this.getDocsClient();
+    const document = await docs.documents.get({ documentId });
+    
+    if (!document.data.body?.content) {
+      return;
+    }
+    
+    const requests: any[] = [];
+    const styleUpdate: any = {};
+    const fields: string[] = [];
+    
+    if (formatOptions.bold !== undefined) {
+      styleUpdate.bold = formatOptions.bold;
+      fields.push('bold');
+    }
+    
+    if (formatOptions.italic !== undefined) {
+      styleUpdate.italic = formatOptions.italic;
+      fields.push('italic');
+    }
+    
+    if (formatOptions.underline !== undefined) {
+      styleUpdate.underline = formatOptions.underline;
+      fields.push('underline');
+    }
+    
+    if (formatOptions.fontSize !== undefined) {
+      styleUpdate.fontSize = {
+        magnitude: formatOptions.fontSize,
+        unit: 'PT',
+      };
+      fields.push('fontSize');
+    }
+    
+    if (formatOptions.foregroundColor) {
+      styleUpdate.foregroundColor = {
+        color: {
+          rgbColor: {
+            red: formatOptions.foregroundColor.red,
+            green: formatOptions.foregroundColor.green,
+            blue: formatOptions.foregroundColor.blue,
+          },
+        },
+      };
+      fields.push('foregroundColor');
+    }
+    
+    if (formatOptions.backgroundColor) {
+      styleUpdate.backgroundColor = {
+        color: {
+          rgbColor: {
+            red: formatOptions.backgroundColor.red,
+            green: formatOptions.backgroundColor.green,
+            blue: formatOptions.backgroundColor.blue,
+          },
+        },
+      };
+      fields.push('backgroundColor');
+    }
+    
+    if (fields.length === 0) {
+      return; // No formatting to apply
+    }
+    
+    // Find all occurrences of the search text
+    const processElement = (element: any, baseIndex: number): number => {
+      let currentIndex = baseIndex;
+      
+      if (element.paragraph?.elements) {
+        const paraStart = element.startIndex !== undefined ? element.startIndex : currentIndex;
+        let paraOffset = 0;
+        
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            const text = el.textRun.content;
+            const textStart = paraStart + paraOffset;
+            
+            // Find all occurrences of searchText in this text run
+            let searchIndex = 0;
+            while ((searchIndex = text.indexOf(searchText, searchIndex)) !== -1) {
+              const matchStart = textStart + searchIndex;
+              const matchEnd = matchStart + searchText.length;
+              
+              requests.push({
+                updateTextStyle: {
+                  range: {
+                    startIndex: matchStart,
+                    endIndex: matchEnd,
+                  },
+                  textStyle: styleUpdate,
+                  fields: fields.join(','),
+                },
+              });
+              
+              searchIndex += searchText.length;
+            }
+            
+            paraOffset += text.length;
+          }
+        }
+        
+        currentIndex = paraStart + paraOffset;
+      } else if (element.table) {
+        // Process table cells
+        for (const row of element.table.tableRows || []) {
+          for (const cell of row.tableCells || []) {
+            for (const cellElement of cell.content || []) {
+              if (cellElement.paragraph?.elements) {
+                const paraStart = cellElement.startIndex !== undefined ? cellElement.startIndex : currentIndex;
+                let paraOffset = 0;
+                
+                for (const el of cellElement.paragraph.elements) {
+                  if (el.textRun?.content) {
+                    const text = el.textRun.content;
+                    const textStart = paraStart + paraOffset;
+                    
+                    let searchIndex = 0;
+                    while ((searchIndex = text.indexOf(searchText, searchIndex)) !== -1) {
+                      const matchStart = textStart + searchIndex;
+                      const matchEnd = matchStart + searchText.length;
+                      
+                      requests.push({
+                        updateTextStyle: {
+                          range: {
+                            startIndex: matchStart,
+                            endIndex: matchEnd,
+                          },
+                          textStyle: styleUpdate,
+                          fields: fields.join(','),
+                        },
+                      });
+                      
+                      searchIndex += searchText.length;
+                    }
+                    
+                    paraOffset += text.length;
+                  }
+                }
+                
+                currentIndex = paraStart + paraOffset;
+              }
+            }
+          }
+        }
+      }
+      
+      return currentIndex;
+    };
+    
+    // Process all content elements
+    let docIndex = 1;
+    for (const element of document.data.body.content || []) {
+      docIndex = processElement(element, docIndex);
+    }
+    
+    // Apply all formatting requests
+    if (requests.length > 0) {
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests },
+      });
+    }
+  }
+
+  /**
+   * Apply formatting to specific text ranges
+   * @param documentId The Google Doc ID
+   * @param textRanges Array of text ranges with formatting options
+   */
+  private async applyTextFormatting(documentId: string, textRanges: Array<{ startIndex: number; endIndex: number; formatting: TextFormatting }>): Promise<void> {
+    const docs = await this.getDocsClient();
+    const requests: any[] = [];
+    
+    for (const range of textRanges) {
+      const styleUpdate: any = {};
+      const fields: string[] = [];
+      
+      if (range.formatting.bold !== undefined) {
+        styleUpdate.bold = range.formatting.bold;
+        fields.push('bold');
+      }
+      
+      if (range.formatting.italic !== undefined) {
+        styleUpdate.italic = range.formatting.italic;
+        fields.push('italic');
+      }
+      
+      if (range.formatting.underline !== undefined) {
+        styleUpdate.underline = range.formatting.underline;
+        fields.push('underline');
+      }
+      
+      if (range.formatting.fontSize !== undefined) {
+        styleUpdate.fontSize = {
+          magnitude: range.formatting.fontSize,
+          unit: 'PT',
+        };
+        fields.push('fontSize');
+      }
+      
+      if (range.formatting.foregroundColor) {
+        styleUpdate.foregroundColor = {
+          color: {
+            rgbColor: {
+              red: range.formatting.foregroundColor.red,
+              green: range.formatting.foregroundColor.green,
+              blue: range.formatting.foregroundColor.blue,
+            },
+          },
+        };
+        fields.push('foregroundColor');
+      }
+      
+      if (range.formatting.backgroundColor) {
+        styleUpdate.backgroundColor = {
+          color: {
+            rgbColor: {
+              red: range.formatting.backgroundColor.red,
+              green: range.formatting.backgroundColor.green,
+              blue: range.formatting.backgroundColor.blue,
+            },
+          },
+        };
+        fields.push('backgroundColor');
+      }
+      
+      if (fields.length > 0) {
+        requests.push({
+          updateTextStyle: {
+            range: {
+              startIndex: range.startIndex,
+              endIndex: range.endIndex,
+            },
+            textStyle: styleUpdate,
+            fields: fields.join(','),
+          },
+        });
+      }
+    }
+    
+    if (requests.length > 0) {
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests },
+      });
+    }
+  }
+
+  /**
    * Escape special regex characters
    */
   private escapeRegex(str: string): string {
@@ -1401,6 +2486,13 @@ export class GoogleDriveService {
    * Export template to PDF after filling placeholders
    * This creates a temporary copy, fills it, exports, then deletes the copy
    * to preserve the original template
+   * 
+   * Formatting order:
+   * 1. Replace placeholders (formatting is preserved automatically by Google Docs API)
+   * 2. Process loops and conditionals
+   * 3. Apply programmatic formatting (bold labels, skill categories, etc.)
+   * 4. Export to PDF
+   * 
    * @param documentId The Google Doc template ID
    * @param placeholderMap Map of placeholder strings to replacement values
    * @param conditionMap Optional map of condition names to boolean values for conditional blocks
@@ -1413,10 +2505,15 @@ export class GoogleDriveService {
       // Create a copy of the template
       copyId = await this.copyDocument(documentId, 'Temp Resume Export');
       
-      // Fill placeholders in the copy
+      // Fill placeholders in the copy (this also applies formatting in the correct order)
+      // The fillPlaceholders method handles:
+      // - Placeholder replacement (formatting preserved automatically)
+      // - Loop processing
+      // - Conditional block processing
+      // - Programmatic formatting (skills, work experience attributes, position titles)
       await this.fillPlaceholders(copyId, placeholderMap, conditionMap, profile);
       
-      // Export the copy to PDF
+      // Export the copy to PDF (all formatting is now applied)
       const pdf = await this.exportToPDF(copyId);
       
       return pdf;

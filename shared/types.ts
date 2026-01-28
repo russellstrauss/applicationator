@@ -173,3 +173,12 @@ export interface GoogleAuthToken {
   token_type: string;
 }
 
+export interface TextFormatting {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  fontSize?: number;
+  foregroundColor?: { red: number; green: number; blue: number };
+  backgroundColor?: { red: number; green: number; blue: number };
+}
+
