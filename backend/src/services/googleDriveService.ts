@@ -711,26 +711,35 @@ export class GoogleDriveService {
       }
       
       // Replace the entire loop block with expanded content
-      // This preserves formatting because the Google Docs API preserves formatting
-      // when replacing text that matches existing formatted text
+      // Preserve list formatting by using structural edits when in a list context
       const replacement = expandedContent.join('\n\n');
+      const replacedInList = await this.replaceBlockPreservingList(
+        documentId,
+        block.full,
+        replacement,
+        { allowFallback: false }
+      );
       
-      requests.push({
-        replaceAllText: {
-          containsText: { 
-            text: block.full, 
-            matchCase: false 
+      if (!replacedInList) {
+        requests.push({
+          replaceAllText: {
+            containsText: { 
+              text: block.full, 
+              matchCase: false 
+            },
+            replaceText: replacement,
           },
-          replaceText: replacement,
-        },
-      });
-      
-      // Apply the replacement
-      if (requests.length > 0) {
-        await docs.documents.batchUpdate({
-          documentId,
-          requestBody: { requests },
         });
+        
+        // Apply the replacement
+        if (requests.length > 0) {
+          await docs.documents.batchUpdate({
+            documentId,
+            requestBody: { requests },
+          });
+        }
+      } else {
+        console.log(`[Loop Expansion] Preserved bulleted list formatting for block`);
       }
       
       // Process nested description loops for workExperience after expanding
@@ -982,6 +991,25 @@ export class GoogleDriveService {
         } else {
           console.log(`[Nested Loops Immediate] Processing ${descriptionItems.length} description items`);
           
+          // Try to process as a native Google Docs bulleted list first
+          // This preserves star bullets, indentation, and other list formatting
+          const processedAsBulletedList = await this.processNestedLoopAsBulletedList(
+            documentId,
+            block.full,
+            descriptionItems,
+            true
+          );
+          
+          if (processedAsBulletedList) {
+            console.log(`[Nested Loops Immediate] Processed as native bulleted list`);
+            processedCount++;
+            // Skip the standard processing since we handled it
+            continue;
+          }
+          
+          // Fall back to standard text-based processing
+          console.log(`[Nested Loops Immediate] Using standard text-based processing`);
+          
           // Detect bullet character from template
           const bulletChar = this.detectAndPreserveBullet(block.content);
           console.log(`[Nested Loops Immediate] Detected bullet character: "${bulletChar}"`);
@@ -1008,15 +1036,14 @@ export class GoogleDriveService {
             itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
             
             // Check if template already has a bullet character
-            const hasBullet = itemContent.match(/^[\s]*[•*\-▪▫]/);
+            const hasBullet = itemContent.match(/^[\s]*[•*\-▪▫★☆✦✧⭐●○◆◇►▸]/);
             
-            if (!hasBullet) {
-              // Template doesn't have bullet - add the detected bullet character
+            // Only add bullet if we detected a text-based bullet AND template doesn't already have one
+            // If bulletChar is empty, the template uses native Google Docs list formatting
+            if (bulletChar && !hasBullet) {
               itemContent = `${bulletChar} ${itemContent}`;
-            } else {
-              // Template has bullet - preserve it (might be different from detected one)
-              // The bullet is already in itemContent, so we keep it as-is
             }
+            // If template has bullet or uses native list formatting, keep content as-is
             
             expandedDescriptionItems.push(itemContent);
           });
@@ -1024,6 +1051,18 @@ export class GoogleDriveService {
           // Replace nested loop block with expanded items
           const replacement = expandedDescriptionItems.join('\n');
           console.log(`[Nested Loops Immediate] Replacement text (first 200 chars): "${replacement.substring(0, 200)}"`);
+
+          const replacedInList = await this.replaceBlockPreservingList(
+            documentId,
+            block.full,
+            replacement,
+            { allowFallback: true }
+          );
+          if (replacedInList) {
+            console.log(`[Nested Loops Immediate] Preserved bulleted list formatting for block`);
+            processedCount++;
+            continue;
+          }
           
           // Replace the entire block (start pattern + content) together
           // This ensures we only replace the specific nested loop, not other occurrences
@@ -1215,30 +1254,31 @@ export class GoogleDriveService {
 
   /**
    * Detect and extract bullet character from template block content
-   * Supports common bullet types: •, *, -, ▪, ▫
+   * Supports common bullet types: •, *, -, ▪, ▫, ★, ☆, ✦, ✧, ⭐, ●, ○, ◆, ◇, ►, ▸
    * @param content The template block content to analyze
-   * @returns The bullet character found, or '•' as default if none found
+   * @returns The bullet character found, or empty string if none found (to preserve native list formatting)
    */
   private detectAndPreserveBullet(content: string): string {
-    if (!content) return '•';
+    if (!content) return '';
     
     // Try to match bullet at the start of the content (with optional whitespace and newlines)
-    // Match common bullet characters: • (bullet), * (asterisk), - (hyphen), ▪ (black square), ▫ (white square)
+    // Match common bullet characters including stars
     // Also check for bullets that might be on a separate line or have whitespace/newlines after them
-    const bulletMatch = content.match(/^[\s\n\r]*([•*\-▪▫])[\s\n\r]*/);
+    const bulletMatch = content.match(/^[\s\n\r]*([•*\-▪▫★☆✦✧⭐●○◆◇►▸])[\s\n\r]*/);
     if (bulletMatch && bulletMatch[1]) {
       return bulletMatch[1];
     }
     
     // Also check for bullets that might appear after some text (e.g., if template has "Description: • {{item}}")
     // Look for bullet followed by placeholder patterns
-    const bulletWithPlaceholder = content.match(/([•*\-▪▫])[\s\n\r]*(?:\{\{|\{)[\s]*item[\s]*(?:\}\}|\})/i);
+    const bulletWithPlaceholder = content.match(/([•*\-▪▫★☆✦✧⭐●○◆◇►▸])[\s\n\r]*(?:\{\{|\{)[\s]*item[\s]*(?:\}\}|\})/i);
     if (bulletWithPlaceholder && bulletWithPlaceholder[1]) {
       return bulletWithPlaceholder[1];
     }
     
-    // Default to bullet point if none found
-    return '•';
+    // Return empty string if no bullet found - this preserves native Google Docs list formatting
+    // (star bullets, custom bullets, etc. that are paragraph formatting, not text characters)
+    return '';
   }
 
   /**
@@ -1420,7 +1460,7 @@ export class GoogleDriveService {
                 // Remove bullet from template content if present (we'll add it back to each item)
                 // Handle bullets that might be on a separate line or have whitespace/newlines
                 let templateContent = String(block.content);
-                templateContent = templateContent.replace(/^[\s\n\r]*[•*\-▪▫][\s\n\r]*/, '');
+                templateContent = templateContent.replace(/^[\s\n\r]*[•*\-▪▫★☆✦✧⭐●○◆◇►▸][\s\n\r]*/, '');
                 
                 // Expand block for each description item
                 const expandedContent: string[] = [];
@@ -1488,9 +1528,9 @@ export class GoogleDriveService {
                   // Trim leading whitespace and newlines from itemContent to prevent line breaks
                   itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
                   
-                  // Add preserved bullet character to each item
-                  // Only add bullet if the item content doesn't already start with a bullet
-                  if (!itemContent.match(/^[\s]*[•*\-▪▫]/)) {
+                  // Add preserved bullet character to each item (only if we detected a text-based bullet)
+                  // If bulletChar is empty, the template uses native Google Docs list formatting
+                  if (bulletChar && !itemContent.match(/^[\s]*[•*\-▪▫★☆✦✧⭐●○◆◇►▸]/)) {
                     itemContent = `${bulletChar} ${itemContent}`;
                   }
                   
@@ -1676,13 +1716,31 @@ export class GoogleDriveService {
               },
             });
           } else {
+            // Try to process as a native Google Docs bulleted list first
+            // This preserves star bullets, indentation, and other list formatting
+            const processedAsBulletedList = await this.processNestedLoopAsBulletedList(
+              documentId,
+              block.full,
+              descriptionItems,
+              true
+            );
+            
+            if (processedAsBulletedList) {
+              console.log(`[Nested Loops Plural] Processed as native bulleted list`);
+              // Skip the standard processing - break to next iteration
+              break;
+            }
+            
+            // Fall back to standard text-based processing
+            console.log(`[Nested Loops Plural] Using standard text-based processing`);
+            
             // Detect and preserve bullet character from template
             const bulletChar = this.detectAndPreserveBullet(block.content);
             
             // Remove bullet from template content if present (we'll add it back to each item)
             // Handle bullets that might be on a separate line or have whitespace/newlines
             let templateContent = String(block.content);
-            templateContent = templateContent.replace(/^[\s\n\r]*[•*\-▪▫][\s\n\r]*/, '');
+            templateContent = templateContent.replace(/^[\s\n\r]*[•*\-▪▫★☆✦✧⭐●○◆◇►▸][\s\n\r]*/, '');
             
             const expandedContent: string[] = [];
             
@@ -1751,15 +1809,15 @@ export class GoogleDriveService {
               // Trim leading whitespace and newlines from itemContent to prevent line breaks
               itemContent = itemContent.replace(/^[\s\n\r]+/, '').trimStart();
               
-              // Add preserved bullet character to each item
-              // Only add bullet if the item content doesn't already start with a bullet
-              if (!itemContent.match(/^[\s]*[•*\-▪▫]/)) {
+              // Add preserved bullet character to each item (only if we detected a text-based bullet)
+              // If bulletChar is empty, the template uses native Google Docs list formatting
+              if (bulletChar && !itemContent.match(/^[\s]*[•*\-▪▫★☆✦✧⭐●○◆◇►▸]/)) {
                 itemContent = `${bulletChar} ${itemContent}`;
               }
               
               expandedContent.push(itemContent);
             }
-            
+
             // Join all expanded items with newlines - each item on its own line
             const replacementText = expandedContent.join('\n');
             
@@ -1771,6 +1829,17 @@ export class GoogleDriveService {
             console.log(`[Description Loop Debug] Expanded content count: ${expandedContent.length}`);
             console.log(`[Description Loop Debug] Expanded content:`, expandedContent);
             console.log(`[Description Loop Debug] Replacement text (first 300 chars): "${replacementText.substring(0, 300)}"`);
+
+            const replacedInList = await this.replaceBlockPreservingList(
+              documentId,
+              block.full,
+              replacementText,
+              { allowFallback: true }
+            );
+            if (replacedInList) {
+              console.log(`[Nested Loops Plural] Preserved bulleted list formatting for block`);
+              break;
+            }
             
             // Replace this specific block
             // Since replaceAllText replaces ALL occurrences, we need to make the block unique
@@ -1850,6 +1919,46 @@ export class GoogleDriveService {
       '{/endeach}',
       '{/endeach }',
     ];
+
+    const openingTags = [
+      '{{#each workExperience}}',
+      '{{#each workExperience }}',
+      '{#each workExperience}',
+      '{#each workExperience }',
+      '{{#each skills}}',
+      '{{#each skills }}',
+      '{#each skills}',
+      '{#each skills }',
+      '{{#each certifications}}',
+      '{{#each certifications }}',
+      '{#each certifications}',
+      '{#each certifications }',
+      '{{#each description}}',
+      '{{#each description }}',
+      '{#each description}',
+      '{#each description }',
+    ];
+
+    const placeholderFields = [
+      'position',
+      'company',
+      'location',
+      'startDate',
+      'endDate',
+      'current',
+      'description',
+      'title',
+      'skills',
+      'name',
+      'issuer',
+      'issueDate',
+      'expiryDate',
+      'credentialId',
+      'item',
+      'text',
+      'index',
+      'index1',
+    ];
     
     const requests: any[] = [];
     
@@ -1860,6 +1969,31 @@ export class GoogleDriveService {
           replaceText: '',
         },
       });
+    }
+
+    for (const tag of openingTags) {
+      requests.push({
+        replaceAllText: {
+          containsText: { text: tag, matchCase: false },
+          replaceText: '',
+        },
+      });
+    }
+
+    for (const field of placeholderFields) {
+      const variants = [
+        `{{${field}}}`,
+        `{{ ${field} }}`,
+        `{${field}}`,
+      ];
+      for (const placeholder of variants) {
+        requests.push({
+          replaceAllText: {
+            containsText: { text: placeholder, matchCase: false },
+            replaceText: '',
+          },
+        });
+      }
     }
     
     if (requests.length > 0) {
@@ -2657,6 +2791,744 @@ export class GoogleDriveService {
     }
     
     return text;
+  }
+
+  private normalizeTextForMatch(text: string): string {
+    return text.replace(/\s+/g, ' ').trim();
+  }
+
+  private extractParagraphFontSize(paragraph: any): { magnitude: number; unit: string } | null {
+    if (!paragraph?.elements) {
+      return null;
+    }
+
+    for (const el of paragraph.elements) {
+      if (el.textRun?.content && el.textRun.textStyle?.fontSize?.magnitude) {
+        const fontSize = el.textRun.textStyle.fontSize;
+        return {
+          magnitude: fontSize.magnitude,
+          unit: fontSize.unit || 'PT',
+        };
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find the paragraph element containing a specific text and return its bullet/list properties.
+   * Uses flexible matching - first tries exact match, then falls back to loop marker detection.
+   * @param document The Google Docs document data
+   * @param searchText The text to find
+   * @returns Object with paragraph info including bullet properties, or null if not found
+   */
+  private findParagraphWithBullet(document: any, searchText: string): {
+    paragraph: any;
+    startIndex: number;
+    endIndex: number;
+    listId: string | null;
+    nestingLevel: number;
+    bulletGlyph: string | null;
+  } | null {
+    if (!document.body?.content) {
+      return null;
+    }
+
+    const normalizedSearch = this.normalizeTextForMatch(searchText).toLowerCase();
+
+    // Loop markers that indicate nested description loops
+    const loopMarkers = [
+      '{{#each description}}',
+      '{{#each description }}',
+      '{#each description}',
+      '{#each description }',
+      '{{item}}',
+      '{{ item }}',
+      '{item}',
+      '{{/endeach}}',
+      '{{/endeach }}',
+      '{/endeach}',
+      '{/endeach }',
+    ];
+
+    // First pass: Try exact text match
+    for (const element of document.body.content) {
+      if (element.paragraph?.elements) {
+        let paragraphText = '';
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            paragraphText += el.textRun.content;
+          }
+        }
+
+        const normalizedParagraph = this.normalizeTextForMatch(paragraphText).toLowerCase();
+        const hasExactMatch = paragraphText.includes(searchText);
+        const hasNormalizedMatch = normalizedSearch.length > 0 && normalizedParagraph.includes(normalizedSearch);
+
+        // Check for exact or normalized match first
+        if (hasExactMatch || hasNormalizedMatch) {
+          const bullet = element.paragraph.bullet;
+          return {
+            paragraph: element.paragraph,
+            startIndex: element.startIndex || 0,
+            endIndex: element.endIndex || 0,
+            listId: bullet?.listId || null,
+            nestingLevel: bullet?.nestingLevel || 0,
+            bulletGlyph: null,
+          };
+        }
+      }
+    }
+
+    // Second pass: If no exact match, look for any paragraph with loop markers AND bullet formatting
+    // This handles cases where the text doesn't match exactly due to whitespace or formatting differences
+    for (const element of document.body.content) {
+      if (element.paragraph?.elements) {
+        let paragraphText = '';
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            paragraphText += el.textRun.content;
+          }
+        }
+
+        // Check if this paragraph contains any loop marker
+        const containsLoopMarker = loopMarkers.some(marker => 
+          paragraphText.toLowerCase().includes(marker.toLowerCase())
+        );
+
+        if (containsLoopMarker) {
+          const bullet = element.paragraph.bullet;
+          // Return this paragraph's info - even if no bullet, the caller can use position info
+          return {
+            paragraph: element.paragraph,
+            startIndex: element.startIndex || 0,
+            endIndex: element.endIndex || 0,
+            listId: bullet?.listId || null,
+            nestingLevel: bullet?.nestingLevel || 0,
+            bulletGlyph: null,
+          };
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Find list context by searching for any paragraph containing loop markers that has bullet formatting.
+   * This is a fallback method when exact text matching fails - it finds ANY paragraph with
+   * description loop markers and returns its list context if it has bullets.
+   * @param document The Google Docs document data
+   * @returns Object with list context (listId, nestingLevel, position) or null if no bulleted loop found
+   */
+  private findListContextForLoop(document: any): {
+    listId: string;
+    nestingLevel: number;
+    paragraphStartIndex: number;
+    paragraphEndIndex: number;
+  } | null {
+    if (!document.body?.content) {
+      return null;
+    }
+
+    // Loop markers that indicate nested description loops
+    const loopMarkers = [
+      '{{#each description}}',
+      '{{#each description }}',
+      '{#each description}',
+      '{#each description }',
+      '{{item}}',
+      '{{ item }}',
+      '{item}',
+      '{{/endeach}}',
+      '{{/endeach }}',
+      '{/endeach}',
+      '{/endeach }',
+    ];
+
+    // Search all paragraphs for any with loop markers AND bullet formatting
+    for (const element of document.body.content) {
+      if (element.paragraph?.elements) {
+        let paragraphText = '';
+        for (const el of element.paragraph.elements) {
+          if (el.textRun?.content) {
+            paragraphText += el.textRun.content;
+          }
+        }
+
+        // Check if this paragraph contains any loop marker
+        const containsLoopMarker = loopMarkers.some(marker => 
+          paragraphText.toLowerCase().includes(marker.toLowerCase())
+        );
+
+        // If it has a loop marker AND bullet formatting, return the list context
+        if (containsLoopMarker && element.paragraph.bullet?.listId) {
+          console.log(`[List Context] Found bulleted paragraph with loop marker: "${paragraphText.substring(0, 50)}..."`);
+          return {
+            listId: element.paragraph.bullet.listId,
+            nestingLevel: element.paragraph.bullet.nestingLevel || 0,
+            paragraphStartIndex: element.startIndex || 0,
+            paragraphEndIndex: element.endIndex || 0,
+          };
+        }
+      }
+    }
+
+    // If no paragraph with loop markers has bullets, check if we're in a list context
+    // by looking at paragraphs before/after loop markers
+    let loopParagraphIndex = -1;
+    const paragraphs: any[] = [];
+    
+    for (const element of document.body.content) {
+      if (element.paragraph) {
+        paragraphs.push(element);
+        
+        let paragraphText = '';
+        for (const el of element.paragraph.elements || []) {
+          if (el.textRun?.content) {
+            paragraphText += el.textRun.content;
+          }
+        }
+        
+        const containsLoopMarker = loopMarkers.some(marker => 
+          paragraphText.toLowerCase().includes(marker.toLowerCase())
+        );
+        
+        if (containsLoopMarker && loopParagraphIndex === -1) {
+          loopParagraphIndex = paragraphs.length - 1;
+        }
+      }
+    }
+
+    // If we found a loop paragraph, check surrounding paragraphs for list context
+    if (loopParagraphIndex >= 0) {
+      // Check previous paragraph
+      if (loopParagraphIndex > 0) {
+        const prevParagraph = paragraphs[loopParagraphIndex - 1];
+        if (prevParagraph.paragraph?.bullet?.listId) {
+          console.log(`[List Context] Found list context from previous paragraph`);
+          return {
+            listId: prevParagraph.paragraph.bullet.listId,
+            nestingLevel: prevParagraph.paragraph.bullet.nestingLevel || 0,
+            paragraphStartIndex: paragraphs[loopParagraphIndex].startIndex || 0,
+            paragraphEndIndex: paragraphs[loopParagraphIndex].endIndex || 0,
+          };
+        }
+      }
+      
+      // Check next paragraph
+      if (loopParagraphIndex < paragraphs.length - 1) {
+        const nextParagraph = paragraphs[loopParagraphIndex + 1];
+        if (nextParagraph.paragraph?.bullet?.listId) {
+          console.log(`[List Context] Found list context from next paragraph`);
+          return {
+            listId: nextParagraph.paragraph.bullet.listId,
+            nestingLevel: nextParagraph.paragraph.bullet.nestingLevel || 0,
+            paragraphStartIndex: paragraphs[loopParagraphIndex].startIndex || 0,
+            paragraphEndIndex: paragraphs[loopParagraphIndex].endIndex || 0,
+          };
+        }
+      }
+    }
+
+    console.log(`[List Context] No list context found for loop markers`);
+    return null;
+  }
+
+  /**
+   * Get the list properties for a given list ID from the document
+   * @param document The Google Docs document data
+   * @param listId The list ID to look up
+   * @param nestingLevel The nesting level within the list
+   * @returns The list properties including glyph format and indentation, or null if not found
+   */
+  private getListProperties(document: any, listId: string, nestingLevel: number): {
+    glyphType: string | null;
+    glyphSymbol: string | null;
+    indentFirstLine: { magnitude: number; unit: string } | null;
+    indentStart: { magnitude: number; unit: string } | null;
+  } | null {
+    if (!document.lists || !document.lists[listId]) {
+      return null;
+    }
+
+    const list = document.lists[listId];
+    const nestingLevels = list.listProperties?.nestingLevels;
+    
+    if (!nestingLevels || !nestingLevels[nestingLevel]) {
+      return null;
+    }
+
+    const levelProps = nestingLevels[nestingLevel];
+    return {
+      glyphType: levelProps.glyphType || null,
+      glyphSymbol: levelProps.glyphSymbol || null,
+      indentFirstLine: levelProps.indentFirstLine || null,
+      indentStart: levelProps.indentStart || null,
+    };
+  }
+
+  /**
+   * Find the exact document position (startIndex, endIndex) for a text string
+   * @param document The Google Docs document data  
+   * @param searchText The text to find
+   * @returns Object with startIndex and endIndex, or null if not found
+   */
+  private findTextRange(document: any, searchText: string): { startIndex: number; endIndex: number } | null {
+    if (!document.body?.content) {
+      return null;
+    }
+
+    const findInElements = (elements: any[]): { startIndex: number; endIndex: number } | null => {
+      let combinedText = '';
+      const runs: Array<{ combinedStart: number; length: number; docStart: number }> = [];
+
+      for (const el of elements) {
+        if (el.textRun?.content) {
+          const text = el.textRun.content;
+          const combinedStart = combinedText.length;
+          combinedText += text;
+          runs.push({
+            combinedStart,
+            length: text.length,
+            docStart: el.startIndex || 0,
+          });
+        }
+      }
+
+      const idx = combinedText.indexOf(searchText);
+      if (idx === -1) {
+        return null;
+      }
+
+      const run = runs.find(runEntry =>
+        idx >= runEntry.combinedStart && idx < runEntry.combinedStart + runEntry.length
+      );
+
+      if (!run) {
+        return null;
+      }
+
+      const startIndex = run.docStart + (idx - run.combinedStart);
+      return {
+        startIndex,
+        endIndex: startIndex + searchText.length,
+      };
+    };
+
+    for (const element of document.body.content) {
+      if (element.paragraph?.elements) {
+        const foundInParagraph = findInElements(element.paragraph.elements);
+        if (foundInParagraph) {
+          return foundInParagraph;
+        }
+      } else if (element.table) {
+        for (const row of element.table.tableRows || []) {
+          for (const cell of row.tableCells || []) {
+            for (const cellElement of cell.content || []) {
+              if (cellElement.paragraph?.elements) {
+                const foundInCellParagraph = findInElements(cellElement.paragraph.elements);
+                if (foundInCellParagraph) {
+                  return foundInCellParagraph;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+  private async replaceBlockPreservingList(
+    documentId: string,
+    blockText: string,
+    replacementText: string,
+    options: { allowFallback?: boolean } = {}
+  ): Promise<boolean> {
+    const normalizedReplacement = replacementText.replace(/\r/g, '');
+    const items = normalizedReplacement
+      .split('\n')
+      .map(item => item.trim())
+      .filter(item => item.length > 0);
+
+    if (items.length === 0) {
+      return false;
+    }
+
+    return this.processNestedLoopAsBulletedList(
+      documentId,
+      blockText,
+      items,
+      options.allowFallback ?? false
+    );
+  }
+
+  /**
+   * Process a nested description loop that's inside a native Google Docs bulleted list.
+   * This method properly preserves bullet formatting by:
+   * 1. Finding the list properties of the paragraph containing the loop
+   * 2. Using position-based delete + insert to preserve list context
+   * 3. Inserting items one at a time to maintain list inheritance
+   * 
+   * @param documentId The Google Doc ID
+   * @param blockText The full text of the loop block (including markers)
+   * @param descriptionItems Array of description text items to insert
+   * @returns true if processed as a bulleted list, false if not a bulleted list
+   */
+  private async processNestedLoopAsBulletedList(
+    documentId: string,
+    blockText: string,
+    descriptionItems: string[],
+    allowFallback: boolean
+  ): Promise<boolean> {
+    const docs = await this.getDocsClient();
+    const document = await docs.documents.get({ documentId });
+    const cleanedItems = descriptionItems
+      .map(item => item.trim())
+      .filter(item => item.length > 0);
+
+    if (cleanedItems.length === 0) {
+      return false;
+    }
+
+    // Find the paragraph containing this loop block (improved with flexible matching)
+    let paragraphInfo = this.findParagraphWithBullet(document.data, blockText);
+
+    if (paragraphInfo?.paragraph && !paragraphInfo.listId) {
+      return false;
+    }
+    
+    // If direct detection didn't find a list, try the context-based fallback (optional)
+    if (!paragraphInfo || !paragraphInfo.listId) {
+      if (!allowFallback) {
+        return false;
+      }
+
+      console.log('[Bulleted List] Direct detection failed, trying context-based detection...');
+      const listContext = this.findListContextForLoop(document.data);
+      
+      if (listContext) {
+        console.log(`[Bulleted List] Found list context via fallback: listId=${listContext.listId}, nestingLevel=${listContext.nestingLevel}`);
+        // Create a paragraphInfo-like object from the list context
+        paragraphInfo = {
+          paragraph: null,
+          startIndex: listContext.paragraphStartIndex,
+          endIndex: listContext.paragraphEndIndex,
+          listId: listContext.listId,
+          nestingLevel: listContext.nestingLevel,
+          bulletGlyph: null,
+        };
+      } else {
+        // No list context found at all - return false to use standard processing
+        console.log('[Bulleted List] No list context found, using standard processing');
+        return false;
+      }
+    }
+
+    const listId = paragraphInfo.listId!;
+    const nestingLevel = paragraphInfo.nestingLevel;
+    
+    console.log(`[Bulleted List] Found list ID: ${listId}, nesting level: ${nestingLevel}`);
+
+    // Get the list properties to understand the bullet style (for logging)
+    const listProps = this.getListProperties(document.data, listId, nestingLevel);
+    console.log(`[Bulleted List] List properties:`, listProps);
+
+    // Find the exact position of the block text within the document
+    let textRange = this.findTextRange(document.data, blockText);
+    
+    // If exact text range not found, try to find the position using loop markers
+    if (!textRange) {
+      console.log('[Bulleted List] Exact text range not found, trying marker-based detection...');
+      
+      // Search for the start marker position
+      const startMarkers = ['{{#each description}}', '{{#each description }}', '{#each description}', '{#each description }'];
+      for (const marker of startMarkers) {
+        textRange = this.findTextRange(document.data, marker);
+        if (textRange) {
+          console.log(`[Bulleted List] Found start marker: ${marker}`);
+          
+          // Now find the end marker to get the full range
+          const endMarkers = ['{{/endeach}}', '{{/endeach }}', '{/endeach}', '{/endeach }'];
+          for (const endMarker of endMarkers) {
+            const endRange = this.findTextRange(document.data, endMarker);
+            if (endRange && endRange.startIndex > textRange.startIndex) {
+              textRange.endIndex = endRange.endIndex;
+              console.log(`[Bulleted List] Found end marker, full range: ${textRange.startIndex} - ${textRange.endIndex}`);
+              break;
+            }
+          }
+          break;
+        }
+      }
+    }
+    
+    if (!textRange) {
+      console.log('[Bulleted List] Could not find text range for block');
+      return false;
+    }
+
+    console.log(`[Bulleted List] Block range: ${textRange.startIndex} - ${textRange.endIndex}`);
+
+    // Strategy: Delete the loop block text, then insert each item with \n separators
+    // The key is that inserting \n inside a list item creates a new list item that
+    // inherits the same list formatting
+    
+    // Step 1: Delete the loop block content (but NOT the paragraph - just the text)
+    await docs.documents.batchUpdate({
+      documentId,
+      requestBody: {
+        requests: [{
+          deleteContentRange: {
+            range: {
+              startIndex: textRange.startIndex,
+              endIndex: textRange.endIndex,
+            },
+          },
+        }],
+      },
+    });
+    
+    console.log(`[Bulleted List] Deleted loop block text`);
+
+    const templateFontSize = paragraphInfo.paragraph
+      ? this.extractParagraphFontSize(paragraphInfo.paragraph)
+      : null;
+
+    // Step 2: Insert the first item at the position where we deleted
+    // This text goes into the existing list item, preserving its bullet
+    let currentInsertPosition = textRange.startIndex;
+    const insertedRanges: Array<{ startIndex: number; endIndex: number }> = [];
+    
+    await docs.documents.batchUpdate({
+      documentId,
+      requestBody: {
+        requests: [{
+          insertText: {
+            location: { index: currentInsertPosition },
+            text: cleanedItems[0],
+          },
+        }],
+      },
+    });
+    
+    insertedRanges.push({
+      startIndex: currentInsertPosition,
+      endIndex: currentInsertPosition + cleanedItems[0].length,
+    });
+    currentInsertPosition += cleanedItems[0].length;
+    console.log(`[Bulleted List] Inserted first item: "${cleanedItems[0].substring(0, 50)}..."`);
+
+    // Step 3: For each additional item, insert a newline (creates new list item) then the text
+    for (let i = 1; i < cleanedItems.length; i++) {
+      const item = cleanedItems[i];
+      
+      // Insert newline first - this creates a new paragraph that should inherit list formatting
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: {
+          requests: [{
+            insertText: {
+              location: { index: currentInsertPosition },
+              text: '\n',
+            },
+          }],
+        },
+      });
+      currentInsertPosition += 1;
+      
+      // Then insert the item text
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: {
+          requests: [{
+            insertText: {
+              location: { index: currentInsertPosition },
+              text: item,
+            },
+          }],
+        },
+      });
+      insertedRanges.push({
+        startIndex: currentInsertPosition,
+        endIndex: currentInsertPosition + item.length,
+      });
+      currentInsertPosition += item.length;
+      
+      console.log(`[Bulleted List] Inserted item ${i + 1}: "${item.substring(0, 50)}..."`);
+    }
+
+    if (templateFontSize && insertedRanges.length > 0) {
+      const styleRequests: any[] = insertedRanges.map(range => ({
+        updateTextStyle: {
+          range,
+          textStyle: { fontSize: templateFontSize },
+          fields: 'fontSize',
+        },
+      }));
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: { requests: styleRequests },
+      });
+    }
+
+    // Step 4: Verify and fix any paragraphs that didn't inherit list formatting
+    // Re-read the document
+    const updatedDoc = await docs.documents.get({ documentId });
+    
+    // Find paragraphs in the range that should have bullets but don't
+    const paragraphsToFix: Array<{ startIndex: number; endIndex: number }> = [];
+    const searchStart = textRange.startIndex;
+    const searchEnd = currentInsertPosition + 10;
+    
+    if (updatedDoc.data.body?.content) {
+      for (const element of updatedDoc.data.body.content) {
+        if (element.paragraph) {
+          const paraStart = element.startIndex || 0;
+          const paraEnd = element.endIndex || 0;
+          
+          // Check if this paragraph is in our inserted range
+          if (paraStart >= searchStart && paraStart < searchEnd) {
+            const hasBullet = element.paragraph.bullet?.listId;
+            
+            if (!hasBullet) {
+              // Get paragraph text for logging
+              let paragraphText = '';
+              for (const el of element.paragraph.elements || []) {
+                if (el.textRun?.content) {
+                  paragraphText += el.textRun.content;
+                }
+              }
+              console.log(`[Bulleted List] Paragraph at ${paraStart} missing bullet: "${paragraphText.substring(0, 50)}..."`);
+              paragraphsToFix.push({ startIndex: paraStart, endIndex: paraEnd });
+            }
+          }
+        }
+      }
+    }
+
+    // Apply bullet formatting to any paragraphs that lost it
+    if (paragraphsToFix.length > 0) {
+      console.log(`[Bulleted List] ${paragraphsToFix.length} paragraphs need bullet formatting`);
+      
+      // Determine the best bullet preset based on list properties
+      // Check for star-like glyphs
+      const isStarBullet = listProps?.glyphSymbol && 
+        /[★☆✦✧⭐✪✫✬✭✮✯]/.test(listProps.glyphSymbol);
+      
+      const bulletPreset = isStarBullet ? 'BULLET_STAR_CIRCLE_SQUARE' : 'BULLET_DISC_CIRCLE_SQUARE';
+      console.log(`[Bulleted List] Using bullet preset: ${bulletPreset}`);
+      
+      // Step 1: Create bullets for paragraphs that lost them
+      const bulletRequests: any[] = [];
+      for (const para of paragraphsToFix) {
+        bulletRequests.push({
+          createParagraphBullets: {
+            range: {
+              startIndex: para.startIndex,
+              endIndex: para.endIndex,
+            },
+            bulletPreset: bulletPreset,
+          },
+        });
+      }
+
+      try {
+        await docs.documents.batchUpdate({
+          documentId,
+          requestBody: { requests: bulletRequests },
+        });
+        console.log(`[Bulleted List] Applied bullet formatting to ${bulletRequests.length} paragraphs`);
+        
+        // Step 2: Apply indentation if the original list had specific indentation
+        if (listProps?.indentStart || listProps?.indentFirstLine || nestingLevel > 0) {
+          console.log(`[Bulleted List] Applying indentation from original list`);
+          
+          // Re-read document to get updated positions
+          const docAfterBullets = await docs.documents.get({ documentId });
+          
+          // Find the paragraphs again (positions may have changed slightly)
+          const indentRequests: any[] = [];
+          
+          if (docAfterBullets.data.body?.content) {
+            for (const element of docAfterBullets.data.body.content) {
+              if (element.paragraph) {
+                const paraStart = element.startIndex || 0;
+                const paraEnd = element.endIndex || 0;
+                
+                // Check if this paragraph contains one of our description items
+                let paragraphText = '';
+                for (const el of element.paragraph.elements || []) {
+                  if (el.textRun?.content) {
+                    paragraphText += el.textRun.content;
+                  }
+                }
+                
+                const containsDescriptionItem = cleanedItems.some(item => 
+                  paragraphText.includes(item)
+                );
+                
+                if (containsDescriptionItem) {
+                  // Build paragraph style update for indentation
+                  const paragraphStyle: any = {};
+                  const fields: string[] = [];
+                  
+                  if (listProps?.indentStart) {
+                    paragraphStyle.indentStart = listProps.indentStart;
+                    fields.push('indentStart');
+                  }
+                  if (listProps?.indentFirstLine) {
+                    paragraphStyle.indentFirstLine = listProps.indentFirstLine;
+                    fields.push('indentFirstLine');
+                  }
+                  
+                  // If there's a nesting level > 0, add additional indentation
+                  // Each nesting level typically adds about 36 points (0.5 inches)
+                  if (nestingLevel > 0 && !listProps?.indentStart) {
+                    const indentMagnitude = 36 * nestingLevel;
+                    paragraphStyle.indentStart = { magnitude: indentMagnitude, unit: 'PT' };
+                    fields.push('indentStart');
+                  }
+                  
+                  if (fields.length > 0) {
+                    indentRequests.push({
+                      updateParagraphStyle: {
+                        range: {
+                          startIndex: paraStart,
+                          endIndex: paraEnd,
+                        },
+                        paragraphStyle: paragraphStyle,
+                        fields: fields.join(','),
+                      },
+                    });
+                  }
+                }
+              }
+            }
+          }
+          
+          if (indentRequests.length > 0) {
+            try {
+              await docs.documents.batchUpdate({
+                documentId,
+                requestBody: { requests: indentRequests },
+              });
+              console.log(`[Bulleted List] Applied indentation to ${indentRequests.length} paragraphs`);
+            } catch (indentError: any) {
+              console.log(`[Bulleted List] updateParagraphStyle for indent failed: ${indentError.message}`);
+            }
+          }
+        }
+      } catch (error: any) {
+        console.log(`[Bulleted List] createParagraphBullets failed: ${error.message}`);
+      }
+    } else {
+      console.log(`[Bulleted List] All paragraphs have bullet formatting - list inheritance worked!`);
+    }
+
+    return true;
   }
 
   /**

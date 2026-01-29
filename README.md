@@ -162,7 +162,7 @@ How this works:
     - `{{text}}` / `{text}` – alias for the text
     - `{{index}}`, `{index}` – 0-based index
     - `{{index1}}`, `{index1}` – 1-based index
-  - Detects a leading bullet character (`•`, `*`, `-`, `▪`, `▫`) once, strips it from the template, and prepends it to every expanded item.
+  - Detects a leading bullet character (`•`, `*`, `-`, `▪`, `▫`, `★`, `☆`, `✦`, `✧`, `⭐`, `●`, `○`, `◆`, `◇`, `►`, `▸`) once, strips it from the template, and prepends it to every expanded item.
 - All expanded lines are joined with `\n` so each bullet stays on its own line in the final PDF.
 
 ### Attribute-based formatting in loops
